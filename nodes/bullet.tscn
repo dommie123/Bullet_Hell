@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://dfc84ckt16wow"]
+
+[ext_resource type="Script" path="res://scripts/bullet.gd" id="1_6leip"]
+[ext_resource type="Texture2D" uid="uid://cfqrj4tfvs8lg" path="res://assets/Bullet.png" id="1_reotx"]
+
+[sub_resource type="Shader" id="Shader_oo4yq"]
+code = "shader_type canvas_item;
+
+void fragment() {
+	// Place fragment code here.
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_trqu3"]
+shader = SubResource("Shader_oo4yq")
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_s2m05"]
+bounce = 1.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0xt8d"]
+radius = 16.0
+
+[node name="Bullet" type="RigidBody2D"]
+material = SubResource("ShaderMaterial_trqu3")
+collision_layer = 2
+physics_material_override = SubResource("PhysicsMaterial_s2m05")
+gravity_scale = 0.0
+script = ExtResource("1_6leip")
+
+[node name="Icon" type="Sprite2D" parent="."]
+scale = Vector2(1.07227, 1.0625)
+texture = ExtResource("1_reotx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_0xt8d")

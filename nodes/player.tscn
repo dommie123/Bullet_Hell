@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://d18a07m61bxpn"]
+
+[ext_resource type="Script" path="res://scripts/Player.gd" id="1_uotbm"]
+[ext_resource type="Texture2D" uid="uid://dagfdmpgmseyw" path="res://assets/BO_Paddle.png" id="2_o4h8m"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_tbeve"]
+bounce = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uo6ne"]
+size = Vector2(128, 20)
+
+[node name="Player" type="RigidBody2D"]
+position = Vector2(0, 550)
+collision_mask = 2
+physics_material_override = SubResource("PhysicsMaterial_tbeve")
+gravity_scale = 0.0
+lock_rotation = true
+freeze = true
+freeze_mode = 1
+script = ExtResource("1_uotbm")
+
+[node name="BoPaddle" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("2_o4h8m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_uo6ne")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
