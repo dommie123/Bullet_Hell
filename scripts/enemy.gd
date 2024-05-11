@@ -31,14 +31,15 @@ func calc_y(x):
 func shoot():
 	var bullet = bullet_scene.instantiate()
 	
-	bullet.position = $BulletLauncher.position
+	bullet.position = position
 	var direction = $BulletLauncher.rotation
 	
-	# Choose the velocity for the mob
+	# Choose the velocity for the bullet
 	var velocity = Vector2(0, 350.0)
 	bullet.linear_velocity = velocity.rotated(direction)
 	
-	add_child(bullet)
+	# add_child(bullet)
+	add_sibling(bullet)
 
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
