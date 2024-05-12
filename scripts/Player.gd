@@ -4,6 +4,8 @@ signal reflect_bullet
 
 var yIsLocked = true
 
+const MAX_ROTATION = PI / 6 # 30 degrees in radians
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -18,8 +20,16 @@ func _process(delta):
 	
 	if not yIsLocked:
 		position.y = clamp(mouse_position.y, screen_bounds.y - 100, screen_bounds.y)
+	
+	if Input.is_action_pressed("rotate_left") and Input.is_action_pressed("rotate_right"):
+		rotate(0)
+	elif Input.is_action_pressed("rotate_left") and rotation > -MAX_ROTATION:
+		rotate(-(PI / 24))
+	elif Input.is_action_pressed("rotate_right") and rotation < MAX_ROTATION:
+		rotate(PI / 24)
 
 
 func _on_body_entered(body):
 	# TODO reflect ONLY when color is same as bullet
 	reflect_bullet.emit()
+	print_debug("Hit!")

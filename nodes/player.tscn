@@ -27,3 +27,4 @@ texture = ExtResource("2_o4h8m")
 shape = SubResource("RectangleShape2D_uo6ne")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="input_event" from="." to="." method="_on_input_event"]
