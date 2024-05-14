@@ -11,5 +11,7 @@ script = ExtResource("1_o6526")
 
 [node name="Enemy" parent="." instance=ExtResource("3_0a6xa")]
 position = Vector2(-130, 130)
+xYInverted = true
 
 [connection signal="enemy_fled" from="Enemy" to="." method="_on_enemy_enemy_fled"]
+[connection signal="enemy_killed" from="Enemy" to="." method="_on_enemy_enemy_killed"]

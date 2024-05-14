@@ -26,12 +26,21 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	print(current_enemies)
+#	print(current_enemies)
+	pass
 
 func _on_enemy_enemy_fled():
 	if current_enemies < max_enemies:
 		current_enemies += 1
 	
+	enemy_disappear_routine()
+
+# TODO on boss defeated, increase level and set boss active to false.
+
+func _on_enemy_enemy_killed():
+	enemy_disappear_routine()
+
+func enemy_disappear_routine():
 	active_enemies -= 1
 	if active_enemies == 0 and not boss_active:
 		active_enemies = current_enemies
@@ -41,5 +50,3 @@ func _on_enemy_enemy_fled():
 		if phase == 5:
 			boss_active = true
 			active_enemies = 0
-
-# TODO on boss defeated, increase level and set boss active to false.
