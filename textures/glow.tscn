@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://b5rkyiahed6us"]
+
+[ext_resource type="Shader" path="res://textures/glow.gdshader" id="1_ljfh5"]
+[ext_resource type="Texture2D" uid="uid://dk3j7hwpv4kpc" path="res://assets/icon.svg" id="2_m1u6a"]
+[ext_resource type="Texture2D" uid="uid://ba2mkwk5jdfxp" path="res://assets/Enemy.png" id="3_kv44q"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_30jdk"]
+shader = ExtResource("1_ljfh5")
+shader_parameter/brightness = 1.0
+shader_parameter/brightness_drop_percent = 0.5
+shader_parameter/glow_period = 1.0
+shader_parameter/flicker_period = 10.0
+shader_parameter/flicker_spikes_sharpness = 20.0
+
+[node name="Glow" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_30jdk")
+texture = ExtResource("2_m1u6a")
+
+[node name="Enemy" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("3_kv44q")
