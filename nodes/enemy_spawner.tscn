@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://eu3b6h326b4b" path="res://nodes/enemy.tscn" id="2_ciyst"]
 
 [node name="EnemySpawner" type="Node2D"]
-position = Vector2(-155, 123)
+position = Vector2(-69, 44)
 script = ExtResource("1_rapuo")
 enemyScene = ExtResource("2_ciyst")
 spawnOffset = Vector2(-100, -100)
