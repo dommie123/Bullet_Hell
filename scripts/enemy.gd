@@ -3,18 +3,24 @@ extends Node2D
 enum STATE {
 	MOVING,
 	SHOOTING,
+	MOVING_AND_SHOOTING,
 	DEAD
 }
 
 signal enemy_fled
+signal enemy_killed
 
 @export var bullet_scene: PackedScene
+@export var currentState: STATE
 
-var angularVelocity = (3 * PI) / 4
-var timePassed = 0
-var currentState = STATE.MOVING
-var canShoot = true
-var functions
+@export var positionOffset: float
+
+var functions: Functions
+
+var angularVelocity: float
+var timePassed: float
+var canShoot: bool
+var funcIndex: int
 
 const timeMultiplier = 100
 const Functions = preload("res://scripts/functions.gd")
@@ -23,26 +29,34 @@ const Functions = preload("res://scripts/functions.gd")
 func _ready():
 	$AnimatedSprite2D.play("default")
 	functions = Functions.new()
+	
+	angularVelocity = (3 * PI) / 4
+	positionOffset = 0
+	timePassed = positionOffset
+	canShoot = true
+	funcIndex = 0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if currentState == STATE.DEAD:
+		enemy_killed.emit()
+		queue_free()
+	
 	timePassed += timeMultiplier * delta
 	
-#	position.x += speed * delta
-#	position.y = calc_y(position.x)
-	position = calc_pos(timePassed)
+	if currentState == STATE.MOVING or currentState == STATE.MOVING_AND_SHOOTING:
+		position = calc_pos(timePassed)
 	
 	$BulletLauncher.rotation = 2 * PI + functions.ANGULAR_FUNCTIONS[0].call(timePassed)
 	
-	if canShoot:
+	if canShoot and (currentState == STATE.SHOOTING or currentState == STATE.MOVING_AND_SHOOTING):
 		shoot()
 		canShoot = false
 		$BulletTimer.start()
 		
 
 func calc_pos(t):
-#	return functions.MATH_FUNCTIONS[0].call(t)
-	return Vector2(100, 100)
+	return functions.MATH_FUNCTIONS[0].call(t)
 	
 	
 func shoot():
