@@ -33,3 +33,11 @@ func _on_body_entered(body):
 	# TODO reflect ONLY when color is same as bullet
 	reflect_bullet.emit()
 	print_debug("Hit!")
+
+
+func _on_powerup_activate_powerup(powerup):
+	print_debug("Yay! I got the %f powerup!" % powerup)
+
+
+func _on_powerup_activate_curse(curse):
+	print_debug("Oh no! I've been cursed with %f!" % curse)

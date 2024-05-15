@@ -44,15 +44,15 @@ func _process(delta):
 	position.y += fallSpeed * delta
 
 
-func _on_area_2d_area_entered(area):
+func _on_curse_timer_timeout():
+	activate_curse.emit(currentCurse)
+	queue_free()
+
+
+func _on_area_2d_body_entered(body):
 	activate_powerup.emit(currentPowerup)
 	
 	$Area2D.visible = false
 	$AnimatedSprite2D.visible = false
 	
 	$CurseTimer.start()
-
-
-func _on_curse_timer_timeout():
-	activate_curse.emit(currentCurse)
-	queue_free()
