@@ -49,7 +49,7 @@ func _process(delta):
 	
 	timePassed += timeMultiplier * delta
 	
-	if currentState == STATE.MOVING or currentState == STATE.MOVING_AND_SHOOTING:
+	if (currentState == STATE.MOVING or currentState == STATE.MOVING_AND_SHOOTING):
 		position = calc_pos(timePassed)
 	
 	$BulletLauncher.rotation = 2 * PI + functions.ANGULAR_FUNCTIONS[0].call(timePassed)
