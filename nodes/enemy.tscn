@@ -149,10 +149,11 @@ animations = [{
 position = Vector2(37, 33)
 script = ExtResource("1_m52gn")
 bullet_scene = ExtResource("2_yxds1")
-currentState = 1
+currentState = 2
+xYInverted = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(2.5, 2.5)
+scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_3dpxp")
 frame_progress = 0.58604
 

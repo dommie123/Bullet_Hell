@@ -17,18 +17,21 @@ func _ready():
 func _process(delta):
 	if canSpawnEnemy and enemyCount > 0:
 		print_debug("Spawning enemy...")
-		spawnEnemy("Enemy %d".format(enemiesSpawned + 1))
+		spawn_enemy("Enemy %d".format(enemiesSpawned + 1))
 
 
 func _on_spawn_timer_timeout():
 	canSpawnEnemy = true
+
 	
-func spawnEnemy(_name):
+func spawn_enemy(_name, funcIndex = 0):
 	var enemy = enemyScene.instantiate()
 	
 	enemy.name = _name
 	enemy.positionOffset = spawnOffset
 	enemy.currentState = 3 # STATE.MOVING_AND_SHOOTING
+	enemy.funcIndex = funcIndex
+	enemy.xYInverted = true
 	
 	add_child(enemy)
 	

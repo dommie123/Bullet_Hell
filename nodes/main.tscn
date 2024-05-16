@@ -2,21 +2,23 @@
 
 [ext_resource type="Script" path="res://scripts/Main.gd" id="1_o6526"]
 [ext_resource type="PackedScene" uid="uid://d18a07m61bxpn" path="res://nodes/player.tscn" id="2_nnhgw"]
-[ext_resource type="PackedScene" uid="uid://eu3b6h326b4b" path="res://nodes/enemy.tscn" id="3_0a6xa"]
+[ext_resource type="PackedScene" uid="uid://eu3b6h326b4b" path="res://nodes/enemy.tscn" id="4_34kcd"]
 [ext_resource type="PackedScene" uid="uid://ct0s05l6kyqbn" path="res://nodes/powerup.tscn" id="4_haxs5"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_o6526")
+phase = null
 
 [node name="Player" parent="." instance=ExtResource("2_nnhgw")]
-
-[node name="Enemy" parent="." instance=ExtResource("3_0a6xa")]
-position = Vector2(-130, 130)
-xYInverted = true
+position = Vector2(198, 856)
 
 [node name="Powerup" parent="." instance=ExtResource("4_haxs5")]
+position = Vector2(205, 105)
 
-[connection signal="enemy_fled" from="Enemy" to="." method="_on_enemy_enemy_fled"]
-[connection signal="enemy_killed" from="Enemy" to="." method="_on_enemy_enemy_killed"]
+[node name="Enemy" parent="." instance=ExtResource("4_34kcd")]
+position = Vector2(202, 39)
+currentState = 3
+positionOffset = Vector2(0, 100)
+
 [connection signal="activate_curse" from="Powerup" to="Player" method="_on_powerup_activate_curse"]
 [connection signal="activate_powerup" from="Powerup" to="Player" method="_on_powerup_activate_powerup"]

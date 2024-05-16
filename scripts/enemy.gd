@@ -7,11 +7,21 @@ enum STATE {
 	DEAD = 4
 }
 
+enum TYPE {
+	AIMBOT = 0,
+	TROJAN = 1,
+	HAXOR = 2,
+	WORM = 3,
+	MEGABYTE = 4,
+	GIGABYTE = 5
+}
+
 signal enemy_fled
 signal enemy_killed
 
 @export var bullet_scene: PackedScene
 @export var currentState: STATE
+@export var currentType: TYPE
 @export var positionOffset: Vector2
 
 @export var xYInverted: bool
@@ -40,6 +50,9 @@ func _ready():
 	canShoot = true
 	spawnGrace = true
 	funcIndex = 0
+	
+	if currentType == TYPE.AIMBOT:
+		$BulletTimer.wait_time *= 2
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -52,7 +65,11 @@ func _process(delta):
 	if (currentState == STATE.MOVING or currentState == STATE.MOVING_AND_SHOOTING):
 		position = calc_pos(timePassed)
 	
-	$BulletLauncher.rotation = 2 * PI + functions.ANGULAR_FUNCTIONS[0].call(timePassed)
+	if currentType == TYPE.AIMBOT or currentType == TYPE.MEGABYTE or currentType == TYPE.GIGABYTE:
+		var playerPos = get_node("/root/Main/Player").position
+		$BulletLauncher.look_at(playerPos)
+	else:
+		$BulletLauncher.rotation = 2 * PI + functions.ANGULAR_FUNCTIONS[0].call(timePassed)
 	
 	if canShoot and (currentState == STATE.SHOOTING or currentState == STATE.MOVING_AND_SHOOTING):
 		shoot()
@@ -61,19 +78,22 @@ func _process(delta):
 		
 
 func calc_pos(t):
-	var result = functions.MATH_FUNCTIONS[0].call(t)
+	var result = functions.MATH_FUNCTIONS[14].call(t)
 	var resultWithOffset = result + positionOffset
 	return utils.invert_vector.call(resultWithOffset) if xYInverted else resultWithOffset
 	
 	
 func shoot():
+	if currentType == TYPE.TROJAN:
+		assert(false, "Trojan enemies cannot shoot the player!")
+		
 	var bullet = bullet_scene.instantiate()
 	
 	bullet.position = position
 	var direction = $BulletLauncher.rotation
 	
 	# Choose the velocity for the bullet
-	var velocity = Vector2(0, 350.0)
+	var velocity = Vector2(350, 0)
 	bullet.linear_velocity = velocity.rotated(direction)
 	
 	add_sibling(bullet)

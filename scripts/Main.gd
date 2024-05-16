@@ -3,6 +3,8 @@ extends Node2D
 signal level_changed
 signal phase_changed
 
+@export var enemySpawnerScene: PackedScene
+
 @export var phase: int
 
 var level: int
@@ -50,3 +52,7 @@ func enemy_disappear_routine():
 		if phase == 5:
 			boss_active = true
 			active_enemies = 0
+			
+func spawn_enemy_spawner():
+	# TODO spawn enemy spawner at somewhat random location just offscreen
+	pass
