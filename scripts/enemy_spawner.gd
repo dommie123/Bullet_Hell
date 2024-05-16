@@ -4,6 +4,7 @@ extends Node2D
 @export var spawnOffset: Vector2
 
 @export var enemyCount: int
+@export var funcIndex: int
 
 var canSpawnEnemy: bool
 var enemiesSpawned: int
@@ -16,7 +17,6 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if canSpawnEnemy and enemyCount > 0:
-		print_debug("Spawning enemy...")
 		spawn_enemy("Enemy %d".format(enemiesSpawned + 1))
 
 
@@ -24,14 +24,17 @@ func _on_spawn_timer_timeout():
 	canSpawnEnemy = true
 
 	
-func spawn_enemy(_name, funcIndex = 0):
+func spawn_enemy(_name):
 	var enemy = enemyScene.instantiate()
+	var xYInverted = false
+	if position.y < 0:
+		xYInverted = true
 	
 	enemy.name = _name
 	enemy.positionOffset = spawnOffset
 	enemy.currentState = 3 # STATE.MOVING_AND_SHOOTING
 	enemy.funcIndex = funcIndex
-	enemy.xYInverted = true
+	enemy.xYInverted = xYInverted
 	
 	add_child(enemy)
 	

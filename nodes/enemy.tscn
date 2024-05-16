@@ -159,6 +159,18 @@ frame_progress = 0.58604
 
 [node name="BulletLauncher" type="Node2D" parent="."]
 
+[node name="BulletLauncher2" type="Node2D" parent="."]
+visible = false
+
+[node name="BulletLauncher3" type="Node2D" parent="."]
+visible = false
+
+[node name="BulletLauncher4" type="Node2D" parent="."]
+visible = false
+
+[node name="BulletLauncher5" type="Node2D" parent="."]
+visible = false
+
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
 [node name="BulletTimer" type="Timer" parent="."]

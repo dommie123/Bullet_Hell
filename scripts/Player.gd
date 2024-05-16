@@ -2,13 +2,15 @@ extends RigidBody2D
 
 signal reflect_bullet
 
-var yIsLocked = true
+var yIsLocked: bool
+var initialYPos: float
 
 const MAX_ROTATION = PI / 6 # 30 degrees in radians
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	yIsLocked = true
+	initialYPos = position.y
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -41,3 +43,8 @@ func _on_powerup_activate_powerup(powerup):
 
 func _on_powerup_activate_curse(curse):
 	print_debug("Oh no! I've been cursed with %f!" % curse)
+
+
+func reset_stats():
+	var yIsLocked = true
+	position.y = initialYPos

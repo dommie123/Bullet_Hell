@@ -25,6 +25,7 @@ signal enemy_killed
 @export var positionOffset: Vector2
 
 @export var xYInverted: bool
+@export var funcIndex: int
 
 var functions: Functions
 var utils: Utils
@@ -33,7 +34,6 @@ var angularVelocity: float
 var timePassed: float
 var canShoot: bool
 var spawnGrace: bool # Keeps the enemy from being destroyed while spawning offscreen
-var funcIndex: int
 
 const timeMultiplier = 100
 const Functions = preload("res://scripts/functions.gd")
@@ -49,10 +49,12 @@ func _ready():
 	timePassed = 0
 	canShoot = true
 	spawnGrace = true
-	funcIndex = 0
 	
 	if currentType == TYPE.AIMBOT:
-		$BulletTimer.wait_time *= 2
+		$BulletTimer.wait_time *= 3
+		
+	var mainNode = get_node("/root/Main")
+	enemy_fled.connect(mainNode.enemy_fled_callable)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -78,7 +80,7 @@ func _process(delta):
 		
 
 func calc_pos(t):
-	var result = functions.MATH_FUNCTIONS[14].call(t)
+	var result = functions.MATH_FUNCTIONS[funcIndex].call(t)
 	var resultWithOffset = result + positionOffset
 	return utils.invert_vector.call(resultWithOffset) if xYInverted else resultWithOffset
 	
