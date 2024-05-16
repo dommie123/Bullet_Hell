@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://b8wk107okjidg"]
+
+[ext_resource type="Script" path="res://scripts/Main.gd" id="1_o6526"]
+[ext_resource type="PackedScene" uid="uid://bxrp03v51pwbw" path="res://nodes/enemy_spawner.tscn" id="2_hk6sm"]
+[ext_resource type="PackedScene" uid="uid://d18a07m61bxpn" path="res://nodes/player.tscn" id="2_nnhgw"]
+[ext_resource type="PackedScene" uid="uid://ct0s05l6kyqbn" path="res://nodes/powerup.tscn" id="4_haxs5"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_o6526")
+enemySpawnerScene = ExtResource("2_hk6sm")
+
+[node name="Player" parent="." instance=ExtResource("2_nnhgw")]
+position = Vector2(198, 856)
+
+[node name="Powerup" parent="." instance=ExtResource("4_haxs5")]
+position = Vector2(205, 105)
+
+[node name="EnemySpawnerTimer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[connection signal="activate_curse" from="Powerup" to="Player" method="_on_powerup_activate_curse"]
+[connection signal="activate_powerup" from="Powerup" to="Player" method="_on_powerup_activate_powerup"]
+[connection signal="timeout" from="EnemySpawnerTimer" to="." method="_on_enemy_spawner_timer_timeout"]
