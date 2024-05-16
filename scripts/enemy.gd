@@ -16,6 +16,8 @@ enum TYPE {
 	GIGABYTE = 5
 }
 
+enum color {cyan,magenta} #ADDED enumerator used to denote colors throughout the code. Use these when describing a color of enemy or bullet
+
 signal enemy_fled
 signal enemy_killed
 
@@ -90,6 +92,7 @@ func shoot():
 		assert(false, "Trojan enemies cannot shoot the player!")
 		
 	var bullet = bullet_scene.instantiate()
+	bullet.bulletColor = color.cyan #TEMPORARY. ALL BULLETS SHOT ARE CYAN RIGHT NOW
 	
 	bullet.position = position
 	var direction = $BulletLauncher.rotation
