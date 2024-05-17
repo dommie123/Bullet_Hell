@@ -157,3 +157,14 @@ func _on_curse_timer_timeout():
 	deactivate_powerup.emit()
 	deactivate_curse.emit()
 	print("Stats Reset")
+
+
+func _on_player_ship_lose_life():
+	print("Ouch!")
+	lives -= 1
+	
+	# If the player is out of lives, it's game over.
+	if lives == 0:
+		print("I'm dead!")
+		player_died.emit()
+		queue_free()

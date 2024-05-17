@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://bfhuoslxpj43e"]
+
+[ext_resource type="Script" path="res://scripts/PlayerShip.gd" id="1_oaehg"]
+[ext_resource type="Texture2D" uid="uid://j4mh2h5rq8lt" path="res://assets/PlayerShip/Galaga-PNG-Photos.png" id="2_5tcah"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_phas3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_5tcah")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0ee5a"]
+size = Vector2(24, 22)
+
+[node name="PlayerShip" type="RigidBody2D"]
+collision_mask = 192
+gravity_scale = 0.0
+max_contacts_reported = 1
+contact_monitor = true
+lock_rotation = true
+freeze = true
+script = ExtResource("1_oaehg")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.0379304, 0.0387271)
+sprite_frames = SubResource("SpriteFrames_phas3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+scale = Vector2(1.45563, 1.47409)
+shape = SubResource("RectangleShape2D_0ee5a")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

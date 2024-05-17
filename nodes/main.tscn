@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://b8wk107okjidg"]
+[gd_scene load_steps=7 format=3 uid="uid://b8wk107okjidg"]
 
 [ext_resource type="Script" path="res://scripts/Main.gd" id="1_o6526"]
 [ext_resource type="PackedScene" uid="uid://bxrp03v51pwbw" path="res://nodes/enemy_spawner.tscn" id="2_hk6sm"]
 [ext_resource type="PackedScene" uid="uid://drh6a3js8480r" path="res://nodes/player.tscn" id="2_nnhgw"]
+[ext_resource type="PackedScene" uid="uid://bfhuoslxpj43e" path="res://nodes/player_ship.tscn" id="4_2dr2i"]
 [ext_resource type="PackedScene" uid="uid://ct0s05l6kyqbn" path="res://nodes/powerup.tscn" id="4_haxs5"]
 [ext_resource type="Script" path="res://scripts/MainCamera2D.gd" id="5_3ca1x"]
 
@@ -12,6 +13,9 @@ enemySpawnerScene = ExtResource("2_hk6sm")
 
 [node name="Player" parent="." instance=ExtResource("2_nnhgw")]
 position = Vector2(198, 856)
+
+[node name="PlayerShip" parent="." instance=ExtResource("4_2dr2i")]
+position = Vector2(199, 893)
 
 [node name="Powerup" parent="." instance=ExtResource("4_haxs5")]
 position = Vector2(192, 774)
@@ -27,4 +31,6 @@ script = ExtResource("5_3ca1x")
 
 [connection signal="deactivate_curse" from="Player" to="." method="_on_player_deactivate_curse"]
 [connection signal="deactivate_powerup" from="Player" to="." method="_on_player_deactivate_powerup"]
+[connection signal="player_died" from="Player" to="PlayerShip" method="_on_player_player_died"]
+[connection signal="lose_life" from="PlayerShip" to="Player" method="_on_player_ship_lose_life"]
 [connection signal="timeout" from="EnemySpawnerTimer" to="." method="_on_enemy_spawner_timer_timeout"]

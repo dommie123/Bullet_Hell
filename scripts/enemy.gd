@@ -83,8 +83,13 @@ func _process(delta):
 		position = calc_pos(timePassed)
 	
 	if currentType == TYPE.AIMBOT or currentType == TYPE.MEGABYTE or currentType == TYPE.GIGABYTE:
-		var playerPos = get_node("/root/Main/Player").position
-		$BulletLauncher.look_at(playerPos)
+		var player = get_node("/root/Main/Player")
+		
+		if player:
+			var playerPos = get_node("/root/Main/Player").position
+			$BulletLauncher.look_at(playerPos)
+		else:
+			currentState = STATE.MOVING
 	else:
 		$BulletLauncher.rotation = 2 * PI + functions.ANGULAR_FUNCTIONS[0].call(timePassed)
 	

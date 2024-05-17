@@ -36,8 +36,6 @@ func _ready():
 		set_collision_mask_value(3, false)
 		set_collision_mask_value(4, true)
 		$Icon.texture = magentaBulletTexture
-	
-	var playerNode = get_node("/root/Main/Player")
 		
 
 func _process(delta):
@@ -50,13 +48,15 @@ func _on_screen_exited():
 
 func _on_body_entered(body):
 #	print()
-	if "Player" in body.name:
+	if "Player" in body.name and "Ship" not in body.name:
 		linear_velocity = linear_velocity.normalized() * speed
 #		set_collision_mask_value(3, true)
 		set_collision_layer_value(9, true)
 #		set_collision_layer_value(2, false)
 #		set_collision_mask_value(1, false)
-
+	elif "PlayerShip" in body.name:
+		body.bullet_hit_callable.call(body)
+		queue_free()
 	elif "Enemy" in body.name:
 		body.currentState = 3 # STATE.DEAD
 		bullet_hit.emit()
