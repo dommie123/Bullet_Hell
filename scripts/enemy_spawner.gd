@@ -8,6 +8,7 @@ extends Node2D
 
 var canSpawnEnemy: bool
 var enemiesSpawned: int
+var currentCurse: int
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -17,7 +18,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if canSpawnEnemy and enemyCount > 0:
-		spawn_enemy("Enemy %d".format(enemiesSpawned + 1))
+		spawn_enemy("Enemy %s" % (enemiesSpawned + 1))
 
 
 func _on_spawn_timer_timeout():
@@ -35,6 +36,7 @@ func spawn_enemy(_name):
 	enemy.currentState = 3 # STATE.MOVING_AND_SHOOTING
 	enemy.funcIndex = funcIndex
 	enemy.xYInverted = xYInverted
+	enemy = curse_enemy(enemy)
 	
 	add_child(enemy)
 	
@@ -45,3 +47,14 @@ func spawn_enemy(_name):
 
 func _on_kill_timer_timeout():
 	queue_free()
+
+
+func curse_enemy(enemy):
+	if currentCurse == 2:
+		enemy.timeMultiplier = 200
+	elif currentCurse == 3:
+		enemy.get_node("AnimatedSprite2D").visible = false
+	elif currentCurse == 4:
+		enemy.bulletLaunchSpeedMultiplier = 2
+	
+	return enemy

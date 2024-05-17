@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dagfdmpgmseyw"
-path="res://.godot/imported/BO_Paddle.png-b1d37258819ca974f7c1a5f77aeed88c.ctex"
+uid="uid://cils03yrx5suw"
+path="res://.godot/imported/Head Frame 7.svg-c1e70905c7ff2e51d4d0be6850ed40c1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/BO_Paddle.png"
-dest_files=["res://.godot/imported/BO_Paddle.png-b1d37258819ca974f7c1a5f77aeed88c.ctex"]
+source_file="res://assets/Boss/Head/Head Frame 7.svg"
+dest_files=["res://.godot/imported/Head Frame 7.svg-c1e70905c7ff2e51d4d0be6850ed40c1.ctex"]
 
 [params]
 
@@ -32,3 +32,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

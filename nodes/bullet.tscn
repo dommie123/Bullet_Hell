@@ -1,7 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://dfc84ckt16wow"]
+[gd_scene load_steps=7 format=3 uid="uid://bbwfo67k6imi6"]
 
 [ext_resource type="Script" path="res://scripts/bullet.gd" id="1_6leip"]
-[ext_resource type="Texture2D" uid="uid://cfqrj4tfvs8lg" path="res://assets/Bullet.png" id="1_reotx"]
+[ext_resource type="Texture2D" uid="uid://cfqrj4tfvs8lg" path="res://assets/Bullets/Bullet.png" id="2_f1t73"]
 
 [sub_resource type="Shader" id="Shader_oo4yq"]
 code = "shader_type canvas_item;
@@ -32,7 +32,7 @@ script = ExtResource("1_6leip")
 
 [node name="Icon" type="Sprite2D" parent="."]
 scale = Vector2(1.008, 1)
-texture = ExtResource("1_reotx")
+texture = ExtResource("2_f1t73")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_0xt8d")

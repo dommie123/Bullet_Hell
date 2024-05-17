@@ -14,8 +14,7 @@ enum POWER_DOWN_TYPE {
 	REVERSE_CONTROLS = 1,
 	ENEMY_SPEED = 2,
 	ENEMY_INVISIBILITY = 3,
-	SCREEN_FLIP = 4,
-	ENEMY_SHOT_SPEED = 5
+	ENEMY_SHOT_SPEED = 4
 }
 
 signal activate_powerup
@@ -32,11 +31,19 @@ func _ready():
 	fallSpeed = 100
 	
 	var rngPowerup = randi_range(1, 7)
-	var rngCurse = randi_range(1, 5)
+	var rngCurse = randi_range(1, 4)
 	
 	currentPowerup = rngPowerup
 	currentCurse = rngCurse
-
+	
+	var playerNode = get_node("/root/Main/Player")
+	var mainNode = get_node("/root/Main")
+#	var cameraNode = get_node("/root/Main/Camera2D")
+	
+	activate_powerup.connect(playerNode.activate_powerup_callable)	
+	activate_curse.connect(playerNode.activate_curse_callable)
+	activate_powerup.connect(mainNode.activate_powerup_callable)	
+	activate_curse.connect(mainNode.activate_curse_callable)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -52,7 +59,7 @@ func _on_curse_timer_timeout():
 func _on_area_2d_body_entered(body):
 	activate_powerup.emit(currentPowerup)
 	
-	$Area2D.visible = false
+	$Area2D/CollisionShape2D.set_deferred("disabled", true)
 	$AnimatedSprite2D.visible = false
 	
 	$CurseTimer.start()

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d0nb2dnirtjfn"
-path="res://.godot/imported/Magenta Bullet.png-1a107a77614b056b923ae18ca8a0dda5.ctex"
+uid="uid://b3fc0jt4lkayv"
+path="res://.godot/imported/Worm.svg-54d3a8e0e539c5a946f1179f5a614af0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Magenta Bullet.png"
-dest_files=["res://.godot/imported/Magenta Bullet.png-1a107a77614b056b923ae18ca8a0dda5.ctex"]
+source_file="res://assets/Boss/Worm.svg"
+dest_files=["res://.godot/imported/Worm.svg-54d3a8e0e539c5a946f1179f5a614af0.ctex"]
 
 [params]
 
@@ -32,3 +32,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

@@ -22,12 +22,14 @@ signal enemy_fled
 signal enemy_killed
 
 @export var bullet_scene: PackedScene
+@export var powerupScene: PackedScene
 @export var currentState: STATE
 @export var currentType: TYPE
 @export var positionOffset: Vector2
 
 @export var xYInverted: bool
 @export var funcIndex: int
+@export var bulletLaunchSpeedMultiplier: int
 
 var functions: Functions
 var utils: Utils
@@ -36,8 +38,9 @@ var angularVelocity: float
 var timePassed: float
 var canShoot: bool
 var spawnGrace: bool # Keeps the enemy from being destroyed while spawning offscreen
+var bulletLaunchSpeed: int
 
-const timeMultiplier = 100
+var timeMultiplier: int
 const Functions = preload("res://scripts/functions.gd")
 const Utils = preload("res://scripts/utils.gd")
 
@@ -47,10 +50,12 @@ func _ready():
 	functions = Functions.new()
 	utils = Utils.new()
 	
+	timeMultiplier = 100
 	angularVelocity = (3 * PI) / 4
 	timePassed = 0
 	canShoot = true
 	spawnGrace = true
+	bulletLaunchSpeed = 350 * bulletLaunchSpeedMultiplier
 	
 	if currentType == TYPE.AIMBOT:
 		$BulletTimer.wait_time *= 30
@@ -63,6 +68,12 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if currentState == STATE.DEAD:
+		const pwrDropChance = 50
+		var pwrDropRoll = randi_range(1, pwrDropChance)
+		
+		if pwrDropRoll % pwrDropChance == 0:
+			spawn_powerup()
+			
 		enemy_killed.emit()
 		queue_free()
 	
@@ -99,12 +110,21 @@ func shoot():
 	bullet.position = position
 	var direction = $BulletLauncher.rotation
 	
+	bullet.speed = bulletLaunchSpeed
+	
 	# Choose the velocity for the bullet
 	var velocity = Vector2(1, 0)
 	bullet.linear_velocity = velocity.rotated(direction)
 	
 	add_sibling(bullet)
 	
+	
+func spawn_powerup():
+	var powerup = powerupScene.instantiate()
+	
+	powerup.position = position
+	
+	add_sibling(powerup)
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	if not spawnGrace:
@@ -122,3 +142,4 @@ func _on_visible_on_screen_notifier_2d_screen_entered():
 
 func _on_area_2d_body_entered(body):
 	currentState = STATE.DEAD
+	

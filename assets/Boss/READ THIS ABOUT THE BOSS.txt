@@ -1,0 +1,1 @@
+When the boss spins a segment, including its head, that segment changes color, so make the opposite side the other color.

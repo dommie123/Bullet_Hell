@@ -14,14 +14,14 @@ enum color {cyan, magenta}#ADDED enumerator used to denote colors throughout the
 var bulletColor : color
 
 func _ready():
-	speed = 350
+#	speed = 350
 	damage = 1
 	pierce = 1
 	bulletGrace = false
 	linear_velocity = linear_velocity.normalized() * speed
 	
-	cyanBulletTexture = load("res://assets/Cyan Bullet.png")
-	magentaBulletTexture = load("res://assets/Magenta Bullet.png")
+	cyanBulletTexture = load("res://assets/Bullets/Cyan Bullet.png")
+	magentaBulletTexture = load("res://assets/Bullets/Magenta Bullet.png")
 	
 	if bulletColor == color.cyan:
 		set_collision_layer_value(7, true)
