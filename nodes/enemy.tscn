@@ -158,8 +158,6 @@ contact_monitor = true
 lock_rotation = true
 script = ExtResource("1_m52gn")
 bullet_scene = ExtResource("2_yxds1")
-currentState = 2
-xYInverted = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(2, 2)
