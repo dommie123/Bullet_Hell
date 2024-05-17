@@ -102,7 +102,7 @@ func spawn_enemy_spawner(spawnToLeft = false):
 		enemySpawner.position.y = -50
 	else:
 		enemySpawner.position.x = -50
-		enemySpawner.position.y = randf_range(150, 700)
+		enemySpawner.position.y = randf_range(150, 500)
 		
 	enemySpawner.enemyCount = currentEnemiesPerSpawner
 	enemySpawner.funcIndex = phase
@@ -119,6 +119,7 @@ func _on_enemy_spawner_timer_timeout():
 
 func _on_powerup_activate_powerup(powerup):
 	currentPowerup = powerup
+	$PlayerShip.update_powerup(powerup)
 
 
 func _on_powerup_activate_curse(curse):
@@ -132,14 +133,10 @@ func _on_powerup_activate_curse(curse):
 	
 	for enemy in enemies:
 		enemy.set_deferred("currentCurse", curse)
-
+		
 
 func _on_player_deactivate_curse():
 	currentCurse = 0
-	
-
-func _on_player_deactivate_powerup():
-	currentPowerup = 0
 	
 	var enemySpawners = get_tree().get_nodes_in_group("EnemySpawners")
 	var enemies = get_tree().get_nodes_in_group("Enemies")
@@ -149,3 +146,8 @@ func _on_player_deactivate_powerup():
 	
 	for enemy in enemies:
 		enemy.set_deferred("currentCurse", 0)
+#
+
+func _on_player_deactivate_powerup():
+	currentPowerup = 0
+	$PlayerShip.update_powerup()

@@ -19,12 +19,15 @@ size = Vector2(24, 22)
 
 [node name="PlayerShip" type="RigidBody2D"]
 collision_mask = 192
+mass = 5.0
+inertia = 10.0
 gravity_scale = 0.0
 max_contacts_reported = 1
 contact_monitor = true
 lock_rotation = true
 freeze = true
 script = ExtResource("1_oaehg")
+initialSpeed = 20.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.0379304, 0.0387271)
