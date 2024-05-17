@@ -150,14 +150,16 @@ radius = 32.0156
 
 [node name="Enemy" type="RigidBody2D"]
 position = Vector2(37, 33)
-collision_layer = 4
-collision_mask = 8
+collision_layer = 16
+collision_mask = 256
 gravity_scale = 0.0
 max_contacts_reported = 1
 contact_monitor = true
 lock_rotation = true
 script = ExtResource("1_m52gn")
 bullet_scene = ExtResource("2_yxds1")
+currentState = 2
+xYInverted = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(2, 2)

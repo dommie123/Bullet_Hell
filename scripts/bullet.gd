@@ -2,6 +2,7 @@ extends RigidBody2D
 
 signal bullet_hit
 
+var speed: float
 var damage: int
 var pierce: int
 var bulletGrace: bool
@@ -13,9 +14,11 @@ enum color {cyan, magenta}#ADDED enumerator used to denote colors throughout the
 var bulletColor : color
 
 func _ready():
+	speed = 350
 	damage = 1
 	pierce = 1
 	bulletGrace = false
+	linear_velocity = linear_velocity.normalized() * speed
 	
 	cyanBulletTexture = load("res://assets/Cyan Bullet.png")
 	magentaBulletTexture = load("res://assets/Magenta Bullet.png")
@@ -48,8 +51,9 @@ func _on_screen_exited():
 func _on_body_entered(body):
 #	print()
 	if "Player" in body.name:
+		linear_velocity = linear_velocity.normalized() * speed
 #		set_collision_mask_value(3, true)
-		set_collision_layer_value(4, true)
+		set_collision_layer_value(9, true)
 #		set_collision_layer_value(2, false)
 #		set_collision_mask_value(1, false)
 

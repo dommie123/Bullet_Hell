@@ -92,7 +92,7 @@ func spawn_enemy_spawner(spawnToLeft = false):
 		enemySpawner.position.y = -50
 	else:
 		enemySpawner.position.x = -50
-		enemySpawner.position.y = randf_range(150, 800)
+		enemySpawner.position.y = randf_range(150, 700)
 		
 	enemySpawner.enemyCount = currentEnemiesPerSpawner
 	enemySpawner.funcIndex = phase

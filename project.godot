@@ -52,13 +52,8 @@ shift={
 2d_physics/layer_6="Enemy Magenta"
 2d_physics/layer_7="Bullet Cyan"
 2d_physics/layer_8="Bullet Magenta"
-
-[layer_names]
-
-2d_physics/layer_1="Player"
-2d_physics/layer_2="Bullet"
-2d_physics/layer_3="Enemy"
-2d_physics/layer_4="ReflectedBullet"
+2d_physics/layer_9="BulletReflected Cyan"
+2d_physics/layer_10="BulletReflected Magenta"
 
 [rendering]
 

@@ -11,7 +11,7 @@ size = Vector2(128, 20)
 
 [node name="Player" type="RigidBody2D"]
 position = Vector2(0, 550)
-collision_mask = 10
+collision_mask = 64
 physics_material_override = SubResource("PhysicsMaterial_tbeve")
 gravity_scale = 0.0
 max_contacts_reported = 1

@@ -100,7 +100,7 @@ func shoot():
 	var direction = $BulletLauncher.rotation
 	
 	# Choose the velocity for the bullet
-	var velocity = Vector2(350, 0)
+	var velocity = Vector2(1, 0)
 	bullet.linear_velocity = velocity.rotated(direction)
 	
 	add_sibling(bullet)
