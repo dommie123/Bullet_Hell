@@ -16,16 +16,20 @@ enum TYPE {
 	GIGABYTE = 5
 }
 
+enum color {cyan,magenta} #ADDED enumerator used to denote colors throughout the code. Use these when describing a color of enemy or bullet
+
 signal enemy_fled
 signal enemy_killed
 
 @export var bullet_scene: PackedScene
+@export var powerupScene: PackedScene
 @export var currentState: STATE
 @export var currentType: TYPE
 @export var positionOffset: Vector2
 
 @export var xYInverted: bool
 @export var funcIndex: int
+@export var bulletLaunchSpeedMultiplier: int
 
 var functions: Functions
 var utils: Utils
@@ -34,8 +38,9 @@ var angularVelocity: float
 var timePassed: float
 var canShoot: bool
 var spawnGrace: bool # Keeps the enemy from being destroyed while spawning offscreen
+var bulletLaunchSpeed: int
 
-const timeMultiplier = 100
+var timeMultiplier: int
 const Functions = preload("res://scripts/functions.gd")
 const Utils = preload("res://scripts/utils.gd")
 
@@ -45,20 +50,30 @@ func _ready():
 	functions = Functions.new()
 	utils = Utils.new()
 	
+	timeMultiplier = 100
 	angularVelocity = (3 * PI) / 4
 	timePassed = 0
 	canShoot = true
 	spawnGrace = true
+	bulletLaunchSpeed = 350 * bulletLaunchSpeedMultiplier
 	
 	if currentType == TYPE.AIMBOT:
-		$BulletTimer.wait_time *= 3
+		$BulletTimer.wait_time *= 30
 		
 	var mainNode = get_node("/root/Main")
+	
 	enemy_fled.connect(mainNode.enemy_fled_callable)
+	enemy_killed.connect(mainNode.enemy_killed_callable)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if currentState == STATE.DEAD:
+		const pwrDropChance = 50
+		var pwrDropRoll = randi_range(1, pwrDropChance)
+		
+		if pwrDropRoll % pwrDropChance == 0:
+			spawn_powerup()
+			
 		enemy_killed.emit()
 		queue_free()
 	
@@ -68,8 +83,13 @@ func _process(delta):
 		position = calc_pos(timePassed)
 	
 	if currentType == TYPE.AIMBOT or currentType == TYPE.MEGABYTE or currentType == TYPE.GIGABYTE:
-		var playerPos = get_node("/root/Main/Player").position
-		$BulletLauncher.look_at(playerPos)
+		var player = get_node("/root/Main/Player")
+		
+		if player:
+			var playerPos = get_node("/root/Main/Player").position
+			$BulletLauncher.look_at(playerPos)
+		else:
+			currentState = STATE.MOVING
 	else:
 		$BulletLauncher.rotation = 2 * PI + functions.ANGULAR_FUNCTIONS[0].call(timePassed)
 	
@@ -90,16 +110,26 @@ func shoot():
 		assert(false, "Trojan enemies cannot shoot the player!")
 		
 	var bullet = bullet_scene.instantiate()
+	bullet.bulletColor = color.cyan #TEMPORARY. ALL BULLETS SHOT ARE CYAN RIGHT NOW
 	
 	bullet.position = position
 	var direction = $BulletLauncher.rotation
 	
+	bullet.speed = bulletLaunchSpeed
+	
 	# Choose the velocity for the bullet
-	var velocity = Vector2(350, 0)
+	var velocity = Vector2(1, 0)
 	bullet.linear_velocity = velocity.rotated(direction)
 	
 	add_sibling(bullet)
 	
+	
+func spawn_powerup():
+	var powerup = powerupScene.instantiate()
+	
+	powerup.position = position
+	
+	add_sibling(powerup)
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	if not spawnGrace:
@@ -113,3 +143,8 @@ func _on_timer_timeout():
 
 func _on_visible_on_screen_notifier_2d_screen_entered():
 	spawnGrace = false
+
+
+func _on_area_2d_body_entered(body):
+	currentState = STATE.DEAD
+	

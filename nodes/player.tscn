@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://d18a07m61bxpn"]
+[gd_scene load_steps=5 format=3 uid="uid://drh6a3js8480r"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_uotbm"]
-[ext_resource type="Texture2D" uid="uid://dagfdmpgmseyw" path="res://assets/BO_Paddle.png" id="2_o4h8m"]
+[ext_resource type="Texture2D" uid="uid://dagfdmpgmseyw" path="res://assets/Paddle/BO_Paddle.png" id="2_n3s0w"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_tbeve"]
 bounce = 1.0
@@ -11,9 +11,11 @@ size = Vector2(128, 20)
 
 [node name="Player" type="RigidBody2D"]
 position = Vector2(0, 550)
-collision_mask = 2
+collision_mask = 64
 physics_material_override = SubResource("PhysicsMaterial_tbeve")
 gravity_scale = 0.0
+max_contacts_reported = 1
+contact_monitor = true
 lock_rotation = true
 freeze = true
 freeze_mode = 1
@@ -21,10 +23,19 @@ script = ExtResource("1_uotbm")
 
 [node name="BoPaddle" type="Sprite2D" parent="."]
 scale = Vector2(2, 2)
-texture = ExtResource("2_o4h8m")
+texture = ExtResource("2_n3s0w")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_uo6ne")
 
+[node name="PowerupTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[node name="CurseTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="timeout" from="CurseTimer" to="." method="_on_curse_timer_timeout"]
