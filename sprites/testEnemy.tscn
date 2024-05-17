@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://bcfd0kyae7v3f"]
+
+[ext_resource type="Texture2D" uid="uid://bawqrwepwy0wg" path="res://textures/A_black_image.jpg" id="1_ih3hq"]
+[ext_resource type="Shader" path="res://textures/neon.gdshader" id="2_umm1d"]
+[ext_resource type="Texture2D" uid="uid://dcx7rl2kcd80o" path="res://sprites/Basic Enemy frame 1.svg" id="3_0kr63"]
+[ext_resource type="Texture2D" uid="uid://bfq3rtifhhden" path="res://textures/ThickEnemy.svg" id="4_qm1sr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5vl44"]
+shader = ExtResource("2_umm1d")
+shader_parameter/brightness = 1.112
+shader_parameter/glow_intensity = 5.0
+shader_parameter/glow_color = Color(0, 1, 1, 1)
+shader_parameter/edge_softness = 1.0
+shader_parameter/glow_radius = 0.527
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1dp1w"]
+shader = ExtResource("2_umm1d")
+shader_parameter/brightness = 2.0
+shader_parameter/glow_intensity = 10.0
+shader_parameter/glow_color = Color(0, 1, 1, 1)
+shader_parameter/edge_softness = 0.029
+shader_parameter/glow_radius = 0.348
+
+[node name="TestEnemy" type="Node2D"]
+scale = Vector2(1.00608, 0.9948)
+
+[node name="ABlackImage" type="Sprite2D" parent="."]
+position = Vector2(-41.7464, 10.0523)
+scale = Vector2(1, 1)
+texture = ExtResource("1_ih3hq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_5vl44")
+scale = Vector2(1, 1.00352)
+texture = ExtResource("3_0kr63")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_1dp1w")
+scale = Vector2(1, 1)
+texture = ExtResource("4_qm1sr")
+
+[node name="ThickEnemy" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0.993961, 8.04182)
+texture = ExtResource("4_qm1sr")
