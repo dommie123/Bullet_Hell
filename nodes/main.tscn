@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bxrp03v51pwbw" path="res://nodes/enemy_spawner.tscn" id="2_hk6sm"]
 [ext_resource type="PackedScene" uid="uid://drh6a3js8480r" path="res://nodes/player.tscn" id="2_nnhgw"]
 [ext_resource type="PackedScene" uid="uid://bfhuoslxpj43e" path="res://nodes/player_ship.tscn" id="4_2dr2i"]
-[ext_resource type="PackedScene" uid="uid://ct0s05l6kyqbn" path="res://nodes/powerup.tscn" id="4_haxs5"]
+[ext_resource type="PackedScene" path="res://nodes/powerup.tscn" id="4_haxs5"]
 [ext_resource type="Script" path="res://scripts/MainCamera2D.gd" id="5_3ca1x"]
 
 [node name="Main" type="Node2D"]

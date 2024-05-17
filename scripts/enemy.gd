@@ -34,6 +34,8 @@ signal enemy_killed
 var functions: Functions
 var utils: Utils
 
+var lastFramePos : Vector2 #where we were in space last frame
+var posDifference : Vector2 #the difference between last frame and the next calculated frame
 var angularVelocity: float
 var timePassed: float
 var canShoot: bool
@@ -46,7 +48,7 @@ const Utils = preload("res://scripts/utils.gd")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$AnimatedSprite2D.play("default")
+	$AnimatedSprite2D.play("Gigabyte")
 	functions = Functions.new()
 	utils = Utils.new()
 	
@@ -80,7 +82,9 @@ func _process(delta):
 	timePassed += timeMultiplier * delta
 	
 	if (currentState == STATE.MOVING or currentState == STATE.MOVING_AND_SHOOTING):
+		lastFramePos = position
 		position = calc_pos(timePassed)
+		posDifference = position - lastFramePos
 	
 	if currentType == TYPE.AIMBOT or currentType == TYPE.MEGABYTE or currentType == TYPE.GIGABYTE:
 		var player = get_node("/root/Main/Player")
@@ -97,7 +101,23 @@ func _process(delta):
 		shoot()
 		canShoot = false
 		$BulletTimer.start()
+	
+	#ANIMATION STUFF
+	if posDifference.x < (-5) or posDifference.x > (5):
+		$AnimatedSprite2D.set_frame(3)
+	elif posDifference.x < (-4) or posDifference.x > (4):
+		$AnimatedSprite2D.set_frame(2)
+	elif posDifference.x < (-3) or posDifference.x > (3):
+		$AnimatedSprite2D.set_frame(1)
+	elif posDifference.x < (-1) or posDifference.x > (1):
+		$AnimatedSprite2D.set_frame(0)
+	else:
+		$AnimatedSprite2D.set_frame(0)
 		
+	if posDifference.x <= 0:
+		$AnimatedSprite2D.flip_v = false
+	else:
+		$AnimatedSprite2D.flip_v = true
 
 func calc_pos(t):
 	var result = functions.MATH_FUNCTIONS[funcIndex].call(t)

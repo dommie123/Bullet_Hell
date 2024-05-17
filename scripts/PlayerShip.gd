@@ -13,8 +13,13 @@ enum COLOR {
 var playerPaddle: Node2D
 var speed: float
 
+var lastFramePos : Vector2 #where we were in space last frame
+var posDifference : Vector2 #the difference between last frame and the next calculated frame
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$AnimatedSprite2D.play("PlayerShip")
+	
 	playerPaddle = get_node("/root/Main/Player")
 	speed = initialSpeed
 
@@ -22,10 +27,29 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	var paddlePos = Vector2(playerPaddle.position.x, playerPaddle.position.y + 40)
+	lastFramePos = position
 	position = position.lerp(paddlePos, speed * delta)
+	posDifference = position - lastFramePos
 	
 	if Input.is_action_just_pressed("shift"):
 		shift()
+	
+	#ANIMATION STUFF
+	if posDifference.x < (-5) or posDifference.x > (5):
+		$AnimatedSprite2D.set_frame(3)
+	elif posDifference.x < (-4) or posDifference.x > (4):
+		$AnimatedSprite2D.set_frame(2)
+	elif posDifference.x < (-3) or posDifference.x > (3):
+		$AnimatedSprite2D.set_frame(1)
+	elif posDifference.x < (-1) or posDifference.x > (1):
+		$AnimatedSprite2D.set_frame(0)
+	else:
+		$AnimatedSprite2D.set_frame(0)
+		
+	if posDifference.x <= 0:
+		$AnimatedSprite2D.flip_v = true
+	else:
+		$AnimatedSprite2D.flip_v = false
 
 
 @export var bullet_hit_callable = func(body):

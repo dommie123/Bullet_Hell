@@ -1,16 +1,37 @@
-[gd_scene load_steps=5 format=3 uid="uid://bfhuoslxpj43e"]
+[gd_scene load_steps=9 format=3 uid="uid://bfhuoslxpj43e"]
 
 [ext_resource type="Script" path="res://scripts/PlayerShip.gd" id="1_oaehg"]
+[ext_resource type="Texture2D" uid="uid://7ihwkm6ysckg" path="res://assets/Enemies/Megabyte/Megabyte frame 1.svg" id="2_1w82v"]
 [ext_resource type="Texture2D" uid="uid://j4mh2h5rq8lt" path="res://assets/PlayerShip/Galaga-PNG-Photos.png" id="2_5tcah"]
+[ext_resource type="Texture2D" uid="uid://ctanppjcjl1ge" path="res://assets/Enemies/Megabyte/Megabyte frame 2.svg" id="3_1sh3y"]
+[ext_resource type="Texture2D" uid="uid://yaw0hq61b3r3" path="res://assets/Enemies/Megabyte/Megabyte frame 3.svg" id="4_vmykg"]
+[ext_resource type="Texture2D" uid="uid://m8qfv1ecdpxb" path="res://assets/Enemies/Megabyte/Megabyte frame 4.svg" id="5_lhqlc"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_phas3"]
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("2_1w82v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_1sh3y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_vmykg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_lhqlc")
+}],
+"loop": true,
+"name": &"PlayerShip",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("2_5tcah")
 }],
 "loop": true,
-"name": &"default",
+"name": &"default (old)",
 "speed": 5.0
 }]
 
@@ -30,8 +51,10 @@ script = ExtResource("1_oaehg")
 initialSpeed = 20.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.0379304, 0.0387271)
+rotation = -1.5708
+scale = Vector2(0.117, 0.118)
 sprite_frames = SubResource("SpriteFrames_phas3")
+animation = &"PlayerShip"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 2)
