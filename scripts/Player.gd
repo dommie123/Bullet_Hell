@@ -1,9 +1,11 @@
 extends RigidBody2D
 
 signal reflect_bullet
+signal player_died
 
 var yIsLocked: bool
 var initialYPos: float
+var lives: int
 
 const MAX_ROTATION = PI / 6 # 30 degrees in radians
 
@@ -11,7 +13,7 @@ const MAX_ROTATION = PI / 6 # 30 degrees in radians
 func _ready():
 	yIsLocked = true
 	initialYPos = position.y
-
+	lives = 3
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -33,8 +35,9 @@ func _process(delta):
 
 func _on_body_entered(body):
 	# TODO reflect ONLY when color is same as bullet
-	reflect_bullet.emit()
-	print_debug("Hit!")
+#	if "Bullet" in body.name:
+#		body.isReflected = true
+	pass
 
 
 func _on_powerup_activate_powerup(powerup):
@@ -48,3 +51,7 @@ func _on_powerup_activate_curse(curse):
 func reset_stats():
 	var yIsLocked = true
 	position.y = initialYPos
+	
+	
+@export var _on_bullet_hit = func():
+	reflect_bullet.emit()

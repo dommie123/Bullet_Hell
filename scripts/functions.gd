@@ -26,9 +26,9 @@ var y: float
 		y += sin(t * 2.5)
 		return Vector2(x, y),
 	func(t):
-		x = (t / 2) * sin(t / 20) + 100
+		x = (t / 2) * sin(t / 40) + 100
 		x += t
-		y = 2 * (t / 3) * sin(t / 10) + 300
+		y = 2 * (t / 3) * sin(t / 20) + 300
 		y -= t
 		return Vector2(x, y),
 	func(t):

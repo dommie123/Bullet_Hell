@@ -38,6 +38,7 @@ func _ready():
 func _process(delta):
 	if canSpawnEnemySpawner and activeSpawners > 0:
 		spawn_enemy_spawner(activeSpawners % 2 > 0)
+	pass
 		
 
 @export var enemy_fled_callable = func():
@@ -67,6 +68,7 @@ func enemy_disappear_routine():
 		if currentEnemiesPerSpawner > maxEnemiesPerSpawner:
 			currentEnemiesPerSpawner -= currentEnemiesPerSpawner % maxEnemiesPerSpawner
 		
+		enemiesFled = 0
 		activeSpawners = currentSpawners + 1
 		currentSpawners = activeSpawners 
 		active_enemies = currentEnemiesPerSpawner * activeSpawners

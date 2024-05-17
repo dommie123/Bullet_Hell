@@ -51,10 +51,12 @@ func _ready():
 	spawnGrace = true
 	
 	if currentType == TYPE.AIMBOT:
-		$BulletTimer.wait_time *= 3
+		$BulletTimer.wait_time *= 30
 		
 	var mainNode = get_node("/root/Main")
+	
 	enemy_fled.connect(mainNode.enemy_fled_callable)
+	enemy_killed.connect(mainNode.enemy_killed_callable)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -113,3 +115,7 @@ func _on_timer_timeout():
 
 func _on_visible_on_screen_notifier_2d_screen_entered():
 	spawnGrace = false
+
+
+func _on_area_2d_body_entered(body):
+	currentState = STATE.DEAD
