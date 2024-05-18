@@ -22,6 +22,7 @@ signal activate_curse
 
 var currentPowerup: POWER_UP_TYPE
 var currentCurse: POWER_DOWN_TYPE
+var playerNode: Node2D
 
 var fallSpeed: float
 
@@ -36,7 +37,7 @@ func _ready():
 	currentPowerup = rngPowerup
 	currentCurse = rngCurse
 	
-	var playerNode = get_node("/root/Main/Player")
+	playerNode = get_node("/root/Main/Player")
 	var mainNode = get_node("/root/Main")
 #	var cameraNode = get_node("/root/Main/Camera2D")
 	
@@ -52,7 +53,9 @@ func _process(delta):
 
 
 func _on_curse_timer_timeout():
-	activate_curse.emit(currentCurse)
+	if playerNode.visible:
+		activate_curse.emit(currentCurse)
+		
 	queue_free()
 
 

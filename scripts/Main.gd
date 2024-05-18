@@ -4,6 +4,7 @@ signal level_changed
 signal phase_changed
 
 @export var enemySpawnerScene: PackedScene
+@export var bossScene: PackedScene
 
 @export var phase: int
 
@@ -38,11 +39,19 @@ func _ready():
 	boss_active = false
 	canSpawnEnemySpawner = true
 
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if canSpawnEnemySpawner and activeSpawners > 0:
+	# If there's more than 0 bullets on-screen, wait until there are 0 bullets.
+	var bullets = get_tree().get_nodes_in_group("Bullets")
+	if bullets.size() > 0 and boss_active:
+		return
+	
+	if boss_active and not get_node("/root/Main/DeBugger"):
+		spawn_boss()
+	elif canSpawnEnemySpawner and activeSpawners > 0 and not boss_active:
 		spawn_enemy_spawner(activeSpawners % 2 > 0)
-	pass
+
 		
 
 @export var enemy_fled_callable = func():
@@ -56,6 +65,9 @@ func _process(delta):
 
 @export var activate_curse_callable = func(curse):
 	_on_powerup_activate_curse(curse)
+	
+@export var boss_defeated_callable = func():
+	_on_boss_defeated()
 
 func _on_enemy_enemy_fled():
 	enemiesFled += 1
@@ -63,6 +75,11 @@ func _on_enemy_enemy_fled():
 	enemy_disappear_routine()
 
 # TODO on boss defeated, increase level and set boss active to false.
+func _on_boss_defeated():
+	boss_active = false
+	
+	active_enemies += 1
+	enemy_disappear_routine()
 
 func _on_enemy_enemy_killed():
 	enemy_disappear_routine()
@@ -85,7 +102,6 @@ func enemy_disappear_routine():
 		
 		phase += 1
 		phase_changed.emit(phase)
-		print("No more enemies! Initiate phase %s!" % phase)
 		
 		if phase % 5 == 0:
 			boss_active = true
@@ -151,3 +167,12 @@ func _on_player_deactivate_curse():
 func _on_player_deactivate_powerup():
 	currentPowerup = 0
 	$PlayerShip.update_powerup()
+
+
+func spawn_boss():
+	var boss = bossScene.instantiate()
+	var middleOfViewport = get_viewport_rect().size.x / 2
+	
+	boss.position = Vector2(middleOfViewport / 2, 100)
+	
+	add_child(boss)

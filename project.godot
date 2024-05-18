@@ -17,7 +17,7 @@ config/icon="res://icon.svg"
 
 [display]
 
-window/size/viewport_width=412
+window/size/viewport_width=600
 window/size/viewport_height=915
 
 [dotnet]
@@ -54,6 +54,10 @@ shift={
 2d_physics/layer_8="Bullet Magenta"
 2d_physics/layer_9="BulletReflected Cyan"
 2d_physics/layer_10="BulletReflected Magenta"
+2d_physics/layer_11="Boss Cyan"
+2d_physics/layer_12="Boss Magenta"
+2d_physics/layer_13="BossTurret Cyan"
+2d_physics/layer_14="BossTurret Magenta"
 
 [rendering]
 

@@ -50,8 +50,6 @@ func _process(delta):
 
 
 func Shift(): #ADDED funciton that lets the player shift colors (space bar)
-	print(shipColor)
-	print("SHIFT")
 	if shipColor == color.cyan:
 		shipColor = color.magenta
 		set_collision_layer_value(1,false)#sets ship and paddle collision cyan to false
@@ -109,8 +107,6 @@ func _on_powerup_activate_powerup(powerup):
 		
 	$PowerupTimer.start()
 	
-	print("Current Powerup: %s" % currentPowerup)
-	
 	if currentPowerup == 3:
 		# TODO increase player ship speed
 		pass
@@ -121,10 +117,11 @@ func _on_powerup_activate_powerup(powerup):
 
 
 func _on_powerup_activate_curse(curse):
+	if not visible:
+		return
+		
 	currentCurse = curse
 	$CurseTimer.start()
-	
-	print("Current Curse: %s" % currentCurse)
 	
 	if currentCurse == 1:
 		controlsReversed = true
@@ -156,15 +153,17 @@ func _on_curse_timer_timeout():
 	reset_stats()
 	deactivate_powerup.emit()
 	deactivate_curse.emit()
-	print("Stats Reset")
 
 
 func _on_player_ship_lose_life():
-	print("Ouch!")
 	lives -= 1
 	
 	# If the player is out of lives, it's game over.
 	if lives == 0:
-		print("I'm dead!")
 		player_died.emit()
-		queue_free()
+		
+		$CollisionShape2D.set_deferred("disabled", true)
+		$PowerupTimer.stop()
+		$CurseTimer.stop()
+		
+		set_deferred("visible", false)

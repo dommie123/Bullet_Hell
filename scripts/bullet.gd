@@ -47,7 +47,6 @@ func _on_screen_exited():
 
 
 func _on_body_entered(body):
-#	print()
 	if "Player" in body.name and "Ship" not in body.name:
 		linear_velocity = linear_velocity.normalized() * speed
 #		set_collision_mask_value(3, true)
