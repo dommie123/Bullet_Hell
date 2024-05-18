@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.2.1 (9c6d41e410, 2022-07-14)"
+   sodipodi:docname="Background.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#000000"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.74564394"
+     inkscape:cx="204.52121"
+     inkscape:cy="240.06096"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="1912"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2">
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Invert"
+       id="filter2021"
+       x="-0.012140302"
+       y="-0.0085840521"
+       width="1.0230207"
+       height="1.0162773">
+      <feColorMatrix
+         type="hueRotate"
+         values="180"
+         result="color1"
+         id="feColorMatrix2017" />
+      <feColorMatrix
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 -0.21 -0.72 -0.07 2 0 "
+         result="color2"
+         id="feColorMatrix2019" />
+      <feGaussianBlur
+         stdDeviation="0.95203331"
+         id="feGaussianBlur3112" />
+    </filter>
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#000000;fill-opacity:1;stroke:#075300;stroke-width:0.264583;stroke-opacity:1"
+       id="rect4679"
+       width="210"
+       height="297"
+       x="0"
+       y="0" />
+    <path
+       d="M 0,0 0,296.99999 M 10.583333,0 l 0,296.99999 M 21.166666,0 l 0,296.99999 M 31.749999,0 l 0,296.99999 M 42.333332,0 l 0,296.99999 M 52.916665,0 l 0,296.99999 M 63.499999,0 l 0,296.99999 M 74.083332,0 l 0,296.99999 M 84.666665,0 l 0,296.99999 M 95.249998,0 l 0,296.99999 M 105.83333,0 l 0,296.99999 M 116.41666,0 l 0,296.99999 M 127,0 127,296.99999 M 137.58333,0 l 0,296.99999 M 148.16666,0 l 0,296.99999 M 158.75,0 l 0,296.99999 M 169.33333,0 l 0,296.99999 M 179.91666,0 l 0,296.99999 M 190.5,0 l 0,296.99999 M 201.08333,0 l 0,296.99999 M 0,0 210,0 M 0,10.583333 l 210,0 M 0,21.166666 l 210,0 M 0,31.749999 l 210,0 M 0,42.333332 l 210,0 M 0,52.916665 l 210,0 M 0,63.499999 l 210,0 M 0,74.083332 l 210,0 M 0,84.666665 l 210,0 M 0,95.249998 l 210,0 M 0,105.83333 l 210,0 m -210,10.58333 210,0 M 0,127 l 210,0 m -210,10.58333 210,0 m -210,10.58333 210,0 M 0,158.75 l 210,0 m -210,10.58333 210,0 m -210,10.58333 210,0 M 0,190.5 l 210,0 m -210,10.58333 210,0 m -210,10.58333 210,0 m -210,10.58333 210,0 m -210,10.58334 210,0 m -210,10.58333 210,0 m -210,10.58333 210,0 m -210,10.58334 210,0 m -210,10.58333 210,0 m -210,10.58333 210,0 m -210,10.58334 210,0"
+       style="fill:#1bea10;stroke:#075300;stroke-width:0.529167px;fill-opacity:1;filter:url(#filter2021);stroke-opacity:1"
+       id="path254" />
+  </g>
+</svg>

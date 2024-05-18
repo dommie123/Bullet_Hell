@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cn7oa2dhh1fer"
-path="res://.godot/imported/PlayerShip Frame 1.svg-40b09847b0da4a71753bb56e1b6b6d62.ctex"
+uid="uid://bcrsuauocwgmw"
+path="res://.godot/imported/Background.svg-5ef87eabc1278c1d2694f9d8ad8fbd93.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Enemies/Megabyte/PlayerShip Frame 1.svg"
-dest_files=["res://.godot/imported/PlayerShip Frame 1.svg-40b09847b0da4a71753bb56e1b6b6d62.ctex"]
+source_file="res://assets/Paddle/Background.svg"
+dest_files=["res://.godot/imported/Background.svg-5ef87eabc1278c1d2694f9d8ad8fbd93.ctex"]
 
 [params]
 

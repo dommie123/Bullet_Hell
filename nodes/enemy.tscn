@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://l53fkglr44r4"]
+[gd_scene load_steps=38 format=3 uid="uid://l53fkglr44r4"]
 
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_m52gn"]
 [ext_resource type="PackedScene" uid="uid://bbwfo67k6imi6" path="res://nodes/bullet.tscn" id="2_yxds1"]
@@ -12,6 +12,10 @@
 [ext_resource type="Texture2D" uid="uid://dqyot54os3qcv" path="res://assets/Enemies/Gigabyte/Gigabyte frame 2.svg" id="9_nsecx"]
 [ext_resource type="Texture2D" uid="uid://b22unoy85n0s3" path="res://assets/Enemies/Gigabyte/Gigabyte frame 3.svg" id="10_euxad"]
 [ext_resource type="Texture2D" uid="uid://bcrfpwn8li4lv" path="res://assets/Enemies/Gigabyte/Gigabyte frame 4.svg" id="11_mjvwu"]
+[ext_resource type="Texture2D" uid="uid://7ihwkm6ysckg" path="res://assets/Enemies/Megabyte/Megabyte frame 1.svg" id="12_enpql"]
+[ext_resource type="Texture2D" uid="uid://ctanppjcjl1ge" path="res://assets/Enemies/Megabyte/Megabyte frame 2.svg" id="13_ubfer"]
+[ext_resource type="Texture2D" uid="uid://yaw0hq61b3r3" path="res://assets/Enemies/Megabyte/Megabyte frame 3.svg" id="14_8723t"]
+[ext_resource type="Texture2D" uid="uid://m8qfv1ecdpxb" path="res://assets/Enemies/Megabyte/Megabyte frame 4.svg" id="15_rdnv1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qvxsb"]
 atlas = ExtResource("3_yx85k")
@@ -127,6 +131,23 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("12_enpql")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_ubfer")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_8723t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_rdnv1")
+}],
+"loop": true,
+"name": &"Megabyte",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_qvxsb")
 }, {
 "duration": 1.0,
@@ -186,11 +207,6 @@ animations = [{
 "loop": true,
 "name": &"default (old)",
 "speed": 24.0
-}, {
-"frames": [],
-"loop": true,
-"name": &"new_animation",
-"speed": 5.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xaw2t"]
@@ -213,9 +229,9 @@ bulletLaunchSpeedMultiplier = 1
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 rotation = 1.5708
-scale = Vector2(0.141, 0.141)
+scale = Vector2(0.167, 0.167)
 sprite_frames = SubResource("SpriteFrames_3dpxp")
-animation = &"new_animation"
+animation = &"Megabyte"
 
 [node name="BulletLauncher" type="Node2D" parent="."]
 

@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://drh6a3js8480r" path="res://nodes/player.tscn" id="2_nnhgw"]
 [ext_resource type="PackedScene" uid="uid://bfhuoslxpj43e" path="res://nodes/player_ship.tscn" id="4_2dr2i"]
 [ext_resource type="PackedScene" path="res://nodes/powerup.tscn" id="4_haxs5"]
-[ext_resource type="Texture2D" uid="uid://dmi7opkd01h5f" path="res://assets/WHITE.png" id="7_imso5"]
+[ext_resource type="Texture2D" uid="uid://cqp3cy36gkeva" path="res://assets/Background.svg" id="6_5smm7"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_b5v8l"]
 
@@ -27,11 +27,11 @@ wait_time = 0.5
 autostart = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 z_index = -1
 material = SubResource("CanvasItemMaterial_b5v8l")
-position = Vector2(311.5, 475)
-scale = Vector2(0.663598, 1.2203)
-texture = ExtResource("7_imso5")
+position = Vector2(308, 465)
+texture = ExtResource("6_5smm7")
 
 [connection signal="deactivate_curse" from="Player" to="." method="_on_player_deactivate_curse"]
 [connection signal="deactivate_powerup" from="Player" to="." method="_on_player_deactivate_powerup"]
