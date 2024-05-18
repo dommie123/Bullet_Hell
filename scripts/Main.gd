@@ -23,7 +23,9 @@ var canSpawnEnemySpawner: bool
 
 const Functions = preload("res://scripts/functions.gd")
 
-# Called when the node enters the scene tree for the first time.
+@onready var levelMusic = preload("res://assets/Sound/Music/Level Theme Edit 1 Export 1.wav")
+@onready var bossMusic = preload("res://assets/Sound/Music/Boss Theme Edit 1 Export 1.wav")
+
 func _ready():
 	level = 1
 	phase = 1
@@ -38,6 +40,8 @@ func _ready():
 	game_started = false
 	boss_active = false
 	canSpawnEnemySpawner = true
+	
+	PlayMusic(levelMusic)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -85,6 +89,11 @@ func _on_enemy_enemy_killed():
 	enemy_disappear_routine()
 	
 
+func PlayMusic(stream : AudioStream):
+	$"Background Music"._set_playing(false)
+	$"Background Music".set_stream(stream)
+	$"Background Music"._set_playing(true)
+
 func enemy_disappear_routine():
 	active_enemies -= 1
 	
@@ -104,11 +113,13 @@ func enemy_disappear_routine():
 		phase_changed.emit(phase)
 		
 		if phase % 5 == 0:
+			PlayMusic(bossMusic)
 			boss_active = true
 			active_enemies = 0
 			activeSpawners = 0
 			currentSpawners -= 1
-			
+		elif phase % 5 == 1:
+			PlayMusic(levelMusic)
 			
 func spawn_enemy_spawner(spawnToLeft = false):
 	var enemySpawner = enemySpawnerScene.instantiate()

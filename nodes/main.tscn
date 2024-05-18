@@ -1,13 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://b8wk107okjidg"]
+[gd_scene load_steps=11 format=3 uid="uid://b8wk107okjidg"]
 
 [ext_resource type="Script" path="res://scripts/Main.gd" id="1_o6526"]
 [ext_resource type="PackedScene" uid="uid://bxrp03v51pwbw" path="res://nodes/enemy_spawner.tscn" id="2_hk6sm"]
 [ext_resource type="PackedScene" uid="uid://drh6a3js8480r" path="res://nodes/player.tscn" id="2_nnhgw"]
 [ext_resource type="PackedScene" uid="uid://30yxyqqqaoy1" path="res://nodes/de_bugger.tscn" id="3_jlhsi"]
 [ext_resource type="PackedScene" uid="uid://bfhuoslxpj43e" path="res://nodes/player_ship.tscn" id="4_2dr2i"]
-[ext_resource type="PackedScene" uid="uid://ct0s05l6kyqbn" path="res://nodes/powerup.tscn" id="4_haxs5"]
+[ext_resource type="PackedScene" path="res://nodes/powerup.tscn" id="4_haxs5"]
 [ext_resource type="Shader" path="res://scroll.gdshader" id="6_7h3n2"]
 [ext_resource type="Texture2D" uid="uid://h3fs06ej0erg" path="res://assets/Grid Background.png" id="7_bndeg"]
+[ext_resource type="AudioStream" uid="uid://bmfqgtitvl7tj" path="res://assets/Sound/Music/Level Theme Edit 1 Export 1.wav" id="9_8m8kg"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_k8ur7"]
 shader = ExtResource("6_7h3n2")
@@ -36,10 +37,17 @@ wait_time = 0.5
 autostart = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 z_index = -1
 material = SubResource("ShaderMaterial_k8ur7")
 position = Vector2(308, 465)
 texture = ExtResource("7_bndeg")
+
+[node name="Background Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_8m8kg")
+volume_db = -10.485
+autoplay = true
+bus = &"Music"
 
 [connection signal="deactivate_curse" from="Player" to="." method="_on_player_deactivate_curse"]
 [connection signal="deactivate_powerup" from="Player" to="." method="_on_player_deactivate_powerup"]
