@@ -10,7 +10,7 @@ var bulletGrace: bool
 var cyanBulletTexture : Texture2D
 var magentaBulletTexture : Texture2D
 
-enum color {cyan, magenta}#ADDED enumerator used to denote colors throughout the code. Use these when describing a color of enemy or bullet
+enum color {cyan, magenta}#enumerator used to denote colors throughout the code. Use these when describing a color of enemy or bullet
 var bulletColor : color
 
 func _ready():

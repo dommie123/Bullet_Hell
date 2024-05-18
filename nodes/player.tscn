@@ -1,10 +1,112 @@
-[gd_scene load_steps=5 format=3 uid="uid://drh6a3js8480r"]
+[gd_scene load_steps=17 format=3 uid="uid://drh6a3js8480r"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_uotbm"]
-[ext_resource type="Texture2D" uid="uid://dagfdmpgmseyw" path="res://assets/Paddle/BO_Paddle.png" id="2_n3s0w"]
+[ext_resource type="Texture2D" uid="uid://2l40m7kh3lqr" path="res://assets/Paddle/paddle frame 1.svg" id="2_2cbli"]
+[ext_resource type="Texture2D" uid="uid://dd8cnlub4ath6" path="res://assets/Paddle/paddle frame 2.svg" id="3_wjjyg"]
+[ext_resource type="Texture2D" uid="uid://c4gpoistamihg" path="res://assets/Paddle/paddle frame 3.svg" id="4_ik1me"]
+[ext_resource type="Texture2D" uid="uid://c0sfs36g8r05h" path="res://assets/Paddle/paddle frame 4.svg" id="5_vlm5g"]
+[ext_resource type="Texture2D" uid="uid://dyaixkifece7k" path="res://assets/Paddle/paddle frame 5.svg" id="6_wncsy"]
+[ext_resource type="Texture2D" uid="uid://bik5hp3acdc32" path="res://assets/Paddle/paddle frame 6.svg" id="7_xn0mw"]
+[ext_resource type="Texture2D" uid="uid://dtq1gj1pkcq4a" path="res://assets/Paddle/paddle frame 7.svg" id="8_jmmg8"]
+[ext_resource type="Texture2D" uid="uid://cwuaivqxpwf0g" path="res://assets/Paddle/paddle frame 12.svg" id="9_mfl0v"]
+[ext_resource type="Texture2D" uid="uid://bww43i8usv2ow" path="res://assets/Paddle/paddle frame 11.svg" id="10_u56sq"]
+[ext_resource type="Texture2D" uid="uid://de1ortdnylps1" path="res://assets/Paddle/paddle frame 10.svg" id="11_fs34c"]
+[ext_resource type="Texture2D" uid="uid://bmwwfqrm3oq4o" path="res://assets/Paddle/paddle frame 9.svg" id="12_6ddgh"]
+[ext_resource type="Texture2D" uid="uid://c62eufbnfg487" path="res://assets/Paddle/paddle frame 8.svg" id="13_f25xy"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_tbeve"]
 bounce = 1.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nu1on"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_2cbli")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_wjjyg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ik1me")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_vlm5g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_wncsy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_xn0mw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_jmmg8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_mfl0v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_u56sq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_fs34c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_6ddgh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_f25xy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_2cbli")
+}],
+"loop": false,
+"name": &"PaddleShiftCyanMagenta",
+"speed": 24.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_2cbli")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_wjjyg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ik1me")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_vlm5g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_wncsy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_xn0mw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_jmmg8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_mfl0v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_u56sq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_fs34c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_6ddgh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_f25xy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_2cbli")
+}],
+"loop": false,
+"name": &"PaddleShiftMagentaCyan",
+"speed": 24.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uo6ne"]
 size = Vector2(128, 20)
@@ -14,6 +116,7 @@ position = Vector2(0, 550)
 collision_mask = 64
 physics_material_override = SubResource("PhysicsMaterial_tbeve")
 gravity_scale = 0.0
+continuous_cd = 2
 max_contacts_reported = 1
 contact_monitor = true
 lock_rotation = true
@@ -21,11 +124,14 @@ freeze = true
 freeze_mode = 1
 script = ExtResource("1_uotbm")
 
-[node name="BoPaddle" type="Sprite2D" parent="."]
-scale = Vector2(2, 2)
-texture = ExtResource("2_n3s0w")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+rotation = -1.5708
+scale = Vector2(0.242, 0.242)
+sprite_frames = SubResource("SpriteFrames_nu1on")
+animation = &"PaddleShiftCyanMagenta"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(1.667, 1.667)
 shape = SubResource("RectangleShape2D_uo6ne")
 
 [node name="PowerupTimer" type="Timer" parent="."]
