@@ -52,7 +52,7 @@ func _ready():
 	functions = Functions.new()
 	utils = Utils.new()
 	
-	timeMultiplier = 100
+	timeMultiplier = 75
 	angularVelocity = (3 * PI) / 4
 	timePassed = 0
 	canShoot = true

@@ -2,6 +2,7 @@ extends Node2D
 
 signal level_changed
 signal phase_changed
+signal update_score
 
 @export var enemySpawnerScene: PackedScene
 @export var bossScene: PackedScene
@@ -77,11 +78,14 @@ func _on_enemy_enemy_fled():
 # TODO on boss defeated, increase level and set boss active to false.
 func _on_boss_defeated():
 	boss_active = false
+	update_score.emit(10000)
 	
 	active_enemies += 1
 	enemy_disappear_routine()
 
 func _on_enemy_enemy_killed():
+	update_score.emit(100)
+	
 	enemy_disappear_routine()
 	
 
@@ -176,3 +180,7 @@ func spawn_boss():
 	boss.position = Vector2(middleOfViewport / 2, 100)
 	
 	add_child(boss)
+
+
+func _on_player_ship_lose_life():
+	pass # Replace with function body.

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://30yxyqqqaoy1"]
+[gd_scene load_steps=22 format=3 uid="uid://cnoi2eahhdj8x"]
 
 [ext_resource type="Script" path="res://scripts/DeBugger.gd" id="1_1xqlb"]
 [ext_resource type="Texture2D" uid="uid://bfnj0b5pp7cy7" path="res://assets/Boss/Head/Head Frame 1.svg" id="2_0rh3i"]

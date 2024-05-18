@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=3 uid="uid://by45tyjaglmsp"]
+
+[ext_resource type="Script" path="res://scripts/ui.gd" id="1_7nk61"]
+[ext_resource type="PackedScene" uid="uid://b6ev8dcx56mgj" path="res://nodes/life_count.tscn" id="2_dmacp"]
+[ext_resource type="Texture2D" uid="uid://c18f328b2glqi" path="res://assets/UI/PauseIcon.png" id="2_uj1mv"]
+
+[node name="UI" type="ReferenceRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+border_color = Color(1, 0, 0, 0)
+script = ExtResource("1_7nk61")
+lifeCountScene = ExtResource("2_dmacp")
+
+[node name="LevelCounter" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 257.0
+offset_right = 321.0
+offset_bottom = 26.0
+text = "Lv: 1"
+
+[node name="ScoreCounter" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 451.0
+offset_right = 600.0
+offset_bottom = 26.0
+text = "Score: 0"
+
+[node name="TextureButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 12.0
+offset_right = 77.0
+offset_bottom = 76.0
+texture_normal = ExtResource("2_uj1mv")
+texture_pressed = ExtResource("2_uj1mv")
+texture_hover = ExtResource("2_uj1mv")
+texture_disabled = ExtResource("2_uj1mv")
+texture_focused = ExtResource("2_uj1mv")
