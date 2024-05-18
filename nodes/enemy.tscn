@@ -224,7 +224,7 @@ script = ExtResource("1_m52gn")
 bullet_scene = ExtResource("2_yxds1")
 powerupScene = ExtResource("3_yc7vu")
 currentState = 2
-currentType = 4
+currentType = 5
 xYInverted = true
 bulletLaunchSpeedMultiplier = 1
 enemyColor = 1
@@ -236,6 +236,7 @@ sprite_frames = SubResource("SpriteFrames_3dpxp")
 animation = &"Megabyte"
 
 [node name="BulletLauncher" type="Node2D" parent="."]
+position = Vector2(0, 18)
 
 [node name="BulletLauncher2" type="Node2D" parent="."]
 position = Vector2(-26, 16)

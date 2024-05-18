@@ -84,3 +84,5 @@ func _on_body_entered(body):
 	
 		if pierce <= 0:
 			queue_free()
+	elif "Head" in body.name or "Segment" in body.name:
+		queue_free()
