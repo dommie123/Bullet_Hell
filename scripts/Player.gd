@@ -13,7 +13,7 @@ var currentPowerup: int
 var currentCurse: int
 
 enum color {cyan, magenta}#ADDED enumerator used to denote colors throughout the code. Use these when describing a color of enemy, player or bullet
-var shipColor : color = color.cyan #what color the ship currently is
+@export var shipColor : color = color.cyan #what color the ship currently is
 
 var lockRotation : bool = false
 const MAX_ROTATION = PI / 6 # 30 degrees in radians

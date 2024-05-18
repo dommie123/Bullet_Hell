@@ -11,7 +11,7 @@ var cyanBulletTexture : Texture2D
 var magentaBulletTexture : Texture2D
 
 enum color {cyan, magenta}#enumerator used to denote colors throughout the code. Use these when describing a color of enemy or bullet
-var bulletColor : color
+@export var bulletColor : color
 
 func _ready():
 #	speed = 350
@@ -24,6 +24,7 @@ func _ready():
 	magentaBulletTexture = load("res://assets/Bullets/Magenta Bullet.png")
 	
 	if bulletColor == color.cyan:
+		#print("CYAN")
 		set_collision_layer_value(7, true)
 		set_collision_layer_value(8, false)
 		set_collision_mask_value(3, true)
@@ -31,6 +32,7 @@ func _ready():
 		$Icon.texture = cyanBulletTexture
 		
 	elif bulletColor == color.magenta:
+		#print("MAGENTA")
 		set_collision_layer_value(7, false)
 		set_collision_layer_value(8, true)
 		set_collision_mask_value(3, false)
@@ -49,10 +51,29 @@ func _on_screen_exited():
 func _on_body_entered(body):
 	if "Player" in body.name and "Ship" not in body.name:
 		linear_velocity = linear_velocity.normalized() * speed
-#		set_collision_mask_value(3, true)
-		set_collision_layer_value(9, true)
-#		set_collision_layer_value(2, false)
-#		set_collision_mask_value(1, false)
+		if bulletColor == color.cyan:
+			#print("CYAN REFLECTED")
+			set_collision_layer_value(7, false)
+			set_collision_layer_value(8, false)
+			set_collision_layer_value(9, true)
+			
+			set_collision_mask_value(3, false)
+			set_collision_mask_value(4, false)
+			set_collision_mask_value(6, true)
+			set_collision_mask_value(12, true)
+			set_collision_mask_value(14, true)
+			
+		elif bulletColor == color.magenta:
+			#print("MAGENTA REFLECTED")
+			set_collision_layer_value(7, false)
+			set_collision_layer_value(8, false)
+			set_collision_layer_value(10, true)
+			
+			set_collision_mask_value(3, false)
+			set_collision_mask_value(4, false)
+			set_collision_mask_value(5, true)
+			set_collision_mask_value(11, true)
+			set_collision_mask_value(13, true)
 	elif "PlayerShip" in body.name:
 		body.bullet_hit_callable.call(body)
 		queue_free()
