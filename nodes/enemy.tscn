@@ -1,9 +1,21 @@
-[gd_scene load_steps=26 format=3 uid="uid://l53fkglr44r4"]
+[gd_scene load_steps=38 format=3 uid="uid://l53fkglr44r4"]
 
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_m52gn"]
 [ext_resource type="PackedScene" uid="uid://bbwfo67k6imi6" path="res://nodes/bullet.tscn" id="2_yxds1"]
-[ext_resource type="PackedScene" uid="uid://ct0s05l6kyqbn" path="res://nodes/powerup.tscn" id="3_yc7vu"]
+[ext_resource type="PackedScene" path="res://nodes/powerup.tscn" id="3_yc7vu"]
 [ext_resource type="Texture2D" uid="uid://ba2mkwk5jdfxp" path="res://assets/Enemies/Enemy.png" id="3_yx85k"]
+[ext_resource type="Texture2D" uid="uid://c0okcoxrhgvx3" path="res://assets/Enemies/Basic Ship/Basic Enemy frame 1.svg" id="4_720fu"]
+[ext_resource type="Texture2D" uid="uid://cjgbl8afy2efl" path="res://assets/Enemies/Basic Ship/Basic Enemy frame 2.svg" id="5_cq3p0"]
+[ext_resource type="Texture2D" uid="uid://drlcewihn4yge" path="res://assets/Enemies/Basic Ship/Basic Enemy frame 3.svg" id="6_xrvdb"]
+[ext_resource type="Texture2D" uid="uid://drqldt4i8hc8b" path="res://assets/Enemies/Basic Ship/Basic Enemy frame 4.svg" id="7_1riuc"]
+[ext_resource type="Texture2D" uid="uid://cs5asbivrdbpd" path="res://assets/Enemies/Gigabyte/Gigabyte frame 1.svg" id="8_26l3j"]
+[ext_resource type="Texture2D" uid="uid://dqyot54os3qcv" path="res://assets/Enemies/Gigabyte/Gigabyte frame 2.svg" id="9_nsecx"]
+[ext_resource type="Texture2D" uid="uid://b22unoy85n0s3" path="res://assets/Enemies/Gigabyte/Gigabyte frame 3.svg" id="10_euxad"]
+[ext_resource type="Texture2D" uid="uid://bcrfpwn8li4lv" path="res://assets/Enemies/Gigabyte/Gigabyte frame 4.svg" id="11_mjvwu"]
+[ext_resource type="Texture2D" uid="uid://7ihwkm6ysckg" path="res://assets/Enemies/Megabyte/Megabyte frame 1.svg" id="12_enpql"]
+[ext_resource type="Texture2D" uid="uid://ctanppjcjl1ge" path="res://assets/Enemies/Megabyte/Megabyte frame 2.svg" id="13_ubfer"]
+[ext_resource type="Texture2D" uid="uid://yaw0hq61b3r3" path="res://assets/Enemies/Megabyte/Megabyte frame 3.svg" id="14_8723t"]
+[ext_resource type="Texture2D" uid="uid://m8qfv1ecdpxb" path="res://assets/Enemies/Megabyte/Megabyte frame 4.svg" id="15_rdnv1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qvxsb"]
 atlas = ExtResource("3_yx85k")
@@ -85,6 +97,57 @@ region = Rect2(1152, 0, 64, 64)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("4_720fu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_cq3p0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_xrvdb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_1riuc")
+}],
+"loop": false,
+"name": &"Aimbot",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_26l3j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_nsecx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_euxad")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_mjvwu")
+}],
+"loop": true,
+"name": &"Gigabyte",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_enpql")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_ubfer")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_8723t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_rdnv1")
+}],
+"loop": true,
+"name": &"Megabyte",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_qvxsb")
 }, {
 "duration": 1.0,
@@ -142,7 +205,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_3s8t1")
 }],
 "loop": true,
-"name": &"default",
+"name": &"default (old)",
 "speed": 24.0
 }]
 
@@ -165,9 +228,10 @@ xYInverted = true
 bulletLaunchSpeedMultiplier = 1
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(2, 2)
+rotation = 1.5708
+scale = Vector2(0.167, 0.167)
 sprite_frames = SubResource("SpriteFrames_3dpxp")
-frame_progress = 0.58604
+animation = &"Megabyte"
 
 [node name="BulletLauncher" type="Node2D" parent="."]
 
