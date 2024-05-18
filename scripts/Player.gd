@@ -54,6 +54,7 @@ func Shift(): #ADDED funciton that lets the player shift colors (space bar)
 	print("SHIFT")
 	if shipColor == color.cyan:
 		shipColor = color.magenta
+		$AnimatedSprite2D.play("PaddleShiftCyanMagenta")
 		set_collision_layer_value(1,false)#sets ship and paddle collision cyan to false
 		set_collision_layer_value(3,false)
 		
@@ -68,6 +69,7 @@ func Shift(): #ADDED funciton that lets the player shift colors (space bar)
 	
 	elif shipColor == color.magenta:
 		shipColor = color.cyan
+		$AnimatedSprite2D.play("PaddleShiftMagentaCyan")
 		set_collision_layer_value(2,false)#sets ship and paddle collision magenta to false
 		set_collision_layer_value(4,false)
 		

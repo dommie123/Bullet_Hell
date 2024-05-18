@@ -26,30 +26,35 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	var paddlePos = Vector2(playerPaddle.position.x, playerPaddle.position.y + 40)
+	var paddlePos = Vector2(playerPaddle.position.x, playerPaddle.position.y + 60)
 	lastFramePos = position
 	position = position.lerp(paddlePos, speed * delta)
 	posDifference = position - lastFramePos
+	
+	if $AnimatedSprite2D.get_frame() >= 11:
+		$AnimatedSprite2D.play("PlayerShip")
+
 	
 	if Input.is_action_just_pressed("shift"):
 		shift()
 	
 	#ANIMATION STUFF
-	if posDifference.x < (-5) or posDifference.x > (5):
-		$AnimatedSprite2D.set_frame(3)
-	elif posDifference.x < (-4) or posDifference.x > (4):
-		$AnimatedSprite2D.set_frame(2)
-	elif posDifference.x < (-3) or posDifference.x > (3):
-		$AnimatedSprite2D.set_frame(1)
-	elif posDifference.x < (-1) or posDifference.x > (1):
-		$AnimatedSprite2D.set_frame(0)
-	else:
-		$AnimatedSprite2D.set_frame(0)
-		
-	if posDifference.x <= 0:
-		$AnimatedSprite2D.flip_v = true
-	else:
-		$AnimatedSprite2D.flip_v = false
+	if $AnimatedSprite2D.get_animation() == "PlayerShip":
+		if posDifference.x < (-5) or posDifference.x > (5):
+			$AnimatedSprite2D.set_frame(3)
+		elif posDifference.x < (-4) or posDifference.x > (4):
+			$AnimatedSprite2D.set_frame(2)
+		elif posDifference.x < (-3) or posDifference.x > (3):
+			$AnimatedSprite2D.set_frame(1)
+		elif posDifference.x < (-1) or posDifference.x > (1):
+			$AnimatedSprite2D.set_frame(0)
+		else:
+			$AnimatedSprite2D.set_frame(0)
+			
+		if posDifference.x <= 0:
+			$AnimatedSprite2D.flip_v = false
+		else:
+			$AnimatedSprite2D.flip_v = true
 
 
 @export var bullet_hit_callable = func(body):
@@ -59,6 +64,7 @@ func _process(delta):
 func shift():
 	if currentColor == COLOR.CYAN:
 		currentColor = COLOR.MAGENTA
+		$AnimatedSprite2D.play("PlayerShipShiftCyanMagenta")
 		set_collision_layer_value(2,false)#sets ship and paddle collision cyan to false
 		set_collision_layer_value(3,false)
 		
@@ -73,6 +79,7 @@ func shift():
 	
 	elif currentColor == COLOR.MAGENTA:
 		currentColor = COLOR.CYAN
+		$AnimatedSprite2D.play("PlayerShipShiftMagentaCyan")
 		set_collision_layer_value(1,false)#sets ship and paddle collision magenta to false
 		set_collision_layer_value(4,false)
 		
@@ -84,7 +91,6 @@ func shift():
 		
 		set_collision_mask_value(7,true) #sets bullet collision
 		set_collision_mask_value(8,false)
-	
 
 
 func _on_player_player_died():

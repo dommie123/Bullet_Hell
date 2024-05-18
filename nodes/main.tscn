@@ -1,33 +1,37 @@
-[gd_scene load_steps=7 format=3 uid="uid://b8wk107okjidg"]
+[gd_scene load_steps=8 format=3 uid="uid://b8wk107okjidg"]
 
 [ext_resource type="Script" path="res://scripts/Main.gd" id="1_o6526"]
 [ext_resource type="PackedScene" uid="uid://bxrp03v51pwbw" path="res://nodes/enemy_spawner.tscn" id="2_hk6sm"]
 [ext_resource type="PackedScene" uid="uid://drh6a3js8480r" path="res://nodes/player.tscn" id="2_nnhgw"]
 [ext_resource type="PackedScene" uid="uid://bfhuoslxpj43e" path="res://nodes/player_ship.tscn" id="4_2dr2i"]
 [ext_resource type="PackedScene" path="res://nodes/powerup.tscn" id="4_haxs5"]
-[ext_resource type="Script" path="res://scripts/MainCamera2D.gd" id="5_3ca1x"]
+[ext_resource type="Texture2D" uid="uid://dmi7opkd01h5f" path="res://assets/WHITE.png" id="7_imso5"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_b5v8l"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_o6526")
 enemySpawnerScene = ExtResource("2_hk6sm")
 
 [node name="Player" parent="." instance=ExtResource("2_nnhgw")]
-position = Vector2(198, 856)
+position = Vector2(198, 817)
 
 [node name="PlayerShip" parent="." instance=ExtResource("4_2dr2i")]
 position = Vector2(199, 893)
 
 [node name="Powerup" parent="." instance=ExtResource("4_haxs5")]
-position = Vector2(192, 774)
+position = Vector2(457, 331)
 
 [node name="EnemySpawnerTimer" type="Timer" parent="."]
 wait_time = 0.5
 autostart = true
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(208, 462)
-rotation = -1.58377
-script = ExtResource("5_3ca1x")
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -1
+material = SubResource("CanvasItemMaterial_b5v8l")
+position = Vector2(311.5, 475)
+scale = Vector2(0.663598, 1.2203)
+texture = ExtResource("7_imso5")
 
 [connection signal="deactivate_curse" from="Player" to="." method="_on_player_deactivate_curse"]
 [connection signal="deactivate_powerup" from="Player" to="." method="_on_player_deactivate_powerup"]
