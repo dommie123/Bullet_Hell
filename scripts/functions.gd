@@ -102,3 +102,11 @@ var y: float
 	func(t):
 		return 3 * -cos(t) / 5,
 ]
+
+@export var BOSS_FUNCTIONS = [
+	func(t, amplitude = 45, hShift = 30, vShift = 100):
+		# Note: Below commented code results in a Figure 8 movement pattern
+		x = amplitude * cos(t / hShift) + vShift
+		y = amplitude * sin(t / hShift * 2) + vShift
+		return Vector2(y, x)
+]

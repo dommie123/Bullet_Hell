@@ -1,0 +1,373 @@
+[gd_scene load_steps=22 format=3 uid="uid://30yxyqqqaoy1"]
+
+[ext_resource type="Script" path="res://scripts/DeBugger.gd" id="1_1xqlb"]
+[ext_resource type="Texture2D" uid="uid://bfnj0b5pp7cy7" path="res://assets/Boss/Head/Head Frame 1.svg" id="2_0rh3i"]
+[ext_resource type="PackedScene" uid="uid://ct0s05l6kyqbn" path="res://nodes/powerup.tscn" id="2_spsf8"]
+[ext_resource type="Texture2D" uid="uid://cslio6o8a5jsx" path="res://assets/Boss/Head/Head Frame 2.svg" id="3_y3v0n"]
+[ext_resource type="Texture2D" uid="uid://b1pcfngv843es" path="res://assets/Boss/Head/Head Frame 3.svg" id="4_mu6wh"]
+[ext_resource type="Texture2D" uid="uid://bpw0onpsxnimw" path="res://assets/Boss/Head/Head Frame 4.svg" id="5_ypex8"]
+[ext_resource type="Texture2D" uid="uid://cwykgb3n4g8i5" path="res://assets/Boss/Head/Head Frame 5.svg" id="6_ls6ho"]
+[ext_resource type="Texture2D" uid="uid://ctgm606qmi3hy" path="res://assets/Boss/Head/Head Frame 6.svg" id="7_ehcrm"]
+[ext_resource type="Texture2D" uid="uid://cils03yrx5suw" path="res://assets/Boss/Head/Head Frame 7.svg" id="8_3028x"]
+[ext_resource type="Texture2D" uid="uid://mwre8ka7c8ye" path="res://assets/Boss/Segment/Segment Frame 1.svg" id="9_q45fj"]
+[ext_resource type="Texture2D" uid="uid://cuq3ybge8bic0" path="res://assets/Boss/Segment/Segment Frame 2.svg" id="10_ifj6r"]
+[ext_resource type="Texture2D" uid="uid://doko5bpmr7qmi" path="res://assets/Boss/Segment/Segment Frame 3.svg" id="11_1wjdi"]
+[ext_resource type="Texture2D" uid="uid://bbkcrox6numcm" path="res://assets/Boss/Segment/Segment Frame 4.svg" id="12_7i5wl"]
+[ext_resource type="Texture2D" uid="uid://bwcx5nfae7j37" path="res://assets/Boss/Segment/Segment Frame 5.svg" id="13_r5i3a"]
+[ext_resource type="Texture2D" uid="uid://cwjhe5pq6b6x5" path="res://assets/Boss/Segment/Segment Frame 6.svg" id="14_cncsj"]
+[ext_resource type="Texture2D" uid="uid://dgrquv0krcw8i" path="res://assets/Boss/Segment/Segment Frame 7.svg" id="15_cird6"]
+[ext_resource type="Script" path="res://scripts/Turret.gd" id="17_rsnty"]
+[ext_resource type="PackedScene" uid="uid://bbwfo67k6imi6" path="res://nodes/bullet.tscn" id="18_qsnrh"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_c31gn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_0rh3i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_y3v0n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_mu6wh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ypex8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_ls6ho")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_ehcrm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_3028x")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_65gpj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_q45fj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_ifj6r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_1wjdi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_7i5wl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_r5i3a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_cncsj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_cird6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wylnl"]
+
+[node name="DeBugger" type="Node2D"]
+position = Vector2(200, 114)
+script = ExtResource("1_1xqlb")
+currentState = 2
+powerupScene = ExtResource("2_spsf8")
+positionOffset = Vector2(0, 50)
+speed = 150.0
+moveAmplitude = 200.0
+moveShift = 110.0
+
+[node name="Head" type="RigidBody2D" parent="."]
+collision_layer = 1024
+collision_mask = 256
+gravity_scale = 0.0
+max_contacts_reported = 5
+contact_monitor = true
+lock_rotation = true
+freeze = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Head"]
+scale = Vector2(0.198, 0.2)
+sprite_frames = SubResource("SpriteFrames_c31gn")
+frame_progress = 0.331945
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="Head"]
+polygon = PackedVector2Array(-1, -77, -23, -63, -40, -80, -80, -76, -99, -56, -94, -51, -55, -54, -43, -41, -76, 0, -43, 40, -55, 53, -93, 49, -99, 56, -80, 75, -41, 78, -23, 61, -2, 76, 74, 0)
+
+[node name="ShiftTimer" type="Timer" parent="Head"]
+wait_time = 4.0
+one_shot = true
+autostart = true
+
+[node name="Segment" type="RigidBody2D" parent="." groups=["Segments"]]
+position = Vector2(149, -1)
+rotation = -1.57256
+collision_layer = 1024
+collision_mask = 256
+gravity_scale = 0.0
+max_contacts_reported = 5
+contact_monitor = true
+lock_rotation = true
+freeze = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Segment"]
+scale = Vector2(0.198, 0.2)
+sprite_frames = SubResource("SpriteFrames_65gpj")
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="Segment"]
+polygon = PackedVector2Array(-1, -75, -33, -33, -87, -1, -34, 31, -2, 73, 31, 31, 84, 0, 31, -33)
+
+[node name="Turret1" type="Area2D" parent="Segment" groups=["Boss Turrets"]]
+position = Vector2(-0.909926, -51.0017)
+scale = Vector2(2.80045, 2.94685)
+collision_layer = 4096
+collision_mask = 256
+script = ExtResource("17_rsnty")
+bulletScene = ExtResource("18_qsnrh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Segment/Turret1"]
+shape = SubResource("CircleShape2D_wylnl")
+
+[node name="BulletLauncher" type="Node2D" parent="Segment/Turret1"]
+
+[node name="Turret2" type="Area2D" parent="Segment" groups=["Boss Turrets"]]
+position = Vector2(49.0017, -0.913467)
+scale = Vector2(4.3021, 3.08238)
+collision_layer = 4096
+collision_mask = 256
+script = ExtResource("17_rsnty")
+bulletScene = ExtResource("18_qsnrh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Segment/Turret2"]
+shape = SubResource("CircleShape2D_wylnl")
+
+[node name="BulletLauncher" type="Node2D" parent="Segment/Turret2"]
+
+[node name="Turret3" type="Area2D" parent="Segment" groups=["Boss Turrets"]]
+position = Vector2(-1.0883, 49.9982)
+collision_layer = 4096
+collision_mask = 256
+script = ExtResource("17_rsnty")
+bulletScene = ExtResource("18_qsnrh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Segment/Turret3"]
+scale = Vector2(2.94281, 3.05222)
+shape = SubResource("CircleShape2D_wylnl")
+
+[node name="BulletLauncher" type="Node2D" parent="Segment/Turret3"]
+
+[node name="Turret4" type="Area2D" parent="Segment" groups=["Boss Turrets"]]
+position = Vector2(-51.9982, -1.09184)
+collision_layer = 4096
+collision_mask = 256
+script = ExtResource("17_rsnty")
+bulletScene = ExtResource("18_qsnrh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Segment/Turret4"]
+scale = Vector2(3.731, 2.80329)
+shape = SubResource("CircleShape2D_wylnl")
+
+[node name="BulletLauncher" type="Node2D" parent="Segment/Turret4"]
+
+[node name="ShiftTimer" type="Timer" parent="Segment"]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[node name="Segment2" type="RigidBody2D" parent="." groups=["Segments"]]
+position = Vector2(267, 61)
+rotation = -0.658082
+collision_layer = 1024
+collision_mask = 256
+gravity_scale = 0.0
+max_contacts_reported = 5
+contact_monitor = true
+lock_rotation = true
+freeze = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Segment2"]
+scale = Vector2(0.198, 0.2)
+sprite_frames = SubResource("SpriteFrames_65gpj")
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="Segment2"]
+polygon = PackedVector2Array(-1, -75, -33, -33, -87, -1, -34, 31, -2, 73, 31, 31, 84, 0, 31, -33)
+
+[node name="Turret1" type="Area2D" parent="Segment2" groups=["Boss Turrets"]]
+collision_layer = 4096
+collision_mask = 256
+script = ExtResource("17_rsnty")
+bulletScene = ExtResource("18_qsnrh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Segment2/Turret1"]
+position = Vector2(-51, 0)
+scale = Vector2(4.07343, 2.93549)
+shape = SubResource("CircleShape2D_wylnl")
+
+[node name="BulletLauncher" type="Node2D" parent="Segment2/Turret1"]
+
+[node name="Turret2" type="Area2D" parent="Segment2" groups=["Boss Turrets"]]
+position = Vector2(-1, -51)
+collision_layer = 4096
+collision_mask = 256
+script = ExtResource("17_rsnty")
+bulletScene = ExtResource("18_qsnrh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Segment2/Turret2"]
+scale = Vector2(2.92661, 2.71973)
+shape = SubResource("CircleShape2D_wylnl")
+
+[node name="BulletLauncher" type="Node2D" parent="Segment2/Turret2"]
+
+[node name="Turret3" type="Area2D" parent="Segment2" groups=["Boss Turrets"]]
+position = Vector2(49, -1)
+collision_layer = 4096
+collision_mask = 256
+script = ExtResource("17_rsnty")
+bulletScene = ExtResource("18_qsnrh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Segment2/Turret3"]
+scale = Vector2(4.04051, 2.502)
+shape = SubResource("CircleShape2D_wylnl")
+
+[node name="BulletLauncher" type="Node2D" parent="Segment2/Turret3"]
+
+[node name="Turret4" type="Area2D" parent="Segment2" groups=["Boss Turrets"]]
+position = Vector2(-1, 50)
+collision_layer = 4096
+collision_mask = 256
+script = ExtResource("17_rsnty")
+bulletScene = ExtResource("18_qsnrh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Segment2/Turret4"]
+scale = Vector2(2.83473, 2.92315)
+shape = SubResource("CircleShape2D_wylnl")
+
+[node name="BulletLauncher" type="Node2D" parent="Segment2/Turret4"]
+
+[node name="ShiftTimer" type="Timer" parent="Segment2"]
+wait_time = 9.0
+one_shot = true
+autostart = true
+
+[node name="Segment3" type="RigidBody2D" parent="." groups=["Segments"]]
+position = Vector2(309, 193)
+rotation = 0.0198935
+collision_layer = 1024
+collision_mask = 256
+gravity_scale = 0.0
+max_contacts_reported = 5
+contact_monitor = true
+lock_rotation = true
+freeze = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Segment3"]
+scale = Vector2(0.198, 0.2)
+sprite_frames = SubResource("SpriteFrames_65gpj")
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="Segment3"]
+polygon = PackedVector2Array(-1, -75, -33, -33, -87, -1, -34, 31, -2, 73, 31, 31, 84, 0, 31, -33)
+
+[node name="Turret1" type="Area2D" parent="Segment3" groups=["Boss Turrets"]]
+position = Vector2(-51.9988, -0.354962)
+collision_layer = 4096
+collision_mask = 256
+script = ExtResource("17_rsnty")
+bulletScene = ExtResource("18_qsnrh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Segment3/Turret1"]
+scale = Vector2(4.21568, 3.00291)
+shape = SubResource("CircleShape2D_wylnl")
+
+[node name="BulletLauncher" type="Node2D" parent="Segment3/Turret1"]
+
+[node name="Turret2" type="Area2D" parent="Segment3" groups=["Boss Turrets"]]
+position = Vector2(-1.33444, 48.992)
+collision_layer = 4096
+collision_mask = 256
+script = ExtResource("17_rsnty")
+bulletScene = ExtResource("18_qsnrh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Segment3/Turret2"]
+scale = Vector2(2.93037, 3.00271)
+shape = SubResource("CircleShape2D_wylnl")
+
+[node name="BulletLauncher" type="Node2D" parent="Segment3/Turret2"]
+
+[node name="Turret3" type="Area2D" parent="Segment3" groups=["Boss Turrets"]]
+position = Vector2(49.0057, -0.665495)
+collision_layer = 4096
+collision_mask = 256
+script = ExtResource("17_rsnty")
+bulletScene = ExtResource("18_qsnrh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Segment3/Turret3"]
+scale = Vector2(4.39744, 2.96297)
+shape = SubResource("CircleShape2D_wylnl")
+
+[node name="BulletLauncher" type="Node2D" parent="Segment3/Turret3"]
+
+[node name="Turret4" type="Area2D" parent="Segment3" groups=["Boss Turrets"]]
+position = Vector2(-0.651825, -51.0056)
+collision_layer = 4096
+collision_mask = 256
+script = ExtResource("17_rsnty")
+bulletScene = ExtResource("18_qsnrh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Segment3/Turret4"]
+scale = Vector2(2.97414, 3.01251)
+shape = SubResource("CircleShape2D_wylnl")
+
+[node name="BulletLauncher" type="Node2D" parent="Segment3/Turret4"]
+
+[node name="ShiftTimer" type="Timer" parent="Segment3"]
+one_shot = true
+autostart = true
+
+[node name="BulletTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="fire_turrets" from="." to="Segment/Turret1" method="_on_de_bugger_fire_turrets"]
+[connection signal="fire_turrets" from="." to="Segment/Turret2" method="_on_de_bugger_fire_turrets"]
+[connection signal="fire_turrets" from="." to="Segment/Turret3" method="_on_de_bugger_fire_turrets"]
+[connection signal="fire_turrets" from="." to="Segment/Turret4" method="_on_de_bugger_fire_turrets"]
+[connection signal="fire_turrets_2" from="." to="Segment2/Turret1" method="_on_de_bugger_fire_turrets_2"]
+[connection signal="fire_turrets_2" from="." to="Segment2/Turret2" method="_on_de_bugger_fire_turrets_2"]
+[connection signal="fire_turrets_2" from="." to="Segment2/Turret3" method="_on_de_bugger_fire_turrets_2"]
+[connection signal="fire_turrets_2" from="." to="Segment2/Turret4" method="_on_de_bugger_fire_turrets_2"]
+[connection signal="fire_turrets_3" from="." to="Segment3/Turret1" method="_on_de_bugger_fire_turrets_3"]
+[connection signal="fire_turrets_3" from="." to="Segment3/Turret2" method="_on_de_bugger_fire_turrets_3"]
+[connection signal="fire_turrets_3" from="." to="Segment3/Turret3" method="_on_de_bugger_fire_turrets_3"]
+[connection signal="fire_turrets_3" from="." to="Segment3/Turret4" method="_on_de_bugger_fire_turrets_3"]
+[connection signal="body_entered" from="Head" to="." method="_on_segment_body_entered"]
+[connection signal="timeout" from="Head/ShiftTimer" to="." method="_on_head_shift_timer_timeout"]
+[connection signal="body_entered" from="Segment" to="." method="_on_segment_body_entered"]
+[connection signal="body_entered" from="Segment/Turret1" to="." method="_on_turret_body_entered"]
+[connection signal="body_entered" from="Segment/Turret2" to="." method="_on_turret_body_entered"]
+[connection signal="body_entered" from="Segment/Turret3" to="." method="_on_turret_body_entered"]
+[connection signal="body_entered" from="Segment/Turret4" to="." method="_on_turret_body_entered"]
+[connection signal="timeout" from="Segment/ShiftTimer" to="." method="_on_seg_1_shift_timer_timeout"]
+[connection signal="body_entered" from="Segment2" to="." method="_on_segment_body_entered"]
+[connection signal="body_entered" from="Segment2/Turret1" to="." method="_on_turret_body_entered"]
+[connection signal="body_entered" from="Segment2/Turret2" to="." method="_on_turret_body_entered"]
+[connection signal="body_entered" from="Segment2/Turret3" to="." method="_on_turret_body_entered"]
+[connection signal="body_entered" from="Segment2/Turret4" to="." method="_on_turret_body_entered"]
+[connection signal="timeout" from="Segment2/ShiftTimer" to="." method="_on_seg_2_shift_timer_timeout"]
+[connection signal="body_entered" from="Segment3" to="." method="_on_segment_body_entered"]
+[connection signal="body_entered" from="Segment3/Turret1" to="." method="_on_turret_body_entered"]
+[connection signal="body_entered" from="Segment3/Turret2" to="." method="_on_turret_body_entered"]
+[connection signal="body_entered" from="Segment3/Turret3" to="." method="_on_turret_body_entered"]
+[connection signal="body_entered" from="Segment3/Turret4" to="." method="_on_turret_body_entered"]
+[connection signal="timeout" from="Segment3/ShiftTimer" to="." method="_on_seg_3_shift_timer_timeout"]
+[connection signal="timeout" from="BulletTimer" to="." method="_on_bullet_timer_timeout"]
