@@ -1,13 +1,19 @@
-[gd_scene load_steps=8 format=3 uid="uid://b8wk107okjidg"]
+[gd_scene load_steps=9 format=3 uid="uid://b8wk107okjidg"]
 
 [ext_resource type="Script" path="res://scripts/Main.gd" id="1_o6526"]
 [ext_resource type="PackedScene" uid="uid://bxrp03v51pwbw" path="res://nodes/enemy_spawner.tscn" id="2_hk6sm"]
 [ext_resource type="PackedScene" uid="uid://drh6a3js8480r" path="res://nodes/player.tscn" id="2_nnhgw"]
 [ext_resource type="PackedScene" uid="uid://bfhuoslxpj43e" path="res://nodes/player_ship.tscn" id="4_2dr2i"]
 [ext_resource type="PackedScene" path="res://nodes/powerup.tscn" id="4_haxs5"]
-[ext_resource type="Texture2D" uid="uid://cqp3cy36gkeva" path="res://assets/Background.svg" id="6_5smm7"]
+[ext_resource type="Shader" path="res://scroll.gdshader" id="6_7h3n2"]
+[ext_resource type="Texture2D" uid="uid://h3fs06ej0erg" path="res://assets/Grid Background.png" id="7_bndeg"]
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_b5v8l"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k8ur7"]
+shader = ExtResource("6_7h3n2")
+shader_parameter/texture_size = Vector2(976, 976)
+shader_parameter/scroll_speed = Vector2(0, 0.01)
+shader_parameter/scroll_direction = Vector2(1, -1)
+shader_parameter/texture_to_scroll = ExtResource("7_bndeg")
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_o6526")
@@ -27,11 +33,10 @@ wait_time = 0.5
 autostart = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
 z_index = -1
-material = SubResource("CanvasItemMaterial_b5v8l")
+material = SubResource("ShaderMaterial_k8ur7")
 position = Vector2(308, 465)
-texture = ExtResource("6_5smm7")
+texture = ExtResource("7_bndeg")
 
 [connection signal="deactivate_curse" from="Player" to="." method="_on_player_deactivate_curse"]
 [connection signal="deactivate_powerup" from="Player" to="." method="_on_player_deactivate_powerup"]

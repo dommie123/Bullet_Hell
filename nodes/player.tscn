@@ -8,11 +8,11 @@
 [ext_resource type="Texture2D" uid="uid://dyaixkifece7k" path="res://assets/Paddle/paddle frame 5.svg" id="6_wncsy"]
 [ext_resource type="Texture2D" uid="uid://bik5hp3acdc32" path="res://assets/Paddle/paddle frame 6.svg" id="7_xn0mw"]
 [ext_resource type="Texture2D" uid="uid://dtq1gj1pkcq4a" path="res://assets/Paddle/paddle frame 7.svg" id="8_jmmg8"]
-[ext_resource type="Texture2D" path="res://assets/Paddle/paddle frame 12.svg" id="9_mfl0v"]
-[ext_resource type="Texture2D" path="res://assets/Paddle/paddle frame 11.svg" id="10_u56sq"]
-[ext_resource type="Texture2D" path="res://assets/Paddle/paddle frame 10.svg" id="11_fs34c"]
-[ext_resource type="Texture2D" path="res://assets/Paddle/paddle frame 9.svg" id="12_6ddgh"]
-[ext_resource type="Texture2D" path="res://assets/Paddle/paddle frame 8.svg" id="13_f25xy"]
+[ext_resource type="Texture2D" uid="uid://cwuaivqxpwf0g" path="res://assets/Paddle/paddle frame 12.svg" id="9_mfl0v"]
+[ext_resource type="Texture2D" uid="uid://bww43i8usv2ow" path="res://assets/Paddle/paddle frame 11.svg" id="10_u56sq"]
+[ext_resource type="Texture2D" uid="uid://de1ortdnylps1" path="res://assets/Paddle/paddle frame 10.svg" id="11_fs34c"]
+[ext_resource type="Texture2D" uid="uid://bmwwfqrm3oq4o" path="res://assets/Paddle/paddle frame 9.svg" id="12_6ddgh"]
+[ext_resource type="Texture2D" uid="uid://c62eufbnfg487" path="res://assets/Paddle/paddle frame 8.svg" id="13_f25xy"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_tbeve"]
 bounce = 1.0
