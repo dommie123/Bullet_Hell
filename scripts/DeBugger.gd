@@ -13,8 +13,8 @@ enum STATE {
 }
 
 enum COLOR {
-	CYAN,
-	MAGENTA
+	CYAN = 1,
+	MAGENTA = 2
 }
 
 var Functions = preload("res://scripts/functions.gd")

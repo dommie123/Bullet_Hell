@@ -35,7 +35,6 @@ func _ready():
 	var i = 0
 	while i < lives:
 		var lifeNode = lifeCountScene.instantiate()
-#		var initLifeCountPos = Vector2(11688.201, -1118.922)
 		var initLifeCountPos = Vector2(0, 0)
 		
 		lifeNode.add_to_group("Life Counters")
@@ -47,7 +46,7 @@ func _ready():
 
 func _on_main_level_changed():
 	level += 1
-	$LevelCounter.set_deferred("text", "Lv %s" % level)
+	$CanvasLayer/LevelCounter.set_deferred("text", "Lv %s" % level)
 
 
 func _on_player_ship_lose_life():
@@ -58,7 +57,8 @@ func _on_player_ship_lose_life():
 
 func _on_main_update_score(points):
 	score += points
-	$ScoreCounter.set_deferred("text", "Score: %s" % score)
+	$CanvasLayer/ScoreCounter.set_deferred("text", "Score: %s" % score)
+	$CanvasLayer/GameOverPanel/FinalScoreLabel.set_deferred("text", "Score: %s" % score)
 
 
 func _on_resume_button_pressed():

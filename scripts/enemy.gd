@@ -9,14 +9,17 @@ enum STATE {
 
 enum TYPE {
 	AIMBOT = 0,
-	TROJAN = 1,
-	HAXOR = 2,
-	WORM = 3,
-	MEGABYTE = 4,
-	GIGABYTE = 5
+	MEGABYTE = 1,
+	GIGABYTE = 2,
+	TROJAN = 3,
+	HAXOR = 4,
+	WORM = 5,
 }
 
-enum color {cyan,magenta} #ADDED enumerator used to denote colors throughout the code. Use these when describing a color of enemy or bullet
+enum color {
+	cyan = 1,
+	magenta = 2
+} #ADDED enumerator used to denote colors throughout the code. Use these when describing a color of enemy or bullet
 
 signal enemy_fled
 signal enemy_killed
@@ -51,7 +54,6 @@ const Utils = preload("res://scripts/utils.gd")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$AnimatedSprite2D.play("Gigabyte")
 	functions = Functions.new()
 	utils = Utils.new()
 	
@@ -62,19 +64,31 @@ func _ready():
 	spawnGrace = true
 	bulletLaunchSpeed = 350 * bulletLaunchSpeedMultiplier
 	
-	if currentType == TYPE.AIMBOT:
+	var randomColor = randi_range(1, 2)
+	var randomType = randi_range(1, 3)
+	
+	enemyColor = randomColor
+	currentType = randomType - 1
+	
+	if currentType == TYPE.GIGABYTE:
+		$AnimatedSprite2D.play("Gigabyte")
+	elif currentType == TYPE.AIMBOT:
+		$AnimatedSprite2D.play("Aimbot")
 		$BulletTimer.wait_time *= 30
+	elif currentType == TYPE.MEGABYTE:
+		$AnimatedSprite2D.play("Megabyte")
 		
 	var mainNode = get_node("/root/Main")
 	
 	enemy_fled.connect(mainNode.enemy_fled_callable)
 	enemy_killed.connect(mainNode.enemy_killed_callable)
 	
-#	if shader_material is ShaderMaterial:#TO FIX
-#		if currentColor == COLOR.CYAN:
-#			shader_material.set_shader_parameter("glow_color", Color(0.0, 0.5, 0.5, 1.0))
-#		elif currentColor == COLOR.MAGENTA:
-#			shader_material.set_shader_parameter("glow_color", Color(0.5, 0.0, 0.5, 1.0))
+	if shader_material is ShaderMaterial:#TO FIX
+		if enemyColor == color.cyan:
+			shader_material.set_shader_parameter("glow_color", Color(0.0, 0.5, 0.5, 1.0))
+		elif enemyColor == color.magenta:
+			shader_material.set_shader_parameter("glow_color", Color(0.5, 0.0, 0.5, 1.0))
+	
 	if enemyColor == color.cyan:
 		$".".set_collision_layer_value(5,true)
 		$".".set_collision_layer_value(6,false)
@@ -156,7 +170,7 @@ func shoot():
 		bullet1.bulletColor = enemyColor
 		bullet1.position = $BulletLauncher.position
 		bullet1.speed = bulletLaunchSpeed
-		var velocity = Vector2(0, 1)
+		var velocity = Vector2(1, 0)
 		bullet1.linear_velocity = velocity.rotated(direction)
 		add_sibling(bullet1)
 	elif currentType == TYPE.GIGABYTE: #5

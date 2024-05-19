@@ -7,10 +7,10 @@ var damage: int
 var pierce: int
 var bulletGrace: bool
 
-var cyanBulletTexture : Texture2D
+var cyanBulletTexture : Texture2D 
 var magentaBulletTexture : Texture2D
 
-enum color {cyan, magenta}#enumerator used to denote colors throughout the code. Use these when describing a color of enemy or bullet
+enum color {cyan = 1, magenta = 2}#enumerator used to denote colors throughout the code. Use these when describing a color of enemy or bullet
 @export var bulletColor : color
 
 func _ready():
@@ -20,8 +20,8 @@ func _ready():
 	bulletGrace = false
 	linear_velocity = linear_velocity.normalized() * speed
 	
-	cyanBulletTexture = load("res://assets/Bullets/Cyan Bullet.png")
-	magentaBulletTexture = load("res://assets/Bullets/Magenta Bullet.png")
+	cyanBulletTexture = preload("res://assets/Bullets/Cyan Bullet.png")
+	magentaBulletTexture = preload("res://assets/Bullets/Magenta Bullet.png")
 	
 	if bulletColor == color.cyan:
 		#print("CYAN")

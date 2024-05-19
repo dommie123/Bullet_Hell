@@ -183,7 +183,7 @@ func spawn_boss():
 
 
 func _on_ui_toggle_game_paused(paused):
-	$UI/PauseMenu.set_deferred("visible", paused)
+	$UI/CanvasLayer/PauseMenu.set_deferred("visible", paused)
 	get_tree().paused = paused
 
 
@@ -199,5 +199,5 @@ func _on_ui_new_game_started():
 
 
 func _on_player_player_died():
-	$UI/GameOverPanel.set_deferred("visible", true)
+	$UI/CanvasLayer/GameOverPanel.set_deferred("visible", true)
 	get_tree().paused = true

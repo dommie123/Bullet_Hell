@@ -45,10 +45,6 @@ func spawn_enemy(_name):
 	canSpawnEnemy = false
 
 
-func _on_kill_timer_timeout():
-	queue_free()
-
-
 func curse_enemy(enemy):
 	if currentCurse == 2:
 		enemy.timeMultiplier = 200
