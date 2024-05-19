@@ -187,4 +187,8 @@ position = Vector2(0, 2)
 scale = Vector2(1.943, 1.961)
 shape = SubResource("RectangleShape2D_0ee5a")
 
+[node name="I_FrameTimer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="I_FrameTimer" to="." method="_on_i_frame_timer_timeout"]
