@@ -108,6 +108,9 @@ func shoot():
 func shift_head():
 	if currentColor == COLOR.CYAN:
 		currentColor = COLOR.MAGENTA
+		var headSprite = $Head/AnimatedSprite2D
+		var headMaterial = headSprite.material
+		headMaterial.set_shader_parameter("glow_color", Color(0.5, 0.0, 0.5, 1.0))
 		$Head.set_collision_layer_value(11,false)#sets boss and turret collision cyan to false
 		$Head.set_collision_layer_value(13,false)
 		
@@ -119,6 +122,9 @@ func shift_head():
 	
 	elif currentColor == COLOR.MAGENTA:
 		currentColor = COLOR.CYAN
+		var segmentSprite = $Head/AnimatedSprite2D
+		var segmentMaterial = segmentSprite.material
+		segmentMaterial.set_shader_parameter("glow_color", Color(0.0, 0.5, 0.5, 1.0))
 		$Head.set_collision_layer_value(12,false) #sets boss and turret collision magenta to false
 		$Head.set_collision_layer_value(14,false)
 		
@@ -138,6 +144,9 @@ func shift_segment(segmentIndex: int):
 	
 	if segmentColors[segmentIndex] == COLOR.CYAN:
 		segmentColors[segmentIndex] = COLOR.MAGENTA
+		var segmentSprite = segment.get_node("AnimatedSprite2D")
+		var segmentMaterial = segmentSprite.material
+		segmentMaterial.set_shader_parameter("glow_color", Color(0.5, 0.0, 0.5, 1.0))
 		segment.set_collision_layer_value(11,false)#sets boss and turret collision cyan to false
 		segment.set_collision_layer_value(13,false)
 		
@@ -149,6 +158,9 @@ func shift_segment(segmentIndex: int):
 	
 	elif segmentColors[segmentIndex] == COLOR.MAGENTA:
 		segmentColors[segmentIndex] = COLOR.CYAN
+		var segmentSprite = segment.get_node("AnimatedSprite2D")
+		var segmentMaterial = segmentSprite.material
+		segmentMaterial.set_shader_parameter("glow_color", Color(0.0, 0.5, 0.5, 1.0))
 		segment.set_collision_layer_value(12,false) #sets boss and turret collision magenta to false
 		segment.set_collision_layer_value(14,false)
 		

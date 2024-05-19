@@ -1,7 +1,8 @@
-[gd_scene load_steps=17 format=3 uid="uid://drh6a3js8480r"]
+[gd_scene load_steps=19 format=3 uid="uid://drh6a3js8480r"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_uotbm"]
 [ext_resource type="Texture2D" uid="uid://2l40m7kh3lqr" path="res://assets/Paddle/paddle frame 1.svg" id="2_2cbli"]
+[ext_resource type="Shader" path="res://textures/neon.gdshader" id="2_ubqt5"]
 [ext_resource type="Texture2D" uid="uid://dd8cnlub4ath6" path="res://assets/Paddle/paddle frame 2.svg" id="3_wjjyg"]
 [ext_resource type="Texture2D" uid="uid://c4gpoistamihg" path="res://assets/Paddle/paddle frame 3.svg" id="4_ik1me"]
 [ext_resource type="Texture2D" uid="uid://c0sfs36g8r05h" path="res://assets/Paddle/paddle frame 4.svg" id="5_vlm5g"]
@@ -16,6 +17,14 @@
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_tbeve"]
 bounce = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bv8u7"]
+shader = ExtResource("2_ubqt5")
+shader_parameter/glow_color = Color(0, 0.705882, 0.705882, 1)
+shader_parameter/glow_power = 20.0
+shader_parameter/glow_shift = 1.0
+shader_parameter/glow_radius = 5.0
+shader_parameter/texture_size = Vector2(256, 256)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_nu1on"]
 animations = [{
@@ -125,6 +134,7 @@ freeze_mode = 1
 script = ExtResource("1_uotbm")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_bv8u7")
 rotation = -1.5708
 scale = Vector2(0.242, 0.242)
 sprite_frames = SubResource("SpriteFrames_nu1on")
