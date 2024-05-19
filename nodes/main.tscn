@@ -23,6 +23,9 @@ enemySpawnerScene = ExtResource("2_hk6sm")
 bossScene = ExtResource("3_jlhsi")
 phase = 1
 
+[node name="UI" parent="." instance=ExtResource("4_6m70j")]
+process_mode = 3
+
 [node name="Player" parent="." instance=ExtResource("2_nnhgw")]
 position = Vector2(198, 817)
 
@@ -37,18 +40,16 @@ wait_time = 0.5
 autostart = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
 z_index = -1
 material = SubResource("ShaderMaterial_k8ur7")
 position = Vector2(308, 465)
 texture = ExtResource("7_bndeg")
 
-[node name="UI" parent="." instance=ExtResource("4_6m70j")]
-
 [connection signal="update_score" from="." to="UI" method="_on_main_update_score"]
+[connection signal="toggle_game_paused" from="UI" to="." method="_on_ui_toggle_game_paused"]
 [connection signal="deactivate_curse" from="Player" to="." method="_on_player_deactivate_curse"]
 [connection signal="deactivate_powerup" from="Player" to="." method="_on_player_deactivate_powerup"]
 [connection signal="player_died" from="Player" to="PlayerShip" method="_on_player_player_died"]
-[connection signal="lose_life" from="PlayerShip" to="Player" method="_on_player_ship_lose_life"]
 [connection signal="lose_life" from="PlayerShip" to="UI" method="_on_player_ship_lose_life"]
+[connection signal="lose_life" from="PlayerShip" to="Player" method="_on_player_ship_lose_life"]
 [connection signal="timeout" from="EnemySpawnerTimer" to="." method="_on_enemy_spawner_timer_timeout"]

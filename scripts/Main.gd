@@ -182,5 +182,6 @@ func spawn_boss():
 	add_child(boss)
 
 
-func _on_player_ship_lose_life():
-	pass # Replace with function body.
+func _on_ui_toggle_game_paused(paused):
+	$UI/PauseMenu.set_deferred("visible", paused)
+	get_tree().paused = paused

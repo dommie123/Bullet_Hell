@@ -1,5 +1,8 @@
 extends Control
 
+signal toggle_game_paused
+signal return_to_main_menu
+
 @export var lifeCountScene: PackedScene
 
 var mainNode: Node2D
@@ -55,3 +58,15 @@ func _on_player_ship_lose_life():
 func _on_main_update_score(points):
 	score += points
 	$ScoreCounter.set_deferred("text", "Score: %s" % score)
+
+
+func _on_resume_button_pressed():
+	toggle_game_paused.emit(false)
+
+
+func _on_main_menu_button_pressed():
+	return_to_main_menu.emit()
+
+
+func _on_pause_button_pressed():
+	toggle_game_paused.emit(true)
