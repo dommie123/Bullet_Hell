@@ -40,14 +40,18 @@ wait_time = 0.5
 autostart = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 z_index = -1
 material = SubResource("ShaderMaterial_k8ur7")
 position = Vector2(308, 465)
 texture = ExtResource("7_bndeg")
 
+[connection signal="update_score" from="." to="UI" method="_on_main_update_score"]
+[connection signal="new_game_started" from="UI" to="." method="_on_ui_new_game_started"]
 [connection signal="toggle_game_paused" from="UI" to="." method="_on_ui_toggle_game_paused"]
 [connection signal="deactivate_curse" from="Player" to="." method="_on_player_deactivate_curse"]
 [connection signal="deactivate_powerup" from="Player" to="." method="_on_player_deactivate_powerup"]
+[connection signal="player_died" from="Player" to="." method="_on_player_player_died"]
 [connection signal="player_died" from="Player" to="PlayerShip" method="_on_player_player_died"]
 [connection signal="lose_life" from="PlayerShip" to="UI" method="_on_player_ship_lose_life"]
 [connection signal="lose_life" from="PlayerShip" to="Player" method="_on_player_ship_lose_life"]

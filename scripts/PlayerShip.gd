@@ -75,34 +75,34 @@ func shift():
 		$AnimatedSprite2D.play("PlayerShipShiftCyanMagenta")
 		if shader_material is ShaderMaterial:
 			shader_material.set_shader_parameter("glow_color", Color(0.5, 0.0, 0.5, 1.0))
-		set_collision_layer_value(2,false)#sets ship and paddle collision cyan to false
-		set_collision_layer_value(3,false)
+		#set_collision_layer_value(2,false)#sets ship and paddle collision cyan to false
+		#set_collision_layer_value(3,false)
 		
-		set_collision_layer_value(1,true)#sets ship and paddle collision magenta to true
-		set_collision_layer_value(4,true)
+		#set_collision_layer_value(1,true)#sets ship and paddle collision magenta to true
+		#set_collision_layer_value(4,true)
 		
-		set_collision_mask_value(5,false) #sets enemy collision
-		set_collision_mask_value(6,true)
+		#set_collision_mask_value(5,false) #sets enemy collision
+		#set_collision_mask_value(6,true)
 		
-		set_collision_mask_value(7,false) #sets bullet collision
-		set_collision_mask_value(8,true)
+		#set_collision_mask_value(7,false) #sets bullet collision
+		#set_collision_mask_value(8,true)
 	
 	elif currentColor == COLOR.MAGENTA:
 		currentColor = COLOR.CYAN
 		$AnimatedSprite2D.play("PlayerShipShiftMagentaCyan")
 		if shader_material is ShaderMaterial:
 			shader_material.set_shader_parameter("glow_color", Color(0.0, 0.5, 0.5, 1.0))
-		set_collision_layer_value(1,false)#sets ship and paddle collision magenta to false
-		set_collision_layer_value(4,false)
-		
-		set_collision_layer_value(2,true)#sets ship and paddle collision cyan to true
-		set_collision_layer_value(3,true)
-		
-		set_collision_mask_value(5,true) #sets enemy collision
-		set_collision_mask_value(6,false)
-		
-		set_collision_mask_value(7,true) #sets bullet collision
-		set_collision_mask_value(8,false)
+#		set_collision_layer_value(1,false)#sets ship and paddle collision magenta to false
+#		set_collision_layer_value(4,false)
+#
+#		set_collision_layer_value(2,true)#sets ship and paddle collision cyan to true
+#		set_collision_layer_value(3,true)
+#
+#		set_collision_mask_value(5,true) #sets enemy collision
+#		set_collision_mask_value(6,false)
+#
+#		set_collision_mask_value(7,true) #sets bullet collision
+#		set_collision_mask_value(8,false)
 
 
 func _on_player_player_died():

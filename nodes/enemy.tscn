@@ -236,6 +236,7 @@ currentState = 2
 currentType = 5
 xYInverted = true
 bulletLaunchSpeedMultiplier = 1
+enemyColor = 1
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_akt5c")

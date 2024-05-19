@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bfnj0b5pp7cy7" path="res://assets/Boss/Head/Head Frame 1.svg" id="2_0rh3i"]
 [ext_resource type="PackedScene" path="res://nodes/powerup.tscn" id="2_spsf8"]
 [ext_resource type="Shader" path="res://textures/neon.gdshader" id="3_kqoc7"]
+
 [ext_resource type="Texture2D" uid="uid://cslio6o8a5jsx" path="res://assets/Boss/Head/Head Frame 2.svg" id="3_y3v0n"]
 [ext_resource type="Texture2D" uid="uid://b1pcfngv843es" path="res://assets/Boss/Head/Head Frame 3.svg" id="4_mu6wh"]
 [ext_resource type="Texture2D" uid="uid://bpw0onpsxnimw" path="res://assets/Boss/Head/Head Frame 4.svg" id="5_ypex8"]
