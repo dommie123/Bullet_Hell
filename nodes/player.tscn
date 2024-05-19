@@ -126,12 +126,12 @@ collision_layer = 4
 collision_mask = 64
 physics_material_override = SubResource("PhysicsMaterial_tbeve")
 gravity_scale = 0.0
-continuous_cd = 2
-max_contacts_reported = 1
-contact_monitor = true
 lock_rotation = true
 freeze = true
 freeze_mode = 1
+continuous_cd = 2
+max_contacts_reported = 1
+contact_monitor = true
 script = ExtResource("1_uotbm")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
