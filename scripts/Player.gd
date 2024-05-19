@@ -12,6 +12,8 @@ var lives: int
 var currentPowerup: int
 var currentCurse: int
 
+@onready var shader_material = $AnimatedSprite2D.material
+
 enum color {cyan, magenta}#ADDED enumerator used to denote colors throughout the code. Use these when describing a color of enemy, player or bullet
 var shipColor : color = color.cyan #what color the ship currently is
 
@@ -25,6 +27,12 @@ func _ready():
 	currentCurse = 0
 	initialYPos = position.y
 	lives = 3
+	
+	if shader_material is ShaderMaterial:
+		if shipColor == color.cyan:
+			shader_material.set_shader_parameter("glow_color", Color(0.0, 0.5, 0.5, 1.0))
+		elif shipColor == color.magenta:
+			shader_material.set_shader_parameter("glow_color", Color(0.5, 0.0, 0.5, 1.0))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -53,6 +61,8 @@ func Shift(): #ADDED funciton that lets the player shift colors (space bar)
 	if shipColor == color.cyan:
 		shipColor = color.magenta
 		$AnimatedSprite2D.play("PaddleShiftCyanMagenta")
+		if shader_material is ShaderMaterial:
+			shader_material.set_shader_parameter("glow_color", Color(0.5, 0.0, 0.5, 1.0))
 		set_collision_layer_value(1,false)#sets ship and paddle collision cyan to false
 		set_collision_layer_value(3,false)
 		
@@ -68,6 +78,8 @@ func Shift(): #ADDED funciton that lets the player shift colors (space bar)
 	elif shipColor == color.magenta:
 		shipColor = color.cyan
 		$AnimatedSprite2D.play("PaddleShiftMagentaCyan")
+		if shader_material is ShaderMaterial:
+			shader_material.set_shader_parameter("glow_color", Color(0.0, 0.5, 0.5, 1.0))
 		set_collision_layer_value(2,false)#sets ship and paddle collision magenta to false
 		set_collision_layer_value(4,false)
 		

@@ -31,6 +31,8 @@ signal enemy_killed
 @export var funcIndex: int
 @export var bulletLaunchSpeedMultiplier: int
 
+@onready var shader_material = $AnimatedSprite2D.material
+
 var functions: Functions
 var utils: Utils
 
@@ -66,6 +68,12 @@ func _ready():
 	
 	enemy_fled.connect(mainNode.enemy_fled_callable)
 	enemy_killed.connect(mainNode.enemy_killed_callable)
+	
+#	if shader_material is ShaderMaterial:#TO FIX
+#		if currentColor == COLOR.CYAN:
+#			shader_material.set_shader_parameter("glow_color", Color(0.0, 0.5, 0.5, 1.0))
+#		elif currentColor == COLOR.MAGENTA:
+#			shader_material.set_shader_parameter("glow_color", Color(0.5, 0.0, 0.5, 1.0))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

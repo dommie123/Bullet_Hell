@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://b5rkyiahed6us"]
 
 [ext_resource type="Texture2D" uid="uid://dk3j7hwpv4kpc" path="res://assets/icon.svg" id="2_m1u6a"]
-[ext_resource type="Texture2D" uid="uid://ba2mkwk5jdfxp" path="res://assets/Enemy.png" id="3_kv44q"]
+[ext_resource type="Texture2D" uid="uid://ba2mkwk5jdfxp" path="res://assets/Enemies/Enemy.png" id="3_kv44q"]
 [ext_resource type="Shader" path="res://textures/neon.gdshader" id="3_ppmtx"]
 
 [sub_resource type="Shader" id="Shader_64k0u"]
@@ -37,10 +37,11 @@ shader_parameter/flicker_spikes_sharpness = 20.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rfopa"]
 shader = ExtResource("3_ppmtx")
-shader_parameter/brightness = 1.0
-shader_parameter/glow_intensity = 0.916
 shader_parameter/glow_color = Color(1, 0.423445, 0.719873, 1)
-shader_parameter/glow_size = 0.363
+shader_parameter/glow_power = 10.0
+shader_parameter/glow_shift = 1.0
+shader_parameter/glow_radius = 5.0
+shader_parameter/texture_size = Vector2(256, 256)
 
 [node name="Glow" type="Node2D"]
 
@@ -54,5 +55,4 @@ position = Vector2(-183, 0)
 texture = ExtResource("2_m1u6a")
 
 [node name="Enemy" type="Sprite2D" parent="."]
-visible = false
 texture = ExtResource("3_kv44q")

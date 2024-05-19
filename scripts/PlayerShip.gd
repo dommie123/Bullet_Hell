@@ -16,12 +16,20 @@ var speed: float
 var lastFramePos : Vector2 #where we were in space last frame
 var posDifference : Vector2 #the difference between last frame and the next calculated frame
 
+@onready var shader_material = $AnimatedSprite2D.material
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$AnimatedSprite2D.play("PlayerShip")
 	
 	playerPaddle = get_node("/root/Main/Player")
 	speed = initialSpeed
+	
+	if shader_material is ShaderMaterial:
+		if currentColor == COLOR.CYAN:
+			shader_material.set_shader_parameter("glow_color", Color(0.0, 0.5, 0.5, 1.0))
+		elif currentColor == COLOR.MAGENTA:
+			shader_material.set_shader_parameter("glow_color", Color(0.5, 0.0, 0.5, 1.0))
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -65,6 +73,8 @@ func shift():
 	if currentColor == COLOR.CYAN:
 		currentColor = COLOR.MAGENTA
 		$AnimatedSprite2D.play("PlayerShipShiftCyanMagenta")
+		if shader_material is ShaderMaterial:
+			shader_material.set_shader_parameter("glow_color", Color(0.5, 0.0, 0.5, 1.0))
 		set_collision_layer_value(2,false)#sets ship and paddle collision cyan to false
 		set_collision_layer_value(3,false)
 		
@@ -80,6 +90,8 @@ func shift():
 	elif currentColor == COLOR.MAGENTA:
 		currentColor = COLOR.CYAN
 		$AnimatedSprite2D.play("PlayerShipShiftMagentaCyan")
+		if shader_material is ShaderMaterial:
+			shader_material.set_shader_parameter("glow_color", Color(0.0, 0.5, 0.5, 1.0))
 		set_collision_layer_value(1,false)#sets ship and paddle collision magenta to false
 		set_collision_layer_value(4,false)
 		

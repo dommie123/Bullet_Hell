@@ -1,8 +1,9 @@
-[gd_scene load_steps=22 format=3 uid="uid://cnoi2eahhdj8x"]
+[gd_scene load_steps=27 format=3 uid="uid://30yxyqqqaoy1"]
 
 [ext_resource type="Script" path="res://scripts/DeBugger.gd" id="1_1xqlb"]
 [ext_resource type="Texture2D" uid="uid://bfnj0b5pp7cy7" path="res://assets/Boss/Head/Head Frame 1.svg" id="2_0rh3i"]
-[ext_resource type="PackedScene" uid="uid://ct0s05l6kyqbn" path="res://nodes/powerup.tscn" id="2_spsf8"]
+[ext_resource type="PackedScene" path="res://nodes/powerup.tscn" id="2_spsf8"]
+[ext_resource type="Shader" path="res://textures/neon.gdshader" id="3_kqoc7"]
 [ext_resource type="Texture2D" uid="uid://cslio6o8a5jsx" path="res://assets/Boss/Head/Head Frame 2.svg" id="3_y3v0n"]
 [ext_resource type="Texture2D" uid="uid://b1pcfngv843es" path="res://assets/Boss/Head/Head Frame 3.svg" id="4_mu6wh"]
 [ext_resource type="Texture2D" uid="uid://bpw0onpsxnimw" path="res://assets/Boss/Head/Head Frame 4.svg" id="5_ypex8"]
@@ -18,6 +19,14 @@
 [ext_resource type="Texture2D" uid="uid://dgrquv0krcw8i" path="res://assets/Boss/Segment/Segment Frame 7.svg" id="15_cird6"]
 [ext_resource type="Script" path="res://scripts/Turret.gd" id="17_rsnty"]
 [ext_resource type="PackedScene" uid="uid://bbwfo67k6imi6" path="res://nodes/bullet.tscn" id="18_qsnrh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ujnqy"]
+shader = ExtResource("3_kqoc7")
+shader_parameter/glow_color = Color(0, 0.501961, 0.501961, 1)
+shader_parameter/glow_power = 20.0
+shader_parameter/glow_shift = 1.0
+shader_parameter/glow_radius = 5.0
+shader_parameter/texture_size = Vector2(256, 256)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_c31gn"]
 animations = [{
@@ -47,6 +56,14 @@ animations = [{
 "name": &"default",
 "speed": 5.0
 }]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kfx5s"]
+shader = ExtResource("3_kqoc7")
+shader_parameter/glow_color = Color(0, 0.501961, 0.501961, 1)
+shader_parameter/glow_power = 20.0
+shader_parameter/glow_shift = 1.0
+shader_parameter/glow_radius = 5.0
+shader_parameter/texture_size = Vector2(256, 256)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_65gpj"]
 animations = [{
@@ -79,6 +96,22 @@ animations = [{
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wylnl"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ylgk3"]
+shader = ExtResource("3_kqoc7")
+shader_parameter/glow_color = Color(0, 0.501961, 0.501961, 1)
+shader_parameter/glow_power = 20.0
+shader_parameter/glow_shift = 1.0
+shader_parameter/glow_radius = 5.0
+shader_parameter/texture_size = Vector2(256, 256)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v7niq"]
+shader = ExtResource("3_kqoc7")
+shader_parameter/glow_color = Color(0, 0.501961, 0.501961, 1)
+shader_parameter/glow_power = 20.0
+shader_parameter/glow_shift = 1.0
+shader_parameter/glow_radius = 5.0
+shader_parameter/texture_size = Vector2(256, 256)
+
 [node name="DeBugger" type="Node2D"]
 position = Vector2(200, 114)
 script = ExtResource("1_1xqlb")
@@ -99,6 +132,7 @@ lock_rotation = true
 freeze = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Head"]
+material = SubResource("ShaderMaterial_ujnqy")
 scale = Vector2(0.198, 0.2)
 sprite_frames = SubResource("SpriteFrames_c31gn")
 frame_progress = 0.331945
@@ -123,6 +157,7 @@ lock_rotation = true
 freeze = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Segment"]
+material = SubResource("ShaderMaterial_kfx5s")
 scale = Vector2(0.198, 0.2)
 sprite_frames = SubResource("SpriteFrames_65gpj")
 
@@ -198,6 +233,7 @@ lock_rotation = true
 freeze = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Segment2"]
+material = SubResource("ShaderMaterial_ylgk3")
 scale = Vector2(0.198, 0.2)
 sprite_frames = SubResource("SpriteFrames_65gpj")
 
@@ -273,6 +309,7 @@ lock_rotation = true
 freeze = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Segment3"]
+material = SubResource("ShaderMaterial_v7niq")
 scale = Vector2(0.198, 0.2)
 sprite_frames = SubResource("SpriteFrames_65gpj")
 

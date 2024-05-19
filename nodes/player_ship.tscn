@@ -1,8 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://bfhuoslxpj43e"]
+[gd_scene load_steps=19 format=3 uid="uid://bfhuoslxpj43e"]
 
 [ext_resource type="Script" path="res://scripts/PlayerShip.gd" id="1_oaehg"]
 [ext_resource type="Texture2D" uid="uid://j4mh2h5rq8lt" path="res://assets/PlayerShip/Galaga-PNG-Photos.png" id="2_5tcah"]
 [ext_resource type="Texture2D" uid="uid://deedaq46brjf3" path="res://assets/PlayerShip/PlayerShip Frame 1.svg" id="2_fa800"]
+[ext_resource type="Shader" path="res://textures/neon.gdshader" id="2_umcc4"]
 [ext_resource type="Texture2D" uid="uid://wg0nbqv0cddx" path="res://assets/PlayerShip/PlayerShip Frame 2.svg" id="3_pymuo"]
 [ext_resource type="Texture2D" uid="uid://cpvhyfpjk21xt" path="res://assets/PlayerShip/PlayerShip Frame 3.svg" id="4_pag6h"]
 [ext_resource type="Texture2D" uid="uid://dmllrspp3yaml" path="res://assets/PlayerShip/PlayerShip Frame 5.svg" id="5_f8b3s"]
@@ -14,6 +15,14 @@
 [ext_resource type="Texture2D" uid="uid://d3kr1pay5qxud" path="res://assets/PlayerShip/PlayerShip Frame 11.svg" id="11_p6gdd"]
 [ext_resource type="Texture2D" uid="uid://bu8nf130que7q" path="res://assets/PlayerShip/PlayerShip Frame 12.svg" id="12_2pyhq"]
 [ext_resource type="Texture2D" uid="uid://b6sq7hpgsb50q" path="res://assets/PlayerShip/PlayerShip Frame 13.svg" id="13_mp8ck"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_colug"]
+shader = ExtResource("2_umcc4")
+shader_parameter/glow_color = Color(0, 0.705882, 0.705882, 1)
+shader_parameter/glow_power = 20.0
+shader_parameter/glow_shift = 1.0
+shader_parameter/glow_radius = 5.0
+shader_parameter/texture_size = Vector2(256, 256)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_phas3"]
 animations = [{
@@ -165,6 +174,7 @@ script = ExtResource("1_oaehg")
 initialSpeed = 10.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_colug")
 position = Vector2(0, 6.565)
 rotation = 1.5708
 scale = Vector2(0.14, 0.141)
