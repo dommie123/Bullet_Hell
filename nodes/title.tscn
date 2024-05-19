@@ -37,7 +37,6 @@ bgmName = "Music"
 sfxName = "Sound Effects"
 
 [node name="TitleCanvas" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="TitleInterface" type="Control" parent="TitleCanvas"]
 layout_mode = 3
@@ -173,6 +172,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="OptionsCanvas" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="OptionsInterface" type="Control" parent="OptionsCanvas"]
 layout_mode = 3
