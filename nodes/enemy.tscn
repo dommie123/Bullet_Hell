@@ -43,8 +43,10 @@ script = ExtResource("1_m52gn")
 bullet_scene = ExtResource("2_yxds1")
 powerupScene = ExtResource("3_yc7vu")
 currentState = 2
+currentType = 5
 xYInverted = true
 bulletLaunchSpeedMultiplier = 1
+enemyColor = 1
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.15, 0.15)
@@ -52,23 +54,23 @@ sprite_frames = SubResource("SpriteFrames_3dpxp")
 frame_progress = 0.58604
 
 [node name="BulletLauncher" type="Node2D" parent="."]
+position = Vector2(0, 18)
 
 [node name="BulletLauncher2" type="Node2D" parent="."]
-visible = false
+position = Vector2(-26, 16)
 
 [node name="BulletLauncher3" type="Node2D" parent="."]
-visible = false
+position = Vector2(24, 17)
 
 [node name="BulletLauncher4" type="Node2D" parent="."]
-visible = false
+position = Vector2(-59, 19)
 
 [node name="BulletLauncher5" type="Node2D" parent="."]
-visible = false
+position = Vector2(60, 19)
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
 [node name="BulletTimer" type="Timer" parent="."]
-wait_time = 0.1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 2)
