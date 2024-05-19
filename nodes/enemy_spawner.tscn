@@ -11,7 +11,6 @@ spawnOffset = Vector2(-100, -100)
 enemyCount = 5
 
 [node name="SpawnTimer" type="Timer" parent="."]
-wait_time = 0.25
 autostart = true
 
 [node name="KillTimer" type="Timer" parent="."]

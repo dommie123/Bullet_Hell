@@ -1,0 +1,193 @@
+[gd_scene load_steps=7 format=3 uid="uid://by45tyjaglmsp"]
+
+[ext_resource type="Script" path="res://scripts/ui.gd" id="1_7nk61"]
+[ext_resource type="PackedScene" uid="uid://b6ev8dcx56mgj" path="res://nodes/life_count.tscn" id="2_dmacp"]
+[ext_resource type="Texture2D" uid="uid://c18f328b2glqi" path="res://assets/UI/PauseIcon.png" id="2_uj1mv"]
+[ext_resource type="SystemFont" uid="uid://6qb1h1l1641a" path="res://assets/UI/fonts/game_subheading.tres" id="4_wyrm4"]
+[ext_resource type="Texture2D" uid="uid://byq07bmfd2jar" path="res://assets/UI/CustomButtonIcon.png" id="5_os3yk"]
+[ext_resource type="Texture2D" uid="uid://c6rjenyrn4rbt" path="res://assets/UI/GameOverButtonIcon.png" id="6_y8tks"]
+
+[node name="UI" type="ReferenceRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+border_color = Color(1, 0, 0, 0)
+editor_only = false
+script = ExtResource("1_7nk61")
+lifeCountScene = ExtResource("2_dmacp")
+
+[node name="TextureButton" type="TextureButton" parent="."]
+process_priority = 1
+layout_mode = 0
+offset_left = 17.0
+offset_top = 18.0
+offset_right = 81.0
+offset_bottom = 82.0
+texture_normal = ExtResource("2_uj1mv")
+texture_pressed = ExtResource("2_uj1mv")
+texture_hover = ExtResource("2_uj1mv")
+texture_disabled = ExtResource("2_uj1mv")
+texture_focused = ExtResource("2_uj1mv")
+
+[node name="LevelCounter" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 257.0
+offset_right = 321.0
+offset_bottom = 26.0
+theme_override_colors/default_color = Color(0, 0.772549, 0.905882, 1)
+theme_override_fonts/normal_font = ExtResource("4_wyrm4")
+text = "Lv: 1"
+
+[node name="ScoreCounter" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 451.0
+offset_right = 600.0
+offset_bottom = 26.0
+theme_override_colors/default_color = Color(0, 0.772549, 0.905882, 1)
+theme_override_fonts/normal_font = ExtResource("4_wyrm4")
+text = "Score: 0"
+
+[node name="PauseMenu" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PausedLabel" type="Label" parent="PauseMenu"]
+layout_mode = 0
+offset_left = 218.0
+offset_top = 371.0
+offset_right = 294.0
+offset_bottom = 411.0
+scale = Vector2(2.33522, 2.48999)
+theme_override_colors/font_color = Color(0, 0.772549, 0.905882, 1)
+theme_override_fonts/font = ExtResource("4_wyrm4")
+text = "Paused"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="ResumeButton" type="TextureButton" parent="PauseMenu"]
+layout_mode = 0
+offset_left = 233.0
+offset_top = 445.0
+offset_right = 489.0
+offset_bottom = 509.0
+scale = Vector2(0.578125, 0.818182)
+texture_normal = ExtResource("5_os3yk")
+
+[node name="ResumeLabel" type="Label" parent="PauseMenu/ResumeButton"]
+layout_mode = 0
+offset_top = 4.88892
+offset_right = 153.0
+offset_bottom = 47.8889
+scale = Vector2(1.67434, 1.18367)
+theme_override_colors/font_color = Color(0.760784, 0, 0.741176, 1)
+theme_override_fonts/font = ExtResource("4_wyrm4")
+text = "Resume"
+horizontal_alignment = 1
+
+[node name="MainMenuButton" type="TextureButton" parent="PauseMenu"]
+layout_mode = 0
+offset_left = 233.0
+offset_top = 494.0
+offset_right = 489.0
+offset_bottom = 534.0
+scale = Vector2(0.577299, 0.97561)
+texture_normal = ExtResource("5_os3yk")
+
+[node name="MainMenuLabel" type="Label" parent="PauseMenu/MainMenuButton"]
+layout_mode = 0
+offset_top = 6.14999
+offset_right = 153.0
+offset_bottom = 49.15
+scale = Vector2(1.68, 1)
+theme_override_colors/font_color = Color(0.760784, 0, 0.741176, 1)
+theme_override_fonts/font = ExtResource("4_wyrm4")
+text = "Main Menu"
+horizontal_alignment = 1
+
+[node name="GameOverPanel" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameOverLabel" type="Label" parent="GameOverPanel"]
+layout_mode = 0
+offset_left = 184.0
+offset_top = 346.0
+offset_right = 288.0
+offset_bottom = 365.0
+scale = Vector2(2.33522, 2.48999)
+theme_override_colors/font_color = Color(1, 0.301961, 0.235294, 1)
+theme_override_fonts/font = ExtResource("4_wyrm4")
+text = "Game Over"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="PlayAgainButton" type="TextureButton" parent="GameOverPanel"]
+layout_mode = 0
+offset_left = 230.0
+offset_top = 475.0
+offset_right = 486.0
+offset_bottom = 539.0
+scale = Vector2(0.578125, 0.818182)
+texture_normal = ExtResource("6_y8tks")
+
+[node name="PlayAgainLabel" type="Label" parent="GameOverPanel/PlayAgainButton"]
+layout_mode = 0
+offset_top = 4.88892
+offset_right = 153.0
+offset_bottom = 47.8889
+scale = Vector2(1.67434, 1.18367)
+theme_override_colors/font_color = Color(1, 0.705882, 0.670588, 1)
+theme_override_fonts/font = ExtResource("4_wyrm4")
+text = "Play Again"
+horizontal_alignment = 1
+
+[node name="MainMenuButton" type="TextureButton" parent="GameOverPanel"]
+layout_mode = 0
+offset_left = 230.0
+offset_top = 524.0
+offset_right = 486.0
+offset_bottom = 564.0
+scale = Vector2(0.577299, 0.97561)
+texture_normal = ExtResource("6_y8tks")
+
+[node name="MainMenuLabel" type="Label" parent="GameOverPanel/MainMenuButton"]
+layout_mode = 0
+offset_top = 6.14999
+offset_right = 153.0
+offset_bottom = 49.15
+scale = Vector2(1.68, 1)
+theme_override_colors/font_color = Color(1, 0.705882, 0.670588, 1)
+theme_override_fonts/font = ExtResource("4_wyrm4")
+text = "Main Menu"
+horizontal_alignment = 1
+
+[node name="FinalScoreLabel" type="Label" parent="GameOverPanel"]
+layout_mode = 0
+offset_left = 223.0
+offset_top = 408.0
+offset_right = 372.0
+offset_bottom = 434.0
+theme_override_colors/font_color = Color(1, 0.705882, 0.670588, 1)
+theme_override_fonts/font = ExtResource("4_wyrm4")
+text = "Score: 0"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="TextureButton" to="." method="_on_pause_button_pressed"]
+[connection signal="pressed" from="PauseMenu/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="PauseMenu/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
+[connection signal="pressed" from="GameOverPanel/PlayAgainButton" to="." method="_on_play_again_button_pressed"]
+[connection signal="pressed" from="GameOverPanel/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
