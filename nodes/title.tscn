@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://djq466o4dkfqs"]
+[gd_scene load_steps=9 format=3 uid="uid://djq466o4dkfqs"]
 
 [ext_resource type="Script" path="res://scripts/title.gd" id="1_dishg"]
 [ext_resource type="FontFile" uid="uid://c1l3f4ryq8j0i" path="res://assets/UI/fonts/game_heading.ttf" id="1_ucbo5"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://byq07bmfd2jar" path="res://assets/UI/CustomButtonIcon.png" id="2_464uh"]
 [ext_resource type="Texture2D" uid="uid://h3fs06ej0erg" path="res://assets/Grid Background.png" id="3_nunax"]
 [ext_resource type="SystemFont" uid="uid://6qb1h1l1641a" path="res://assets/UI/fonts/game_subheading.tres" id="3_vo4hn"]
+[ext_resource type="AudioStream" uid="uid://b6rbi45ry47h7" path="res://assets/Audio/Music/TitleTheme_Edit_1_Export_1.wav" id="7_1u0op"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fnga6"]
 shader = ExtResource("2_5vh8o")
@@ -110,6 +111,7 @@ mouse_default_cursor_shape = 2
 texture_normal = ExtResource("2_464uh")
 
 [node name="OptionsLabel" type="Label" parent="TitleCanvas/TitleInterface/OptionsButton"]
+layout_mode = 0
 offset_left = 3.0
 offset_top = 3.47223
 offset_right = 255.0
@@ -139,6 +141,7 @@ mouse_default_cursor_shape = 2
 texture_normal = ExtResource("2_464uh")
 
 [node name="QuitLabel" type="Label" parent="TitleCanvas/TitleInterface/QuitButton"]
+layout_mode = 0
 offset_left = -1.0
 offset_top = 3.47223
 offset_right = 253.0
@@ -155,6 +158,10 @@ z_index = -1
 material = SubResource("ShaderMaterial_fnga6")
 position = Vector2(308, 465)
 texture = ExtResource("3_nunax")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_1u0op")
+autoplay = true
 
 [connection signal="pressed" from="TitleCanvas/TitleInterface/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="TitleCanvas/TitleInterface/OptionsButton" to="." method="_on_options_button_pressed"]

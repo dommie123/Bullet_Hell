@@ -5,7 +5,10 @@ signal phase_changed
 signal update_score
 
 @export var enemySpawnerScene: PackedScene
-@export var bossScene: PackedScene
+@export var bossScene: PackedScene 
+
+var bossMusic: AudioStream = preload("res://assets/Audio/Music/Boss_Theme_Edit_1_Export_1.wav")
+var levelMusic: AudioStream = preload("res://assets/Audio/Music/Level_Theme_Edit_1_Export_1.wav")
 
 @export var phase: int
 
@@ -27,7 +30,7 @@ const Functions = preload("res://scripts/functions.gd")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	level = 1
-	phase = 1
+	phase = 4
 	maxEnemiesPerSpawner = 20
 	currentEnemiesPerSpawner = 5
 	currentSpawners = 2
@@ -39,6 +42,7 @@ func _ready():
 	game_started = false
 	boss_active = false
 	canSpawnEnemySpawner = true
+	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -88,6 +92,12 @@ func _on_enemy_enemy_killed():
 	
 	enemy_disappear_routine()
 	
+	
+func play_music(stream: AudioStream):
+	$BGM._set_playing(false)
+	$BGM.set_stream(stream)
+	$BGM._set_playing(true)
+	
 
 func enemy_disappear_routine():
 	active_enemies -= 1
@@ -112,6 +122,9 @@ func enemy_disappear_routine():
 			active_enemies = 0
 			activeSpawners = 0
 			currentSpawners -= 1
+			play_music(bossMusic)
+		elif phase % 5 == 1:
+			play_music(levelMusic)
 			
 			
 func spawn_enemy_spawner(spawnToLeft = false):
@@ -201,3 +214,7 @@ func _on_ui_new_game_started():
 func _on_player_player_died():
 	$UI/CanvasLayer/GameOverPanel.set_deferred("visible", true)
 	get_tree().paused = true
+
+
+func _on_ui_return_to_main_menu():
+	get_tree().change_scene_to_file("res://nodes/title.tscn")

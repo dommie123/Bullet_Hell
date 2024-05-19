@@ -75,3 +75,11 @@ func _on_pause_button_pressed():
 
 func _on_play_again_button_pressed():
 	new_game_started.emit()
+
+
+func _on_player_update_curse():
+	pass # Replace with function body.
+
+
+func _on_player_update_powerup():
+	pass # Replace with function body.
