@@ -6,8 +6,12 @@ signal return_to_main_menu
 
 @export var lifeCountScene: PackedScene
 
+const Constants = preload("res://scripts/consts.gd")
+
 var mainNode: Node2D
 var playerNode: Node2D
+var pwrIcons
+var curseIcons
 
 var lives: int
 var level: int
@@ -20,6 +24,8 @@ var isPaused: bool
 func _ready():
 	mainNode = get_node("/root/Main")
 	playerNode = get_node("/root/Main/Player")
+	pwrIcons = Constants.new().POWERUP_ICONS
+	curseIcons = Constants.new().CURSE_ICONS
 	
 	if not mainNode or not playerNode:
 		assert(false, "Isolated Scene not supported! Please run this in the Main Scene!")
@@ -77,9 +83,19 @@ func _on_play_again_button_pressed():
 	new_game_started.emit()
 
 
-func _on_player_update_curse():
-	pass # Replace with function body.
+func _on_player_update_curse(curse):
+	$CanvasLayer/CurseContainer/CurseIcon.visible = true
+	$CanvasLayer/CurseContainer/CurseIcon.set_deferred("texture", curseIcons[curse - 1])
 
 
-func _on_player_update_powerup():
-	pass # Replace with function body.
+func _on_player_update_powerup(powerup):
+	$CanvasLayer/PowerupContainer/PowerupIcon.visible = true
+	$CanvasLayer/PowerupContainer/PowerupIcon.set_deferred("texture", pwrIcons[powerup - 1])
+
+
+func _on_player_deactivate_curse():
+	$CanvasLayer/CurseContainer/CurseIcon.visible = false
+
+
+func _on_player_deactivate_powerup():
+	$CanvasLayer/PowerupContainer/PowerupIcon.visible = false

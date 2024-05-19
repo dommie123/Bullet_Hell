@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://by45tyjaglmsp"]
+[gd_scene load_steps=9 format=3 uid="uid://by45tyjaglmsp"]
 
 [ext_resource type="Script" path="res://scripts/ui.gd" id="1_7nk61"]
 [ext_resource type="PackedScene" uid="uid://b6ev8dcx56mgj" path="res://nodes/life_count.tscn" id="2_dmacp"]
@@ -6,6 +6,8 @@
 [ext_resource type="SystemFont" uid="uid://6qb1h1l1641a" path="res://assets/UI/fonts/game_subheading.tres" id="4_wyrm4"]
 [ext_resource type="Texture2D" uid="uid://byq07bmfd2jar" path="res://assets/UI/CustomButtonIcon.png" id="5_os3yk"]
 [ext_resource type="Texture2D" uid="uid://c6rjenyrn4rbt" path="res://assets/UI/GameOverButtonIcon.png" id="6_y8tks"]
+[ext_resource type="Texture2D" uid="uid://emryb57nqs8g" path="res://assets/UI/Powerups/PowerupContainer.png" id="7_8n4xx"]
+[ext_resource type="Texture2D" uid="uid://b21k3am4rsmlt" path="res://assets/UI/Curses/CurseContainer.png" id="8_5nt21"]
 
 [node name="UI" type="ReferenceRect"]
 z_index = 1
@@ -189,6 +191,61 @@ theme_override_colors/font_color = Color(1, 0.705882, 0.670588, 1)
 theme_override_fonts/font = ExtResource("4_wyrm4")
 text = "Score: 0"
 horizontal_alignment = 1
+
+[node name="PowerupContainer" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -148.0
+offset_top = -69.9999
+offset_right = -108.0
+offset_bottom = -29.9999
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(1.6695, 1.67879)
+texture = ExtResource("7_8n4xx")
+
+[node name="PowerupIcon" type="TextureRect" parent="CanvasLayer/PowerupContainer"]
+visible = false
+layout_mode = 0
+offset_left = 2.99487
+offset_top = 4.16962
+offset_right = 42.9949
+offset_bottom = 44.1696
+scale = Vector2(0.808436, 0.822826)
+
+[node name="CurseContainer" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -74.0
+offset_top = -70.0001
+offset_right = -34.0
+offset_bottom = -30.0001
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(1.669, 1.669)
+texture = ExtResource("8_5nt21")
+
+[node name="CurseIcon" type="TextureRect" parent="CanvasLayer/CurseContainer"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.405
+offset_top = -15.2067
+offset_right = 23.595
+offset_bottom = 24.7933
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.786692, 0.799479)
 
 [connection signal="pressed" from="CanvasLayer/TextureButton" to="." method="_on_pause_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/PauseMenu/ResumeButton" to="." method="_on_resume_button_pressed"]
