@@ -31,6 +31,8 @@ signal enemy_killed
 @export var funcIndex: int
 @export var bulletLaunchSpeedMultiplier: int
 
+@export var enemyColor : color
+
 var functions: Functions
 var utils: Utils
 
@@ -52,7 +54,7 @@ func _ready():
 	functions = Functions.new()
 	utils = Utils.new()
 	
-	timeMultiplier = 100
+	timeMultiplier = 75
 	angularVelocity = (3 * PI) / 4
 	timePassed = 0
 	canShoot = true
@@ -66,6 +68,20 @@ func _ready():
 	
 	enemy_fled.connect(mainNode.enemy_fled_callable)
 	enemy_killed.connect(mainNode.enemy_killed_callable)
+	
+	if enemyColor == color.cyan:
+		$".".set_collision_layer_value(5,true)
+		$".".set_collision_layer_value(6,false)
+		
+		$".".set_collision_mask_value(10,true)
+		$".".set_collision_mask_value(9,false)
+	elif enemyColor == color.magenta:
+		$".".set_collision_layer_value(6,true)
+		$".".set_collision_layer_value(5,false)
+		
+		$".".set_collision_mask_value(9,true)
+		$".".set_collision_mask_value(10,false)
+		
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -86,7 +102,7 @@ func _process(delta):
 		position = calc_pos(timePassed)
 		posDifference = position - lastFramePos
 	
-	if currentType == TYPE.AIMBOT or currentType == TYPE.MEGABYTE or currentType == TYPE.GIGABYTE:
+	if currentType == TYPE.AIMBOT: #or currentType == TYPE.MEGABYTE or currentType == TYPE.GIGABYTE:
 		var player = get_node("/root/Main/Player")
 		
 		if player:
@@ -126,22 +142,124 @@ func calc_pos(t):
 	
 	
 func shoot():
-	if currentType == TYPE.TROJAN:
-		assert(false, "Trojan enemies cannot shoot the player!")
-		
-	var bullet = bullet_scene.instantiate()
-	bullet.bulletColor = color.cyan #TEMPORARY. ALL BULLETS SHOT ARE CYAN RIGHT NOW
-	
-	bullet.position = position
 	var direction = $BulletLauncher.rotation
 	
-	bullet.speed = bulletLaunchSpeed
+	if currentType == TYPE.TROJAN:
+		assert(false, "Trojan enemies cannot shoot the player!")
+	elif currentType == TYPE.AIMBOT:
+		var bullet1 = bullet_scene.instantiate()
+		bullet1.bulletColor = enemyColor
+		bullet1.position = $BulletLauncher.position
+		bullet1.speed = bulletLaunchSpeed
+		var velocity = Vector2(0, 1)
+		bullet1.linear_velocity = velocity.rotated(direction)
+		add_sibling(bullet1)
+	elif currentType == TYPE.GIGABYTE: #5
+		var bullet1 = bullet_scene.instantiate()
+		var bullet2 = bullet_scene.instantiate()
+		var bullet3 = bullet_scene.instantiate()
+		var bullet4 = bullet_scene.instantiate()
+		var bullet5 = bullet_scene.instantiate()
+		bullet1.bulletColor = enemyColor
+		bullet2.bulletColor = enemyColor
+		bullet3.bulletColor = enemyColor
+		bullet4.bulletColor = enemyColor
+		bullet5.bulletColor = enemyColor
+		bullet1.position = $BulletLauncher.position
+		bullet2.position = $BulletLauncher2.position
+		bullet3.position = $BulletLauncher3.position
+		bullet4.position = $BulletLauncher4.position
+		bullet5.position = $BulletLauncher5.position
+		bullet1.speed = bulletLaunchSpeed
+		bullet2.speed = bulletLaunchSpeed
+		bullet3.speed = bulletLaunchSpeed
+		bullet4.speed = bulletLaunchSpeed
+		bullet5.speed = bulletLaunchSpeed
+		var velocity = Vector2(0, 1)
+		bullet1.linear_velocity = velocity.rotated(direction)
+		bullet2.linear_velocity = velocity.rotated(direction)
+		bullet3.linear_velocity = velocity.rotated(direction)
+		bullet4.linear_velocity = velocity.rotated(direction)
+		bullet5.linear_velocity = velocity.rotated(direction)
+		add_sibling(bullet1)
+		add_sibling(bullet2)
+		add_sibling(bullet3)
+		add_sibling(bullet4)
+		add_sibling(bullet5)
+		
+	elif currentType == TYPE.HAXOR:
+		var bullet1 = bullet_scene.instantiate()
+		var bullet2 = bullet_scene.instantiate()
+		bullet1.bulletColor = enemyColor
+		bullet2.bulletColor = enemyColor
+		bullet1.position = $BulletLauncher.position
+		bullet2.position = $BulletLauncher2.position
+		bullet1.speed = bulletLaunchSpeed
+		bullet2.speed = bulletLaunchSpeed
+		var velocity = Vector2(0, 1)
+		bullet1.linear_velocity = velocity.rotated(direction)
+		bullet2.linear_velocity = velocity.rotated(direction)
+		add_sibling(bullet1)
+		add_sibling(bullet2)
+		
+	elif currentType == TYPE.MEGABYTE: #3
+		var bullet1 = bullet_scene.instantiate()
+		var bullet2 = bullet_scene.instantiate()
+		var bullet3 = bullet_scene.instantiate()
+		bullet1.bulletColor = enemyColor
+		bullet2.bulletColor = enemyColor
+		bullet3.bulletColor = enemyColor
+		bullet1.position = $BulletLauncher.position
+		bullet2.position = $BulletLauncher2.position
+		bullet3.position = $BulletLauncher3.position
+		bullet1.speed = bulletLaunchSpeed
+		bullet2.speed = bulletLaunchSpeed
+		bullet3.speed = bulletLaunchSpeed
+		var velocity = Vector2(0, 1)
+		bullet1.linear_velocity = velocity.rotated(direction)
+		bullet2.linear_velocity = velocity.rotated(direction)
+		bullet3.linear_velocity = velocity.rotated(direction)
+		add_sibling(bullet1)
+		add_sibling(bullet2)
+		add_sibling(bullet3)
+	elif currentType == TYPE.WORM:
+		var bullet1 = bullet_scene.instantiate()
+		var bullet2 = bullet_scene.instantiate()
+		var bullet3 = bullet_scene.instantiate()
+		var bullet4 = bullet_scene.instantiate()
+		bullet1.bulletColor = enemyColor
+		bullet2.bulletColor = enemyColor
+		bullet3.bulletColor = enemyColor
+		bullet4.bulletColor = enemyColor
+		bullet1.position = $BulletLauncher.position
+		bullet2.position = $BulletLauncher2.position
+		bullet3.position = $BulletLauncher3.position
+		bullet4.position = $BulletLauncher4.position
+		bullet1.speed = bulletLaunchSpeed
+		bullet2.speed = bulletLaunchSpeed
+		bullet3.speed = bulletLaunchSpeed
+		bullet4.speed = bulletLaunchSpeed
+		var velocity = Vector2(0, 1)
+		bullet1.linear_velocity = velocity.rotated(direction)
+		bullet2.linear_velocity = velocity.rotated(direction)
+		bullet3.linear_velocity = velocity.rotated(direction)
+		bullet4.linear_velocity = velocity.rotated(direction)
+		add_sibling(bullet1)
+		add_sibling(bullet2)
+		add_sibling(bullet3)
+		add_sibling(bullet4)
+	
+	#bullet.bulletColor = color.cyan #TEMPORARY. ALL BULLETS SHOT ARE CYAN RIGHT NOW
+	
+	#bullet.position = position
+	
+	#bullet.speed = bulletLaunchSpeed
 	
 	# Choose the velocity for the bullet
-	var velocity = Vector2(1, 0)
-	bullet.linear_velocity = velocity.rotated(direction)
+	#var velocity = Vector2(1, 0)
+	#bullet.linear_velocity = velocity.rotated(direction)
 	
-	add_sibling(bullet)
+	#add_sibling(bullet)
 	
 	
 func spawn_powerup():

@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://b6ev8dcx56mgj"]
+
+[ext_resource type="Texture2D" uid="uid://deedaq46brjf3" path="res://assets/PlayerShip/PlayerShip Frame 1.svg" id="1_0us5o"]
+
+[node name="LifeCount" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+rotation = 1.57422
+scale = Vector2(0.0695326, 0.0766653)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 11688.2
+offset_top = -1118.92
+offset_right = 13608.2
+offset_bottom = -38.9219
+texture = ExtResource("1_0us5o")

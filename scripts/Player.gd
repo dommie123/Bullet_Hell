@@ -8,13 +8,15 @@ signal deactivate_curse
 var yIsLocked: bool
 var controlsReversed: bool
 var initialYPos: float
-var lives: int
+
 var currentPowerup: int
 var currentCurse: int
 
 enum color {cyan, magenta}#ADDED enumerator used to denote colors throughout the code. Use these when describing a color of enemy, player or bullet
-var shipColor : color = color.cyan #what color the ship currently is
+@export var shipColor : color = color.cyan #what color the ship currently is
 
+var lockRotation : bool = false
+var lives: int	= 3
 const MAX_ROTATION = PI / 6 # 30 degrees in radians
 
 # Called when the node enters the scene tree for the first time.
@@ -24,7 +26,7 @@ func _ready():
 	currentPowerup = 0
 	currentCurse = 0
 	initialYPos = position.y
-	lives = 3
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -40,11 +42,14 @@ func _process(delta):
 		position.y = clamp(playerPosY, screen_bounds.y - 100, screen_bounds.y)
 	
 	if Input.is_action_pressed("rotate_left") and Input.is_action_pressed("rotate_right"):
-		rotate(0)
-	elif Input.is_action_pressed("rotate_left") and rotation > -MAX_ROTATION:
-		rotate(-(PI / 24))
-	elif Input.is_action_pressed("rotate_right") and rotation < MAX_ROTATION:
-		rotate(PI / 24)
+		rotation = 0
+		lockRotation = true
+	elif Input.is_action_pressed("rotate_left") and rotation > -MAX_ROTATION and !lockRotation:
+		rotate(-(PI / 48))
+	elif Input.is_action_pressed("rotate_right") and rotation < MAX_ROTATION and !lockRotation:
+		rotate(PI / 48)
+	elif !Input.is_action_pressed("rotate_left") and !Input.is_action_pressed("rotate_right"):
+		lockRotation = false
 	if Input.is_action_just_pressed("shift"):
 		Shift()
 
