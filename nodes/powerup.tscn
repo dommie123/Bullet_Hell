@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://ct0s05l6kyqbn"]
+
+[ext_resource type="Script" path="res://scripts/powerup.gd" id="1_k7aib"]
+[ext_resource type="Texture2D" uid="uid://b3igfbpdfxye" path="res://assets/Powerup.png" id="2_mwn02"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kimbd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_mwn02")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ccyyl"]
+radius = 17.0
+height = 52.0
+
+[node name="Powerup" type="Node2D"]
+position = Vector2(537, 48)
+script = ExtResource("1_k7aib")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_kimbd")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -1)
+shape = SubResource("CapsuleShape2D_ccyyl")
+
+[node name="CurseTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="CurseTimer" to="." method="_on_curse_timer_timeout"]

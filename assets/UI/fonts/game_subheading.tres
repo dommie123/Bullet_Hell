@@ -1,0 +1,4 @@
+[gd_resource type="SystemFont" format=3 uid="uid://6qb1h1l1641a"]
+
+[resource]
+font_names = PackedStringArray("Orbitron")

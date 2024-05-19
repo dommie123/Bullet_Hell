@@ -1,5 +1,7 @@
-extends Node2D
+extends Node
 
+@export var invert_vector = func(vector: Vector2):
+	return Vector2(vector.y, vector.x)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -9,7 +11,3 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
-
-
-func _on_enemy_enemy_fled():
-	print_debug("Oh no! The enemy has ran away!")
