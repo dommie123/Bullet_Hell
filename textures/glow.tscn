@@ -1,0 +1,58 @@
+[gd_scene load_steps=7 format=3 uid="uid://b5rkyiahed6us"]
+
+[ext_resource type="Texture2D" uid="uid://dk3j7hwpv4kpc" path="res://assets/icon.svg" id="2_m1u6a"]
+[ext_resource type="Texture2D" uid="uid://ba2mkwk5jdfxp" path="res://assets/Enemy.png" id="3_kv44q"]
+[ext_resource type="Shader" path="res://textures/neon.gdshader" id="3_ppmtx"]
+
+[sub_resource type="Shader" id="Shader_64k0u"]
+code = "shader_type canvas_item;
+
+uniform float brightness : hint_range(0, 1) = 1.0;
+uniform float brightness_drop_percent : hint_range(0, 1) = 0.5;
+uniform float glow_period : hint_range(0.01, 4) = 1.0;
+uniform float flicker_period : hint_range(2, 40) = 10.0;
+uniform float flicker_spikes_sharpness : hint_range(1, 40) = 20.0;
+
+void fragment() {
+    vec4 tex = texture(TEXTURE, UV);
+    COLOR = tex;
+    
+    float flicker = sin(TIME * (flicker_period + sin(TIME) * flicker_period * 0.3));
+    float graph = (sin(TIME * glow_period) * flicker_spikes_sharpness - (flicker_spikes_sharpness - 1.0));
+    graph = float(graph > 0.0);
+    
+    float cycle = smoothstep(0.9, 0.95, graph * flicker);
+    
+    COLOR.rgb *= brightness - brightness_drop_percent * cycle;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_30jdk"]
+shader = SubResource("Shader_64k0u")
+shader_parameter/brightness = 1.0
+shader_parameter/brightness_drop_percent = 0.5
+shader_parameter/glow_period = 1.0
+shader_parameter/flicker_period = 10.0
+shader_parameter/flicker_spikes_sharpness = 20.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rfopa"]
+shader = ExtResource("3_ppmtx")
+shader_parameter/brightness = 1.0
+shader_parameter/glow_intensity = 0.916
+shader_parameter/glow_color = Color(1, 0.423445, 0.719873, 1)
+shader_parameter/glow_size = 0.363
+
+[node name="Glow" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_30jdk")
+texture = ExtResource("2_m1u6a")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_rfopa")
+position = Vector2(-183, 0)
+texture = ExtResource("2_m1u6a")
+
+[node name="Enemy" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("3_kv44q")
