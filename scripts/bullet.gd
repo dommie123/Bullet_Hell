@@ -86,3 +86,7 @@ func _on_body_entered(body):
 			queue_free()
 	elif "Head" in body.name or "Segment" in body.name:
 		queue_free()
+
+
+func _on_kill_timer_timeout():
+	queue_free()
