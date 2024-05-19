@@ -36,7 +36,6 @@ func _on_back_button_pressed():
 
 func _on_bgm_vol_slider_value_changed(value):
 	AudioServer.set_bus_volume_db(bgmIndex, linear_to_db(value))
-	print(AudioServer.get_bus_volume_db(bgmIndex))
 
 
 func _on_sfx_vol_slider_value_changed(value):
