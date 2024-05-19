@@ -217,4 +217,5 @@ func _on_player_player_died():
 
 
 func _on_ui_return_to_main_menu():
+	get_tree().paused = false
 	get_tree().change_scene_to_file("res://nodes/title.tscn")

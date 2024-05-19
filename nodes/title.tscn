@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://djq466o4dkfqs"]
+[gd_scene load_steps=17 format=3 uid="uid://djq466o4dkfqs"]
 
 [ext_resource type="Script" path="res://scripts/title.gd" id="1_dishg"]
 [ext_resource type="FontFile" uid="uid://c1l3f4ryq8j0i" path="res://assets/UI/fonts/game_heading.ttf" id="1_ucbo5"]
@@ -6,7 +6,23 @@
 [ext_resource type="Texture2D" uid="uid://byq07bmfd2jar" path="res://assets/UI/CustomButtonIcon.png" id="2_464uh"]
 [ext_resource type="Texture2D" uid="uid://h3fs06ej0erg" path="res://assets/Grid Background.png" id="3_nunax"]
 [ext_resource type="SystemFont" uid="uid://6qb1h1l1641a" path="res://assets/UI/fonts/game_subheading.tres" id="3_vo4hn"]
+[ext_resource type="Texture2D" uid="uid://df5qbvebdhhjq" path="res://assets/UI/CustomSliderGrabber.png" id="5_vl2v1"]
+[ext_resource type="Texture2D" uid="uid://c4fds3is7hv" path="res://assets/UI/CustomSliderGrabberHighlighted-export.png" id="6_baafp"]
+[ext_resource type="Texture2D" uid="uid://dtydonkxecvho" path="res://assets/UI/CustomSlider.png" id="6_vdesl"]
 [ext_resource type="AudioStream" uid="uid://b6rbi45ry47h7" path="res://assets/Audio/Music/TitleTheme_Edit_1_Export_1.wav" id="7_1u0op"]
+[ext_resource type="Texture2D" uid="uid://dg8efwowr07d8" path="res://assets/UI/CustomSliderHighlighted.png" id="7_6cly8"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qfx6i"]
+texture = ExtResource("6_vdesl")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_p6brn"]
+texture = ExtResource("7_6cly8")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ac51d"]
+texture = ExtResource("6_vdesl")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_r7hed"]
+texture = ExtResource("7_6cly8")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fnga6"]
 shader = ExtResource("2_5vh8o")
@@ -17,8 +33,11 @@ shader_parameter/texture_to_scroll = ExtResource("3_nunax")
 
 [node name="Title" type="Node2D"]
 script = ExtResource("1_dishg")
+bgmName = "Music"
+sfxName = "Sound Effects"
 
 [node name="TitleCanvas" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="TitleInterface" type="Control" parent="TitleCanvas"]
 layout_mode = 3
@@ -153,6 +172,138 @@ text = "Quit"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="OptionsCanvas" type="CanvasLayer" parent="."]
+
+[node name="OptionsInterface" type="Control" parent="OptionsCanvas"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="OptionsHeading" type="Label" parent="OptionsCanvas/OptionsInterface"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -112.0
+offset_top = 65.0
+offset_right = 117.0
+offset_bottom = 151.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0.9912, 0.9912, 1)
+theme_override_fonts/font = ExtResource("3_vo4hn")
+theme_override_font_sizes/font_size = 60
+text = "Options"
+
+[node name="BGMVolLabel" type="Label" parent="OptionsCanvas/OptionsInterface"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -256.0
+offset_top = 343.0
+offset_right = -5.0
+offset_bottom = 393.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 0, 0.992157, 1)
+theme_override_fonts/font = ExtResource("3_vo4hn")
+theme_override_font_sizes/font_size = 28
+text = "Music"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BGMVolLabel2" type="Label" parent="OptionsCanvas/OptionsInterface"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -253.0
+offset_top = 465.0
+offset_right = -2.0
+offset_bottom = 515.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 0, 0.992157, 1)
+theme_override_fonts/font = ExtResource("3_vo4hn")
+theme_override_font_sizes/font_size = 28
+text = "Sound Effects"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BGMVolSlider" type="HSlider" parent="OptionsCanvas/OptionsInterface"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -176.0
+offset_top = -101.5
+offset_right = -61.0
+offset_bottom = -85.5
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_icons/grabber = ExtResource("5_vl2v1")
+theme_override_icons/grabber_highlight = ExtResource("6_baafp")
+theme_override_styles/grabber_area = SubResource("StyleBoxTexture_qfx6i")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxTexture_p6brn")
+max_value = 1.0
+step = 0.001
+value = 1.0
+
+[node name="SFXVolSlider" type="HSlider" parent="OptionsCanvas/OptionsInterface"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -173.0
+offset_top = 26.5
+offset_right = -58.0
+offset_bottom = 42.5
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_icons/grabber = ExtResource("5_vl2v1")
+theme_override_icons/grabber_highlight = ExtResource("6_baafp")
+theme_override_styles/grabber_area = SubResource("StyleBoxTexture_ac51d")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxTexture_r7hed")
+max_value = 1.0
+step = 0.001
+value = 1.0
+
+[node name="BackButton" type="TextureButton" parent="OptionsCanvas/OptionsInterface"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -134.0
+offset_top = 288.5
+offset_right = 122.0
+offset_bottom = 328.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, 1.45068)
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("2_464uh")
+
+[node name="BackLabel" type="Label" parent="OptionsCanvas/OptionsInterface/BackButton"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 3.44666
+offset_right = 255.0
+offset_bottom = 33.4467
+scale = Vector2(1, 0.806987)
+theme_override_colors/font_color = Color(0, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_vo4hn")
+text = "Back
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Background" type="Sprite2D" parent="."]
 z_index = -1
 material = SubResource("ShaderMaterial_fnga6")
@@ -162,7 +313,11 @@ texture = ExtResource("3_nunax")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_1u0op")
 autoplay = true
+bus = &"Music"
 
 [connection signal="pressed" from="TitleCanvas/TitleInterface/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="TitleCanvas/TitleInterface/OptionsButton" to="." method="_on_options_button_pressed"]
 [connection signal="pressed" from="TitleCanvas/TitleInterface/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="value_changed" from="OptionsCanvas/OptionsInterface/BGMVolSlider" to="." method="_on_bgm_vol_slider_value_changed"]
+[connection signal="value_changed" from="OptionsCanvas/OptionsInterface/SFXVolSlider" to="." method="_on_sfx_vol_slider_value_changed"]
+[connection signal="pressed" from="OptionsCanvas/OptionsInterface/BackButton" to="." method="_on_back_button_pressed"]
