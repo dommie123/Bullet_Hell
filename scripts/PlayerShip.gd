@@ -12,6 +12,8 @@ enum COLOR {
 
 var playerPaddle: Node2D
 var speed: float
+var iTimePassed: float
+var isInvincible: bool
 
 var lastFramePos : Vector2 #where we were in space last frame
 var posDifference : Vector2 #the difference between last frame and the next calculated frame
@@ -24,6 +26,8 @@ func _ready():
 	
 	playerPaddle = get_node("/root/Main/Player")
 	speed = initialSpeed
+	iTimePassed = 0
+	isInvincible = false
 	
 	if shader_material is ShaderMaterial:
 		if currentColor == COLOR.CYAN:
@@ -38,6 +42,10 @@ func _process(delta):
 	lastFramePos = position
 	position = position.lerp(paddlePos, speed * delta)
 	posDifference = position - lastFramePos
+	
+	if shader_material is ShaderMaterial and isInvincible:
+		iTimePassed += delta
+		shader_material.set_shader_parameter("glow_power", 20 * pow(cos(10 * iTimePassed), 2))
 	
 	if $AnimatedSprite2D.get_frame() >= 11:
 		$AnimatedSprite2D.play("PlayerShip")
@@ -66,7 +74,10 @@ func _process(delta):
 
 
 @export var bullet_hit_callable = func(body):
-	lose_life.emit()
+	if not isInvincible:
+		lose_life.emit()
+		isInvincible = true
+		$I_FrameTimer.start()
 		
 		
 func shift():
@@ -119,3 +130,11 @@ func update_powerup(powerup = 0):
 		speed = initialSpeed * 5
 	elif powerup != 3:
 		speed = initialSpeed
+
+
+func _on_i_frame_timer_timeout():
+	isInvincible = false
+	iTimePassed = 0
+	
+	if shader_material is ShaderMaterial:
+		shader_material.set_shader_parameter("glow_power", 20)
