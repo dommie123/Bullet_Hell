@@ -8,12 +8,14 @@ signal deactivate_curse
 var yIsLocked: bool
 var controlsReversed: bool
 var initialYPos: float
-var lives: int
+
 var currentPowerup: int
 var currentCurse: int
 
 enum color {cyan, magenta}#ADDED enumerator used to denote colors throughout the code. Use these when describing a color of enemy, player or bullet
 var shipColor : color = color.cyan #what color the ship currently is
+
+var lives: int	= 3
 
 const MAX_ROTATION = PI / 6 # 30 degrees in radians
 
@@ -24,7 +26,7 @@ func _ready():
 	currentPowerup = 0
 	currentCurse = 0
 	initialYPos = position.y
-	lives = 3
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

@@ -1,6 +1,7 @@
 extends Control
 
 signal toggle_game_paused
+signal new_game_started
 signal return_to_main_menu
 
 @export var lifeCountScene: PackedScene
@@ -70,3 +71,7 @@ func _on_main_menu_button_pressed():
 
 func _on_pause_button_pressed():
 	toggle_game_paused.emit(true)
+
+
+func _on_play_again_button_pressed():
+	new_game_started.emit()
