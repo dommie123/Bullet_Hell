@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://drh6a3js8480r" path="res://nodes/player.tscn" id="2_nnhgw"]
 [ext_resource type="PackedScene" uid="uid://30yxyqqqaoy1" path="res://nodes/de_bugger.tscn" id="3_jlhsi"]
 [ext_resource type="PackedScene" uid="uid://bfhuoslxpj43e" path="res://nodes/player_ship.tscn" id="4_2dr2i"]
+[ext_resource type="PackedScene" path="res://nodes/ui.tscn" id="4_6m70j"]
 [ext_resource type="PackedScene" path="res://nodes/powerup.tscn" id="4_haxs5"]
 [ext_resource type="Shader" path="res://scroll.gdshader" id="6_7h3n2"]
 [ext_resource type="Texture2D" uid="uid://h3fs06ej0erg" path="res://assets/Grid Background.png" id="7_bndeg"]
@@ -49,6 +50,8 @@ volume_db = -10.485
 autoplay = true
 bus = &"Music"
 
+[connection signal="update_score" from="." to="UI" method="_on_main_update_score"]
+[connection signal="toggle_game_paused" from="UI" to="." method="_on_ui_toggle_game_paused"]
 [connection signal="deactivate_curse" from="Player" to="." method="_on_player_deactivate_curse"]
 [connection signal="deactivate_powerup" from="Player" to="." method="_on_player_deactivate_powerup"]
 [connection signal="player_died" from="Player" to="PlayerShip" method="_on_player_player_died"]
