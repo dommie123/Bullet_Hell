@@ -2,6 +2,8 @@ extends RigidBody2D
 
 signal reflect_bullet
 signal player_died
+signal update_powerup
+signal update_curse
 signal deactivate_powerup
 signal deactivate_curse
 
@@ -114,6 +116,7 @@ func _on_body_entered(body):
 	reflect_bullet.emit()
 
 func _on_powerup_activate_powerup(powerup):
+	update_powerup.emit(powerup)
 	currentPowerup = powerup
 	
 	if not $PowerupTimer.is_stopped():
@@ -137,6 +140,7 @@ func _on_powerup_activate_curse(curse):
 	if not visible:
 		return
 		
+	update_curse.emit(curse)
 	currentCurse = curse
 	$CurseTimer.start()
 	

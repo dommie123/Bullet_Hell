@@ -47,7 +47,7 @@ func _ready():
 	segmentColors = [COLOR.CYAN, COLOR.CYAN, COLOR.CYAN]
 	
 	timePassed = 0
-	health = 1000
+	health = 500
 	phase = 1
 	canFireTurrets = true
 	
@@ -61,7 +61,7 @@ func _process(delta):
 		boss_defeated.emit()
 		queue_free()
 	
-	if health <= 500 and phase == 1:
+	if health <= 250 and phase == 1:
 		speed *= 1.5
 		phase = 2
 	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b8wk107okjidg"]
+[gd_scene load_steps=12 format=3 uid="uid://b8wk107okjidg"]
 
 [ext_resource type="Script" path="res://scripts/Main.gd" id="1_o6526"]
 [ext_resource type="PackedScene" uid="uid://bxrp03v51pwbw" path="res://nodes/enemy_spawner.tscn" id="2_hk6sm"]
@@ -6,8 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://cnoi2eahhdj8x" path="res://nodes/de_bugger.tscn" id="3_jlhsi"]
 [ext_resource type="PackedScene" uid="uid://bfhuoslxpj43e" path="res://nodes/player_ship.tscn" id="4_2dr2i"]
 [ext_resource type="PackedScene" uid="uid://by45tyjaglmsp" path="res://nodes/ui.tscn" id="4_6m70j"]
+[ext_resource type="PackedScene" uid="uid://ct0s05l6kyqbn" path="res://nodes/powerup.tscn" id="6_6oqav"]
 [ext_resource type="Shader" path="res://scroll.gdshader" id="6_7h3n2"]
 [ext_resource type="Texture2D" uid="uid://h3fs06ej0erg" path="res://assets/Grid Background.png" id="7_bndeg"]
+[ext_resource type="AudioStream" uid="uid://colnrsmdnaaxa" path="res://assets/Audio/Music/Level_Theme_Edit_1_Export_1.wav" id="9_jtpvp"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_k8ur7"]
 shader = ExtResource("6_7h3n2")
@@ -29,6 +31,8 @@ position = Vector2(198, 817)
 [node name="PlayerShip" parent="." instance=ExtResource("4_2dr2i")]
 position = Vector2(199, 893)
 
+[node name="Powerup" parent="." instance=ExtResource("6_6oqav")]
+
 [node name="EnemySpawnerTimer" type="Timer" parent="."]
 wait_time = 0.5
 autostart = true
@@ -44,13 +48,23 @@ material = SubResource("ShaderMaterial_k8ur7")
 position = Vector2(308, 465)
 texture = ExtResource("7_bndeg")
 
+[node name="BGM" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_jtpvp")
+autoplay = true
+bus = &"Music"
+
 [connection signal="update_score" from="." to="UI" method="_on_main_update_score"]
 [connection signal="deactivate_curse" from="Player" to="." method="_on_player_deactivate_curse"]
+[connection signal="deactivate_curse" from="Player" to="UI" method="_on_player_deactivate_curse"]
 [connection signal="deactivate_powerup" from="Player" to="." method="_on_player_deactivate_powerup"]
+[connection signal="deactivate_powerup" from="Player" to="UI" method="_on_player_deactivate_powerup"]
 [connection signal="player_died" from="Player" to="." method="_on_player_player_died"]
 [connection signal="player_died" from="Player" to="PlayerShip" method="_on_player_player_died"]
+[connection signal="update_curse" from="Player" to="UI" method="_on_player_update_curse"]
+[connection signal="update_powerup" from="Player" to="UI" method="_on_player_update_powerup"]
 [connection signal="lose_life" from="PlayerShip" to="Player" method="_on_player_ship_lose_life"]
 [connection signal="lose_life" from="PlayerShip" to="UI" method="_on_player_ship_lose_life"]
 [connection signal="timeout" from="EnemySpawnerTimer" to="." method="_on_enemy_spawner_timer_timeout"]
 [connection signal="new_game_started" from="UI" to="." method="_on_ui_new_game_started"]
+[connection signal="return_to_main_menu" from="UI" to="." method="_on_ui_return_to_main_menu"]
 [connection signal="toggle_game_paused" from="UI" to="." method="_on_ui_toggle_game_paused"]
