@@ -1,0 +1,161 @@
+[gd_scene load_steps=8 format=3 uid="uid://djq466o4dkfqs"]
+
+[ext_resource type="Script" path="res://scripts/title.gd" id="1_dishg"]
+[ext_resource type="FontFile" uid="uid://c1l3f4ryq8j0i" path="res://assets/UI/fonts/game_heading.ttf" id="1_ucbo5"]
+[ext_resource type="Shader" path="res://scroll.gdshader" id="2_5vh8o"]
+[ext_resource type="Texture2D" uid="uid://byq07bmfd2jar" path="res://assets/UI/CustomButtonIcon.png" id="2_464uh"]
+[ext_resource type="Texture2D" uid="uid://h3fs06ej0erg" path="res://assets/Grid Background.png" id="3_nunax"]
+[ext_resource type="SystemFont" uid="uid://6qb1h1l1641a" path="res://assets/UI/fonts/game_subheading.tres" id="3_vo4hn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fnga6"]
+shader = ExtResource("2_5vh8o")
+shader_parameter/texture_size = Vector2(976, 976)
+shader_parameter/scroll_speed = Vector2(0, 0.01)
+shader_parameter/scroll_direction = Vector2(1, -1)
+shader_parameter/texture_to_scroll = ExtResource("3_nunax")
+
+[node name="Title" type="Node2D"]
+script = ExtResource("1_dishg")
+
+[node name="TitleCanvas" type="CanvasLayer" parent="."]
+
+[node name="TitleInterface" type="Control" parent="TitleCanvas"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TitleText" type="Label" parent="TitleCanvas/TitleInterface"]
+z_index = 1
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -205.5
+offset_top = 92.0
+offset_right = 205.5
+offset_bottom = 167.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0.980392, 0.980392, 1)
+theme_override_fonts/font = ExtResource("1_ucbo5")
+theme_override_font_sizes/font_size = 108
+text = "Cyber Shift"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="TitleTextShadow" type="Label" parent="TitleCanvas/TitleInterface"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -201.0
+offset_top = 97.0
+offset_right = 210.0
+offset_bottom = 172.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 0, 0.980392, 1)
+theme_override_fonts/font = ExtResource("1_ucbo5")
+theme_override_font_sizes/font_size = 108
+text = "Cyber Shift"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="StartButton" type="TextureButton" parent="TitleCanvas/TitleInterface"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -134.0
+offset_top = 52.5
+offset_right = 122.0
+offset_bottom = 92.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, 1.45068)
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("2_464uh")
+
+[node name="StartLabel" type="Label" parent="TitleCanvas/TitleInterface/StartButton"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 3.44666
+offset_right = 255.0
+offset_bottom = 33.4467
+scale = Vector2(1, 0.806987)
+theme_override_colors/font_color = Color(0, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_vo4hn")
+text = "Start"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OptionsButton" type="TextureButton" parent="TitleCanvas/TitleInterface"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -134.0
+offset_top = 147.5
+offset_right = 122.0
+offset_bottom = 179.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, 1.44)
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("2_464uh")
+
+[node name="OptionsLabel" type="Label" parent="TitleCanvas/TitleInterface/OptionsButton"]
+offset_left = 3.0
+offset_top = 3.47223
+offset_right = 255.0
+offset_bottom = 33.4722
+scale = Vector2(1, 0.861111)
+theme_override_colors/font_color = Color(0, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_vo4hn")
+text = "Options"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="QuitButton" type="TextureButton" parent="TitleCanvas/TitleInterface"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -134.0
+offset_top = 246.5
+offset_right = 122.0
+offset_bottom = 278.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, 1.44)
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("2_464uh")
+
+[node name="QuitLabel" type="Label" parent="TitleCanvas/TitleInterface/QuitButton"]
+offset_left = -1.0
+offset_top = 3.47223
+offset_right = 253.0
+offset_bottom = 34.4722
+scale = Vector2(1, 0.833332)
+theme_override_colors/font_color = Color(0, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_vo4hn")
+text = "Quit"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Background" type="Sprite2D" parent="."]
+z_index = -1
+material = SubResource("ShaderMaterial_fnga6")
+position = Vector2(308, 465)
+texture = ExtResource("3_nunax")
+
+[connection signal="pressed" from="TitleCanvas/TitleInterface/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="TitleCanvas/TitleInterface/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="TitleCanvas/TitleInterface/QuitButton" to="." method="_on_quit_button_pressed"]
