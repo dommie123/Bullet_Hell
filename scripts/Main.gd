@@ -102,6 +102,7 @@ func _on_boss_defeated():
 	update_score.emit(10000)
 	
 	$UI/CanvasLayer/WinPanel.set_deferred("visible", true)
+	$UI/CanvasLayer/WinPanel/PlayAgainButton.grab_focus()
 	get_tree().paused = true
 #	active_enemies += 1
 #	enemy_disappear_routine()
@@ -216,6 +217,7 @@ func spawn_boss():
 
 func _on_ui_toggle_game_paused(paused):
 	$UI/CanvasLayer/PauseMenu.set_deferred("visible", paused)
+	$UI/CanvasLayer/PauseMenu/ResumeButton.grab_focus()
 	get_tree().paused = paused
 
 
@@ -236,6 +238,7 @@ func _on_ui_new_game_started():
 func _on_player_player_died():
 	$UI/CanvasLayer/GameOverPanel.set_deferred("visible", true)
 	$BGM.stop()
+	$UI/CanvasLayer/GameOverPanel/PlayAgainButton.grab_focus()
 	get_tree().paused = true
 
 
