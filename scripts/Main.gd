@@ -4,11 +4,19 @@ signal level_changed
 signal phase_changed
 signal update_score
 
+enum CONTROL_SCHEME {
+	KEYBOARD_AND_MOUSE = 0,
+	KEYBOARD_AND_CONTROLLER = 1
+}
+
+@onready var settingsConfig = FileAccess.open("user://settings.dat", FileAccess.READ)
+
 @export var enemySpawnerScene: PackedScene
 @export var bossScene: PackedScene 
 
 var bossMusic: AudioStream = preload("res://assets/Audio/Music/Boss_Theme_Edit_1_Export_1.wav")
 var levelMusic: AudioStream = preload("res://assets/Audio/Music/Level_Theme_Edit_1_Export_1.wav")
+var controlScheme: CONTROL_SCHEME
 
 @export var phase: int
 
@@ -30,7 +38,7 @@ const Functions = preload("res://scripts/functions.gd")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	level = 1
-	phase = 4
+	phase = 1
 	maxEnemiesPerSpawner = 20
 	currentEnemiesPerSpawner = 5
 	currentSpawners = 2
@@ -43,6 +51,15 @@ func _ready():
 	boss_active = false
 	canSpawnEnemySpawner = true
 	
+	var settings = settingsConfig.get_as_text()
+	if settings == "":
+		controlScheme = CONTROL_SCHEME.KEYBOARD_AND_MOUSE
+	else: 
+		var settingsArray = settings.split(";")
+		for setting in settingsArray:
+			if "controls" in setting:
+				controlScheme = int(setting.split(":")[1])
+				
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -204,6 +221,9 @@ func new_game():
 	if get_tree().paused:
 		get_tree().paused = false
 		
+	var saveSettings = FileAccess.open("user://settings.dat", FileAccess.WRITE)
+	saveSettings.store_string("controls:%s;" % controlScheme)
+	
 	get_tree().reload_current_scene()
 
 
@@ -218,4 +238,12 @@ func _on_player_player_died():
 
 func _on_ui_return_to_main_menu():
 	get_tree().paused = false
+	
+	var saveSettings = FileAccess.open("user://settings.dat", FileAccess.WRITE)
+	saveSettings.store_string("controls:%s;" % controlScheme)
+	
 	get_tree().change_scene_to_file("res://nodes/title.tscn")
+
+
+func _on_ui_update_control_scheme(controls):
+	controlScheme = controls

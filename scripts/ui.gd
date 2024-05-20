@@ -3,6 +3,7 @@ extends Control
 signal toggle_game_paused
 signal new_game_started
 signal return_to_main_menu
+signal update_control_scheme
 
 @export var lifeCountScene: PackedScene
 @export var bgmName: String
@@ -61,6 +62,13 @@ func _ready():
 	
 	$CanvasLayer/OptionsInterface/BGMVolSlider.set_value_no_signal(db_to_linear(bgmVolume))
 	$CanvasLayer/OptionsInterface/SFXVolSlider.set_value_no_signal(db_to_linear(sfxVolume))
+
+
+func _process(delta):
+	if Input.is_action_just_pressed("pause") and not isPaused:
+		_on_pause_button_pressed()
+	elif Input.is_action_just_pressed("pause"):
+		_on_resume_button_pressed()
 
 
 func _on_main_level_changed():
@@ -130,3 +138,7 @@ func _on_bgm_vol_slider_value_changed(value):
 
 func _on_sfx_vol_slider_value_changed(value):
 	AudioServer.set_bus_volume_db(sfxIndex, linear_to_db(value))
+
+
+func _on_control_options_item_selected(index):
+	update_control_scheme.emit(index)

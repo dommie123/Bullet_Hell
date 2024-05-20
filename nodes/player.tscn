@@ -133,6 +133,7 @@ lock_rotation = true
 freeze = true
 freeze_mode = 1
 script = ExtResource("1_uotbm")
+speed = 500.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_bv8u7")
