@@ -37,6 +37,9 @@ signal enemy_killed
 @onready var shader_material = $AnimatedSprite2D.material
 @export var enemyColor : color
 
+@onready var SFX_shoot = $SFX_enemy_shoot
+@onready var SFX_die = $SFX_enemy_die
+
 var functions: Functions
 var utils: Utils
 
@@ -172,6 +175,7 @@ func shoot():
 		bullet1.speed = bulletLaunchSpeed
 		var velocity = Vector2(1, 0)
 		bullet1.linear_velocity = velocity.rotated(direction)
+		SFX_shoot.play()
 		add_sibling(bullet1)
 	elif currentType == TYPE.GIGABYTE: #5
 		var bullet1 = bullet_scene.instantiate()
@@ -200,6 +204,7 @@ func shoot():
 		bullet3.linear_velocity = velocity.rotated(direction)
 		bullet4.linear_velocity = velocity.rotated(direction)
 		bullet5.linear_velocity = velocity.rotated(direction)
+		SFX_shoot.play()
 		add_sibling(bullet1)
 		add_sibling(bullet2)
 		add_sibling(bullet3)
@@ -218,6 +223,7 @@ func shoot():
 		var velocity = Vector2(0, 1)
 		bullet1.linear_velocity = velocity.rotated(direction)
 		bullet2.linear_velocity = velocity.rotated(direction)
+		SFX_shoot.play()
 		add_sibling(bullet1)
 		add_sibling(bullet2)
 		
@@ -238,6 +244,7 @@ func shoot():
 		bullet1.linear_velocity = velocity.rotated(direction)
 		bullet2.linear_velocity = velocity.rotated(direction)
 		bullet3.linear_velocity = velocity.rotated(direction)
+		SFX_shoot.play()
 		add_sibling(bullet1)
 		add_sibling(bullet2)
 		add_sibling(bullet3)
@@ -263,6 +270,7 @@ func shoot():
 		bullet2.linear_velocity = velocity.rotated(direction)
 		bullet3.linear_velocity = velocity.rotated(direction)
 		bullet4.linear_velocity = velocity.rotated(direction)
+		SFX_shoot.play()
 		add_sibling(bullet1)
 		add_sibling(bullet2)
 		add_sibling(bullet3)
@@ -303,5 +311,7 @@ func _on_visible_on_screen_notifier_2d_screen_entered():
 
 
 func _on_area_2d_body_entered(body):
+	SFX_die.play()
+	await SFX_die.finished
 	currentState = STATE.DEAD
 	

@@ -8,6 +8,8 @@ signal return_to_main_menu
 @export var bgmName: String
 @export var sfxName: String
 
+@onready var SFX_comfirm = $SFX_UI_comfirm
+
 const Constants = preload("res://scripts/consts.gd")
 
 var mainNode: Node2D
@@ -81,18 +83,22 @@ func _on_main_update_score(points):
 
 
 func _on_resume_button_pressed():
+	SFX_comfirm.play()
 	toggle_game_paused.emit(false)
 
 
 func _on_main_menu_button_pressed():
+	SFX_comfirm.play()
 	return_to_main_menu.emit()
 
 
 func _on_pause_button_pressed():
+	SFX_comfirm.play()
 	toggle_game_paused.emit(true)
 
 
 func _on_play_again_button_pressed():
+	SFX_comfirm.play()
 	new_game_started.emit()
 
 
@@ -115,11 +121,13 @@ func _on_player_deactivate_powerup():
 
 
 func _on_options_button_pressed():
+	SFX_comfirm.play()
 	$CanvasLayer/OptionsInterface.visible = true
 	$CanvasLayer/PauseMenu.visible = false
 
 
 func _on_back_button_pressed():
+	SFX_comfirm.play()
 	$CanvasLayer/OptionsInterface.visible = false
 	$CanvasLayer/PauseMenu.visible = true
 	

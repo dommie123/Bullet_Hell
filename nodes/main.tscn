@@ -38,7 +38,6 @@ wait_time = 0.5
 autostart = true
 
 [node name="UI" parent="." instance=ExtResource("4_6m70j")]
-process_mode = 3
 process_priority = 1
 z_as_relative = false
 
