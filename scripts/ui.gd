@@ -3,6 +3,7 @@ extends Control
 signal toggle_game_paused
 signal new_game_started
 signal return_to_main_menu
+signal update_control_scheme
 
 @export var lifeCountScene: PackedScene
 @export var bgmName: String
@@ -65,12 +66,22 @@ func _ready():
 	$CanvasLayer/OptionsInterface/SFXVolSlider.set_value_no_signal(db_to_linear(sfxVolume))
 
 
+func _process(delta):
+	if Input.is_action_just_pressed("pause") and not isPaused:
+		_on_pause_button_pressed()
+	elif Input.is_action_just_pressed("pause"):
+		_on_resume_button_pressed()
+
+
 func _on_main_level_changed():
 	level += 1
 	$CanvasLayer/LevelCounter.set_deferred("text", "Lv %s" % level)
 
 
 func _on_player_ship_lose_life():
+	if lives == 0:
+		return 
+		
 	var lifeNodes = get_tree().get_nodes_in_group("Life Counters")
 	lifeNodes[lives - 1].queue_free()
 	lives -= 1
@@ -80,11 +91,14 @@ func _on_main_update_score(points):
 	score += points
 	$CanvasLayer/ScoreCounter.set_deferred("text", "Score: %s" % score)
 	$CanvasLayer/GameOverPanel/FinalScoreLabel.set_deferred("text", "Score: %s" % score)
-
+	$CanvasLayer/WinPanel/FinalScoreLabel.set_deferred("text", "Score: %s" % score)
 
 func _on_resume_button_pressed():
 	SFX_comfirm.play()
 	toggle_game_paused.emit(false)
+	
+	var currentBGMVolume = AudioServer.get_bus_volume_db(bgmIndex)
+	AudioServer.set_bus_volume_db(bgmIndex, currentBGMVolume + 15)
 
 
 func _on_main_menu_button_pressed():
@@ -95,6 +109,9 @@ func _on_main_menu_button_pressed():
 func _on_pause_button_pressed():
 	SFX_comfirm.play()
 	toggle_game_paused.emit(true)
+	
+	var currentBGMVolume = AudioServer.get_bus_volume_db(bgmIndex)
+	AudioServer.set_bus_volume_db(bgmIndex, currentBGMVolume - 15)
 
 
 func _on_play_again_button_pressed():
@@ -124,12 +141,13 @@ func _on_options_button_pressed():
 	SFX_comfirm.play()
 	$CanvasLayer/OptionsInterface.visible = true
 	$CanvasLayer/PauseMenu.visible = false
-
+	$CanvasLayer/OptionsInterface/BGMVolSlider.grab_focus()
 
 func _on_back_button_pressed():
 	SFX_comfirm.play()
 	$CanvasLayer/OptionsInterface.visible = false
 	$CanvasLayer/PauseMenu.visible = true
+	$CanvasLayer/PauseMenu/ResumeButton.grab_focus()
 	
 	
 func _on_bgm_vol_slider_value_changed(value):
@@ -138,3 +156,7 @@ func _on_bgm_vol_slider_value_changed(value):
 
 func _on_sfx_vol_slider_value_changed(value):
 	AudioServer.set_bus_volume_db(sfxIndex, linear_to_db(value))
+
+
+func _on_control_options_item_selected(index):
+	update_control_scheme.emit(index)

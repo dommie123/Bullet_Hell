@@ -18,6 +18,8 @@ func _ready():
 	
 	$OptionsCanvas/OptionsInterface/BGMVolSlider.set_value_no_signal(db_to_linear(bgmVolume))
 	$OptionsCanvas/OptionsInterface/SFXVolSlider.set_value_no_signal(db_to_linear(sfxVolume))
+	
+	$TitleCanvas/TitleInterface/StartButton.grab_focus()
 
 func _on_start_button_pressed():
 	SFX_Comfirm.play()
@@ -35,12 +37,16 @@ func _on_options_button_pressed():
 	SFX_move.play()
 	$TitleCanvas.visible = false
 	$OptionsCanvas.visible = true
+	
+	$OptionsCanvas/OptionsInterface/BGMVolSlider.grab_focus()
 
 
 func _on_back_button_pressed():
 	SFX_move.play()
 	$TitleCanvas.visible = true
 	$OptionsCanvas.visible = false
+	
+	$TitleCanvas/TitleInterface/StartButton.grab_focus()
 
 
 func _on_bgm_vol_slider_value_changed(value):

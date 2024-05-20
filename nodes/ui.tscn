@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://c18f328b2glqi" path="res://assets/UI/PauseIcon.png" id="2_uj1mv"]
 [ext_resource type="SystemFont" uid="uid://6qb1h1l1641a" path="res://assets/UI/fonts/game_subheading.tres" id="4_wyrm4"]
 [ext_resource type="Texture2D" uid="uid://byq07bmfd2jar" path="res://assets/UI/CustomButtonIcon.png" id="5_os3yk"]
+[ext_resource type="Texture2D" uid="uid://by4wxv0btxquk" path="res://assets/UI/CustomButtonIconFocused.png" id="6_3wu03"]
 [ext_resource type="Texture2D" uid="uid://c6rjenyrn4rbt" path="res://assets/UI/GameOverButtonIcon.png" id="6_y8tks"]
 [ext_resource type="Texture2D" uid="uid://emryb57nqs8g" path="res://assets/UI/Powerups/PowerupContainer.png" id="7_8n4xx"]
 [ext_resource type="Texture2D" uid="uid://b21k3am4rsmlt" path="res://assets/UI/Curses/CurseContainer.png" id="8_5nt21"]
@@ -28,6 +29,7 @@ texture = ExtResource("12_7qn8a")
 
 [node name="UI" type="ReferenceRect"]
 process_mode = 3
+process_priority = -1
 z_index = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -103,8 +105,11 @@ offset_top = 445.0
 offset_right = 489.0
 offset_bottom = 509.0
 scale = Vector2(0.578125, 0.818182)
+focus_neighbor_bottom = NodePath("../OptionsButton")
+focus_next = NodePath("../OptionsButton")
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource("5_os3yk")
+texture_focused = ExtResource("6_3wu03")
 
 [node name="ResumeLabel" type="Label" parent="CanvasLayer/PauseMenu/ResumeButton"]
 layout_mode = 0
@@ -117,27 +122,6 @@ theme_override_fonts/font = ExtResource("4_wyrm4")
 text = "Resume"
 horizontal_alignment = 1
 
-[node name="MainMenuButton" type="TextureButton" parent="CanvasLayer/PauseMenu"]
-layout_mode = 0
-offset_left = 233.0
-offset_top = 542.0
-offset_right = 489.0
-offset_bottom = 582.0
-scale = Vector2(0.577299, 0.97561)
-mouse_default_cursor_shape = 2
-texture_normal = ExtResource("5_os3yk")
-
-[node name="MainMenuLabel" type="Label" parent="CanvasLayer/PauseMenu/MainMenuButton"]
-layout_mode = 0
-offset_top = 6.14999
-offset_right = 153.0
-offset_bottom = 49.15
-scale = Vector2(1.68, 1)
-theme_override_colors/font_color = Color(0.760784, 0, 0.741176, 1)
-theme_override_fonts/font = ExtResource("4_wyrm4")
-text = "Main Menu"
-horizontal_alignment = 1
-
 [node name="OptionsButton" type="TextureButton" parent="CanvasLayer/PauseMenu"]
 layout_mode = 0
 offset_left = 233.0
@@ -145,8 +129,12 @@ offset_top = 492.0
 offset_right = 489.0
 offset_bottom = 532.0
 scale = Vector2(0.577299, 0.97561)
+focus_neighbor_top = NodePath("../ResumeButton")
+focus_neighbor_bottom = NodePath("../MainMenuButton")
+focus_next = NodePath("../MainMenuButton")
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource("5_os3yk")
+texture_focused = ExtResource("6_3wu03")
 
 [node name="OptionsLabel" type="Label" parent="CanvasLayer/PauseMenu/OptionsButton"]
 layout_mode = 0
@@ -157,6 +145,28 @@ scale = Vector2(1.68, 1)
 theme_override_colors/font_color = Color(0.760784, 0, 0.741176, 1)
 theme_override_fonts/font = ExtResource("4_wyrm4")
 text = "Options"
+horizontal_alignment = 1
+
+[node name="MainMenuButton" type="TextureButton" parent="CanvasLayer/PauseMenu"]
+layout_mode = 0
+offset_left = 233.0
+offset_top = 542.0
+offset_right = 489.0
+offset_bottom = 582.0
+scale = Vector2(0.577299, 0.97561)
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("5_os3yk")
+texture_focused = ExtResource("6_3wu03")
+
+[node name="MainMenuLabel" type="Label" parent="CanvasLayer/PauseMenu/MainMenuButton"]
+layout_mode = 0
+offset_top = 6.14999
+offset_right = 153.0
+offset_bottom = 49.15
+scale = Vector2(1.68, 1)
+theme_override_colors/font_color = Color(0.760784, 0, 0.741176, 1)
+theme_override_fonts/font = ExtResource("4_wyrm4")
+text = "Main Menu"
 horizontal_alignment = 1
 
 [node name="GameOverPanel" type="Panel" parent="CanvasLayer"]
@@ -187,8 +197,10 @@ offset_top = 475.0
 offset_right = 486.0
 offset_bottom = 539.0
 scale = Vector2(0.578125, 0.818182)
+focus_neighbor_bottom = NodePath("../MainMenuButton")
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource("6_y8tks")
+texture_focused = ExtResource("6_3wu03")
 
 [node name="PlayAgainLabel" type="Label" parent="CanvasLayer/GameOverPanel/PlayAgainButton"]
 layout_mode = 0
@@ -208,8 +220,10 @@ offset_top = 524.0
 offset_right = 486.0
 offset_bottom = 564.0
 scale = Vector2(0.577299, 0.97561)
+focus_neighbor_top = NodePath("../PlayAgainButton")
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource("6_y8tks")
+texture_focused = ExtResource("6_3wu03")
 
 [node name="MainMenuLabel" type="Label" parent="CanvasLayer/GameOverPanel/MainMenuButton"]
 layout_mode = 0
@@ -229,6 +243,84 @@ offset_top = 408.0
 offset_right = 372.0
 offset_bottom = 434.0
 theme_override_colors/font_color = Color(1, 0.705882, 0.670588, 1)
+theme_override_fonts/font = ExtResource("4_wyrm4")
+text = "Score: 0"
+horizontal_alignment = 1
+
+[node name="WinPanel" type="Panel" parent="CanvasLayer"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="WinLabel" type="Label" parent="CanvasLayer/WinPanel"]
+layout_mode = 0
+offset_left = 184.0
+offset_top = 294.0
+offset_right = 288.0
+offset_bottom = 332.0
+scale = Vector2(2.33522, 2.48999)
+theme_override_colors/font_color = Color(0, 1, 1, 1)
+theme_override_fonts/font = ExtResource("4_wyrm4")
+text = "Boss Defeated"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="PlayAgainButton" type="TextureButton" parent="CanvasLayer/WinPanel"]
+layout_mode = 0
+offset_left = 230.0
+offset_top = 475.0
+offset_right = 486.0
+offset_bottom = 539.0
+scale = Vector2(0.578125, 0.818182)
+focus_neighbor_bottom = NodePath("../MainMenuButton")
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("5_os3yk")
+texture_focused = ExtResource("6_3wu03")
+
+[node name="PlayAgainLabel" type="Label" parent="CanvasLayer/WinPanel/PlayAgainButton"]
+layout_mode = 0
+offset_top = 4.88892
+offset_right = 153.0
+offset_bottom = 47.8889
+scale = Vector2(1.67434, 1.18367)
+theme_override_colors/font_color = Color(1, 0, 1, 1)
+theme_override_fonts/font = ExtResource("4_wyrm4")
+text = "Play Again"
+horizontal_alignment = 1
+
+[node name="MainMenuButton" type="TextureButton" parent="CanvasLayer/WinPanel"]
+layout_mode = 0
+offset_left = 230.0
+offset_top = 524.0
+offset_right = 486.0
+offset_bottom = 564.0
+scale = Vector2(0.577299, 0.97561)
+focus_neighbor_top = NodePath("../PlayAgainButton")
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("5_os3yk")
+texture_focused = ExtResource("6_3wu03")
+
+[node name="MainMenuLabel" type="Label" parent="CanvasLayer/WinPanel/MainMenuButton"]
+layout_mode = 0
+offset_top = 6.14999
+offset_right = 153.0
+offset_bottom = 49.15
+scale = Vector2(1.68, 1)
+theme_override_colors/font_color = Color(1, 0, 1, 1)
+theme_override_fonts/font = ExtResource("4_wyrm4")
+text = "Main Menu"
+horizontal_alignment = 1
+
+[node name="FinalScoreLabel" type="Label" parent="CanvasLayer/WinPanel"]
+layout_mode = 0
+offset_left = 223.0
+offset_top = 408.0
+offset_right = 372.0
+offset_bottom = 434.0
+theme_override_colors/font_color = Color(0.643137, 1, 0.996078, 1)
 theme_override_fonts/font = ExtResource("4_wyrm4")
 text = "Score: 0"
 horizontal_alignment = 1
@@ -328,23 +420,6 @@ text = "Music"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="BGMVolLabel2" type="Label" parent="CanvasLayer/OptionsInterface"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -253.0
-offset_top = 465.0
-offset_right = -2.0
-offset_bottom = 515.0
-grow_horizontal = 2
-theme_override_colors/font_color = Color(1, 0, 0.992157, 1)
-theme_override_fonts/font = ExtResource("4_wyrm4")
-theme_override_font_sizes/font_size = 28
-text = "Sound Effects"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="BGMVolSlider" type="HSlider" parent="CanvasLayer/OptionsInterface"]
 layout_mode = 1
 anchors_preset = 6
@@ -353,9 +428,9 @@ anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
 offset_left = -176.0
-offset_top = -101.5
+offset_top = -109.5
 offset_right = -61.0
-offset_bottom = -85.5
+offset_bottom = -77.5
 grow_horizontal = 0
 grow_vertical = 2
 theme_override_icons/grabber = ExtResource("9_mmwbp")
@@ -366,6 +441,23 @@ max_value = 1.0
 step = 0.001
 value = 1.0
 
+[node name="SFXVolLabel" type="Label" parent="CanvasLayer/OptionsInterface"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -253.0
+offset_top = 430.0
+offset_right = -2.0
+offset_bottom = 480.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 0, 0.992157, 1)
+theme_override_fonts/font = ExtResource("4_wyrm4")
+theme_override_font_sizes/font_size = 28
+text = "Sound Effects"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="SFXVolSlider" type="HSlider" parent="CanvasLayer/OptionsInterface"]
 layout_mode = 1
 anchors_preset = 6
@@ -373,10 +465,10 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -173.0
-offset_top = 26.5
-offset_right = -58.0
-offset_bottom = 42.5
+offset_left = -176.0
+offset_top = -16.5
+offset_right = -61.0
+offset_bottom = 15.5
 grow_horizontal = 0
 grow_vertical = 2
 theme_override_icons/grabber = ExtResource("9_mmwbp")
@@ -386,6 +478,39 @@ theme_override_styles/grabber_area_highlight = SubResource("StyleBoxTexture_1yit
 max_value = 1.0
 step = 0.001
 value = 1.0
+
+[node name="ControlsLabel" type="Label" parent="CanvasLayer/OptionsInterface"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -254.0
+offset_top = 514.0
+offset_right = -3.0
+offset_bottom = 564.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 0, 0.992157, 1)
+theme_override_fonts/font = ExtResource("4_wyrm4")
+theme_override_font_sizes/font_size = 28
+text = "Controls
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ControlOptions" type="OptionButton" parent="CanvasLayer/OptionsInterface"]
+layout_mode = 0
+offset_left = 400.0
+offset_top = 526.0
+offset_right = 566.0
+offset_bottom = 557.0
+theme_override_colors/font_color = Color(1, 0, 1, 1)
+theme_override_fonts/font = ExtResource("4_wyrm4")
+item_count = 2
+selected = 0
+popup/item_0/text = "Kb/Mouse"
+popup/item_0/id = 0
+popup/item_1/text = "Kb/Controller"
+popup/item_1/id = 1
 
 [node name="BackButton" type="TextureButton" parent="CanvasLayer/OptionsInterface"]
 layout_mode = 1
@@ -403,6 +528,7 @@ grow_vertical = 2
 scale = Vector2(1, 1.45068)
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource("5_os3yk")
+texture_focused = ExtResource("6_3wu03")
 
 [node name="BackLabel" type="Label" parent="CanvasLayer/OptionsInterface/BackButton"]
 layout_mode = 0
@@ -425,10 +551,13 @@ bus = &"Sound Effects"
 
 [connection signal="pressed" from="CanvasLayer/TextureButton" to="." method="_on_pause_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/PauseMenu/ResumeButton" to="." method="_on_resume_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/PauseMenu/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/PauseMenu/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/PauseMenu/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/GameOverPanel/PlayAgainButton" to="." method="_on_play_again_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/GameOverPanel/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/WinPanel/PlayAgainButton" to="." method="_on_play_again_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/WinPanel/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
 [connection signal="value_changed" from="CanvasLayer/OptionsInterface/BGMVolSlider" to="." method="_on_bgm_vol_slider_value_changed"]
 [connection signal="value_changed" from="CanvasLayer/OptionsInterface/SFXVolSlider" to="." method="_on_sfx_vol_slider_value_changed"]
+[connection signal="item_selected" from="CanvasLayer/OptionsInterface/ControlOptions" to="." method="_on_control_options_item_selected"]
 [connection signal="pressed" from="CanvasLayer/OptionsInterface/BackButton" to="." method="_on_back_button_pressed"]

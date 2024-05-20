@@ -7,6 +7,10 @@ signal update_curse
 signal deactivate_powerup
 signal deactivate_curse
 
+@export var speed: float
+
+var mainNode: Node2D
+
 var yIsLocked: bool
 var controlsReversed: bool
 var initialYPos: float
@@ -32,6 +36,7 @@ const MAX_ROTATION = PI / 6 # 30 degrees in radians
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	mainNode = get_node("/root/Main")
 	yIsLocked = true
 	controlsReversed = false
 	currentPowerup = 0
@@ -47,17 +52,33 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	var mouse_position = get_viewport().get_mouse_position()
 	var screen_bounds = get_viewport_rect().size
-	
-	var playerPosX = -mouse_position.x + screen_bounds.x if controlsReversed else mouse_position.x
-	var playerPosY = -mouse_position.y + screen_bounds.y if controlsReversed else mouse_position.y
-	
-	position.x = clamp(playerPosX, 64, screen_bounds.x - 64)
-	
-	if not yIsLocked:
-		position.y = clamp(playerPosY, screen_bounds.y - 100, screen_bounds.y)
-	
+	if mainNode.controlScheme == 0:
+		var mouse_position = get_viewport().get_mouse_position()
+		
+		var playerPosX = -mouse_position.x + screen_bounds.x if controlsReversed else mouse_position.x
+		var playerPosY = -mouse_position.y + screen_bounds.y if controlsReversed else mouse_position.y
+		
+		position.x = clamp(playerPosX, 64, screen_bounds.x - 64)
+		
+		if not yIsLocked:
+			position.y = clamp(playerPosY, screen_bounds.y - 100, screen_bounds.y)
+	else:
+		var leftStrength = Input.get_action_strength("kbjs_move_left") * (speed * delta)
+		var rightStrength = Input.get_action_strength("kbjs_move_right") * (speed * delta)
+		position.x += leftStrength - rightStrength if controlsReversed else -leftStrength + rightStrength
+#		var playerPosX = position.x - leftStrength + rightStrength if not controlsReversed else position.x + leftStrength - rightStrength
+#		playerPosX *= speed * delta
+#		position.x = clamp(playerPosX, 64, screen_bounds.x - 64)
+		
+		if not yIsLocked:
+			var upStrength = Input.get_action_strength("kbjs_move_up") * (speed * delta)
+			var downStrength = Input.get_action_strength("kbjs_move_down") * (speed * delta)
+			position.y += upStrength - downStrength if not controlsReversed else -upStrength + downStrength
+#			var playerPosY = position.y + upStrength - downStrength if not controlsReversed else position.y - upStrength + downStrength
+#			playerPosY *= speed * delta
+#			position.y = clamp(playerPosY, screen_bounds.y - 100, screen_bounds.y)
+		
 	if Input.is_action_pressed("rotate_left") and Input.is_action_pressed("rotate_right"):
 		rotation = 0
 		lockRotation = true
