@@ -23,6 +23,8 @@ func _ready():
 
 func _on_start_button_pressed():
 	SFX_Comfirm.play()
+	$TitleCanvas/TitleInterface/StartButton.set_deferred("disabled", true)
+	$TitleCanvas/TitleInterface/QuitButton.set_deferred("disabled", true)
 	await SFX_Comfirm.finished
 	get_tree().change_scene_to_file("res://nodes/main.tscn")
 

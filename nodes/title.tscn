@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://djq466o4dkfqs"]
+[gd_scene load_steps=20 format=3 uid="uid://djq466o4dkfqs"]
 
 [ext_resource type="Script" path="res://scripts/title.gd" id="1_dishg"]
 [ext_resource type="FontFile" uid="uid://c1l3f4ryq8j0i" path="res://assets/UI/fonts/game_heading.ttf" id="1_ucbo5"]

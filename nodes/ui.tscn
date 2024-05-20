@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://by45tyjaglmsp"]
+[gd_scene load_steps=19 format=3 uid="uid://by45tyjaglmsp"]
 
 [ext_resource type="Script" path="res://scripts/ui.gd" id="1_7nk61"]
 [ext_resource type="PackedScene" uid="uid://b6ev8dcx56mgj" path="res://nodes/life_count.tscn" id="2_dmacp"]

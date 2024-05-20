@@ -39,8 +39,8 @@ const Functions = preload("res://scripts/functions.gd")
 func _ready():
 	level = 1
 	phase = 1
-	maxEnemiesPerSpawner = 20
-	currentEnemiesPerSpawner = 5
+	maxEnemiesPerSpawner = 15
+	currentEnemiesPerSpawner = 2
 	currentSpawners = 2
 	activeSpawners = currentSpawners
 	active_enemies = currentEnemiesPerSpawner * currentSpawners
@@ -104,8 +104,7 @@ func _on_boss_defeated():
 	$UI/CanvasLayer/WinPanel.set_deferred("visible", true)
 	$UI/CanvasLayer/WinPanel/PlayAgainButton.grab_focus()
 	get_tree().paused = true
-#	active_enemies += 1
-#	enemy_disappear_routine()
+	
 
 func _on_enemy_enemy_killed():
 	update_score.emit(100)

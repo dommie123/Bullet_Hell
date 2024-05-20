@@ -108,7 +108,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if currentState == STATE.DEAD:
-		const pwrDropChance = 50
+		const pwrDropChance = 10
 		var pwrDropRoll = randi_range(1, pwrDropChance)
 		
 		if pwrDropRoll % pwrDropChance == 0:

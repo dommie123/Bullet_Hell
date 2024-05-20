@@ -67,17 +67,11 @@ func _process(delta):
 		var leftStrength = Input.get_action_strength("kbjs_move_left") * (speed * delta)
 		var rightStrength = Input.get_action_strength("kbjs_move_right") * (speed * delta)
 		position.x += leftStrength - rightStrength if controlsReversed else -leftStrength + rightStrength
-#		var playerPosX = position.x - leftStrength + rightStrength if not controlsReversed else position.x + leftStrength - rightStrength
-#		playerPosX *= speed * delta
-#		position.x = clamp(playerPosX, 64, screen_bounds.x - 64)
 		
 		if not yIsLocked:
 			var upStrength = Input.get_action_strength("kbjs_move_up") * (speed * delta)
 			var downStrength = Input.get_action_strength("kbjs_move_down") * (speed * delta)
 			position.y += upStrength - downStrength if not controlsReversed else -upStrength + downStrength
-#			var playerPosY = position.y + upStrength - downStrength if not controlsReversed else position.y - upStrength + downStrength
-#			playerPosY *= speed * delta
-#			position.y = clamp(playerPosY, screen_bounds.y - 100, screen_bounds.y)
 		
 	if Input.is_action_pressed("rotate_left") and Input.is_action_pressed("rotate_right"):
 		rotation = 0
@@ -120,7 +114,6 @@ func Shift(): #ADDED funciton that lets the player shift colors (space bar)
 		set_collision_layer_value(2,false)#sets ship and paddle collision magenta to false
 		set_collision_layer_value(4,false)
 		
-#		set_collision_layer_value(1,true)#sets ship and paddle collision cyan to true
 		set_collision_layer_value(3,true)
 		
 		set_collision_mask_value(5,true) #sets enemy collision
@@ -131,9 +124,6 @@ func Shift(): #ADDED funciton that lets the player shift colors (space bar)
 		
 
 func _on_body_entered(body):
-	# TODO reflect ONLY when color is same as bullet
-	#print(body.name)
-	#if "Bullet" in body.name:
 	play_audio(reflect_sound)
 	update_bullet(body)
 
@@ -161,10 +151,7 @@ func _on_powerup_activate_powerup(powerup):
 		
 	$PowerupTimer.start()
 	
-	if currentPowerup == 3:
-		# TODO increase player ship speed
-		pass
-	elif currentPowerup == 5:
+	if currentPowerup == 5:
 		yIsLocked = false
 	elif currentPowerup == 7:
 		lives += 1
@@ -196,12 +183,6 @@ func update_bullet(bullet):
 		bullet.damage += 1
 	elif currentPowerup == 2:
 		bullet.pierce += 1
-	elif currentPowerup == 4:
-##		bullet.scale *= 2 
-#		bullet.global_scale(Vector2(2, 2))
-##		bullet.get_child(1).set_deferred("scale", Vector2(2, 2))
-#		print("Scale: (%s, %s)" % [bullet.scale.x, bullet.scale.y])
-		pass
 	
 
 func _on_curse_timer_timeout():
