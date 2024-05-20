@@ -77,6 +77,9 @@ func _on_main_level_changed():
 
 
 func _on_player_ship_lose_life():
+	if lives == 0:
+		return 
+		
 	var lifeNodes = get_tree().get_nodes_in_group("Life Counters")
 	lifeNodes[lives - 1].queue_free()
 	lives -= 1
