@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://bpaxnyd1tdmxe"]
+[gd_scene load_steps=42 format=3 uid="uid://bpaxnyd1tdmxe"]
 
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_m52gn"]
 [ext_resource type="PackedScene" uid="uid://bbwfo67k6imi6" path="res://nodes/bullet.tscn" id="2_yxds1"]
@@ -17,6 +17,8 @@
 [ext_resource type="Texture2D" uid="uid://ctanppjcjl1ge" path="res://assets/Enemies/Megabyte/Megabyte frame 2.svg" id="13_ubfer"]
 [ext_resource type="Texture2D" uid="uid://yaw0hq61b3r3" path="res://assets/Enemies/Megabyte/Megabyte frame 3.svg" id="14_8723t"]
 [ext_resource type="Texture2D" uid="uid://m8qfv1ecdpxb" path="res://assets/Enemies/Megabyte/Megabyte frame 4.svg" id="15_rdnv1"]
+[ext_resource type="AudioStream" uid="uid://boguqw4j860pl" path="res://assets/Audio/SFX/SFX_enemy_death.mp3" id="18_ra4rr"]
+[ext_resource type="AudioStream" uid="uid://c4qwymqefa8su" path="res://assets/Audio/SFX/SFX_shoot.mp3" id="19_kdkp5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_q6443"]
 resource_local_to_scene = true
@@ -228,9 +230,9 @@ position = Vector2(37, 33)
 collision_layer = 16
 collision_mask = 256
 gravity_scale = 0.0
+lock_rotation = true
 max_contacts_reported = 1
 contact_monitor = true
-lock_rotation = true
 script = ExtResource("1_m52gn")
 bullet_scene = ExtResource("2_yxds1")
 powerupScene = ExtResource("3_yc7vu")
@@ -267,6 +269,15 @@ position = Vector2(60, 19)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 2)
 shape = SubResource("CircleShape2D_xaw2t")
+
+[node name="SFX_enemy_die" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("18_ra4rr")
+volume_db = 15.0
+bus = &"Sound Effects"
+
+[node name="SFX_enemy_shoot" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("19_kdkp5")
+volume_db = 15.0
 
 [connection signal="body_entered" from="." to="." method="_on_area_2d_body_entered"]
 [connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]

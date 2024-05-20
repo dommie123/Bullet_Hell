@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://c4fds3is7hv" path="res://assets/UI/CustomSliderGrabberHighlighted-export.png" id="10_xdwp7"]
 [ext_resource type="Texture2D" uid="uid://dtydonkxecvho" path="res://assets/UI/CustomSlider.png" id="11_7muph"]
 [ext_resource type="Texture2D" uid="uid://dg8efwowr07d8" path="res://assets/UI/CustomSliderHighlighted.png" id="12_7qn8a"]
+[ext_resource type="AudioStream" uid="uid://dovx26y8i8cxe" path="res://assets/Audio/SFX/SFX_UI_comfirm.mp3" id="13_y1hpb"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ure0m"]
 texture = ExtResource("11_7muph")
@@ -542,6 +543,11 @@ text = "Back
 "
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="SFX_UI_comfirm" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("13_y1hpb")
+volume_db = 15.0
+bus = &"Sound Effects"
 
 [connection signal="pressed" from="CanvasLayer/TextureButton" to="." method="_on_pause_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/PauseMenu/ResumeButton" to="." method="_on_resume_button_pressed"]

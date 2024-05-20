@@ -12,6 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://dtydonkxecvho" path="res://assets/UI/CustomSlider.png" id="6_vdesl"]
 [ext_resource type="AudioStream" uid="uid://b6rbi45ry47h7" path="res://assets/Audio/Music/TitleTheme_Edit_1_Export_1.wav" id="7_1u0op"]
 [ext_resource type="Texture2D" uid="uid://dg8efwowr07d8" path="res://assets/UI/CustomSliderHighlighted.png" id="7_6cly8"]
+[ext_resource type="AudioStream" uid="uid://dovx26y8i8cxe" path="res://assets/Audio/SFX/SFX_UI_comfirm.mp3" id="12_wdmif"]
+[ext_resource type="AudioStream" uid="uid://d0qvuh2w12pjr" path="res://assets/Audio/SFX/SFX_UI_move.mp3" id="13_m6vbq"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qfx6i"]
 texture = ExtResource("6_vdesl")
@@ -319,6 +321,16 @@ texture = ExtResource("3_nunax")
 stream = ExtResource("7_1u0op")
 autoplay = true
 bus = &"Music"
+
+[node name="SFX_comfirm" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_wdmif")
+volume_db = 15.0
+bus = &"Sound Effects"
+
+[node name="SFX_UI_move" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("13_m6vbq")
+volume_db = 15.0
+bus = &"Sound Effects"
 
 [connection signal="pressed" from="TitleCanvas/TitleInterface/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="TitleCanvas/TitleInterface/OptionsButton" to="." method="_on_options_button_pressed"]

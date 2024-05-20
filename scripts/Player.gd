@@ -20,6 +20,13 @@ var currentCurse: int
 
 @onready var shader_material = $AnimatedSprite2D.material
 
+@onready var audio_player = $AudioStreamPlayer2D
+@onready var SFX_powerup = $SFX_PowerUp
+@onready var SFX_shift = $SFX_Shift
+@onready var SFX_player_dead = $SFX_player_die
+@onready var SFX_extra_life = $SFX_extra_life
+@onready var reflect_sound: AudioStream = preload("res://assets/Audio/SFX/SFX_reflect_hit.mp3")
+
 enum color {cyan, magenta}#ADDED enumerator used to denote colors throughout the code. Use these when describing a color of enemy, player or bullet
 @export var shipColor : color = color.cyan #what color the ship currently is
 
@@ -88,6 +95,7 @@ func _process(delta):
 func Shift(): #ADDED funciton that lets the player shift colors (space bar)
 	if shipColor == color.cyan:
 		shipColor = color.magenta
+		SFX_shift.play()
 		$AnimatedSprite2D.play("PaddleShiftCyanMagenta")
 		if shader_material is ShaderMaterial:
 			shader_material.set_shader_parameter("glow_color", Color(0.5, 0.0, 0.5, 1.0))
@@ -105,6 +113,7 @@ func Shift(): #ADDED funciton that lets the player shift colors (space bar)
 	
 	elif shipColor == color.magenta:
 		shipColor = color.cyan
+		SFX_shift.play()
 		$AnimatedSprite2D.play("PaddleShiftMagentaCyan")
 		if shader_material is ShaderMaterial:
 			shader_material.set_shader_parameter("glow_color", Color(0.0, 0.5, 0.5, 1.0))
@@ -123,8 +132,10 @@ func Shift(): #ADDED funciton that lets the player shift colors (space bar)
 
 func _on_body_entered(body):
 	# TODO reflect ONLY when color is same as bullet
-	if "Bullet" in body.name:
-		update_bullet(body)
+	#print(body.name)
+	#if "Bullet" in body.name:
+	play_audio(reflect_sound)
+	update_bullet(body)
 
 
 @export var activate_powerup_callable = func(powerup):
@@ -134,10 +145,12 @@ func _on_body_entered(body):
 	_on_powerup_activate_curse(curse)
 	
 @export var _on_bullet_hit = func():
+	play_audio(reflect_sound)
 	reflect_bullet.emit()
 
 func _on_powerup_activate_powerup(powerup):
 	update_powerup.emit(powerup)
+	SFX_powerup.play()
 	currentPowerup = powerup
 	
 	if not $PowerupTimer.is_stopped():
@@ -195,6 +208,12 @@ func _on_curse_timer_timeout():
 	reset_stats()
 	deactivate_powerup.emit()
 	deactivate_curse.emit()
+	
+func play_audio(stream:AudioStream):
+	print(stream)
+	audio_player._set_playing(false)
+	audio_player.set_stream(stream)
+	audio_player._set_playing(true)
 
 
 func _on_player_ship_lose_life():
@@ -202,6 +221,8 @@ func _on_player_ship_lose_life():
 	
 	# If the player is out of lives, it's game over.
 	if lives == 0:
+		SFX_player_dead.play()
+		await SFX_player_dead.finished
 		player_died.emit()
 		
 		$CollisionShape2D.set_deferred("disabled", true)
