@@ -101,8 +101,10 @@ func _on_boss_defeated():
 	boss_active = false
 	update_score.emit(10000)
 	
-	active_enemies += 1
-	enemy_disappear_routine()
+	$UI/CanvasLayer/WinPanel.set_deferred("visible", true)
+	get_tree().paused = true
+#	active_enemies += 1
+#	enemy_disappear_routine()
 
 func _on_enemy_enemy_killed():
 	update_score.emit(100)
@@ -233,6 +235,7 @@ func _on_ui_new_game_started():
 
 func _on_player_player_died():
 	$UI/CanvasLayer/GameOverPanel.set_deferred("visible", true)
+	$BGM.stop()
 	get_tree().paused = true
 
 

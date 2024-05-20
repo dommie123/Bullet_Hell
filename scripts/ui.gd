@@ -86,10 +86,13 @@ func _on_main_update_score(points):
 	score += points
 	$CanvasLayer/ScoreCounter.set_deferred("text", "Score: %s" % score)
 	$CanvasLayer/GameOverPanel/FinalScoreLabel.set_deferred("text", "Score: %s" % score)
-
+	$CanvasLayer/WinPanel/FinalScoreLabel.set_deferred("text", "Score: %s" % score)
 
 func _on_resume_button_pressed():
 	toggle_game_paused.emit(false)
+	
+	var currentBGMVolume = AudioServer.get_bus_volume_db(bgmIndex)
+	AudioServer.set_bus_volume_db(bgmIndex, currentBGMVolume + 15)
 
 
 func _on_main_menu_button_pressed():
@@ -98,6 +101,9 @@ func _on_main_menu_button_pressed():
 
 func _on_pause_button_pressed():
 	toggle_game_paused.emit(true)
+	
+	var currentBGMVolume = AudioServer.get_bus_volume_db(bgmIndex)
+	AudioServer.set_bus_volume_db(bgmIndex, currentBGMVolume - 15)
 
 
 func _on_play_again_button_pressed():
