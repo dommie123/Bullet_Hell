@@ -77,6 +77,9 @@ func _on_main_level_changed():
 
 
 func _on_player_ship_lose_life():
+	if lives == 0:
+		return 
+		
 	var lifeNodes = get_tree().get_nodes_in_group("Life Counters")
 	lifeNodes[lives - 1].queue_free()
 	lives -= 1
@@ -131,11 +134,12 @@ func _on_player_deactivate_powerup():
 func _on_options_button_pressed():
 	$CanvasLayer/OptionsInterface.visible = true
 	$CanvasLayer/PauseMenu.visible = false
-
+	$CanvasLayer/OptionsInterface/BGMVolSlider.grab_focus()
 
 func _on_back_button_pressed():
 	$CanvasLayer/OptionsInterface.visible = false
 	$CanvasLayer/PauseMenu.visible = true
+	$CanvasLayer/PauseMenu/ResumeButton.grab_focus()
 	
 	
 func _on_bgm_vol_slider_value_changed(value):

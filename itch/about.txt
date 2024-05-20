@@ -1,0 +1,28 @@
+Default Controls:
+
+Mouse - Move paddle
+Space Bar - Shift colors
+Left/Right Click - Tilt paddle
+Left+Right Click - Reset paddle rotation
+
+Gameplay:
+
+Move the paddle back and forth to reflect colored bullets.
+Your paddle reflects bullets of the same color.
+Press space to shift colors.
+
+Enemies only take damage from reflected bullets of the opposite color.
+
+Your ship (below the paddle) isn't immune to any color bullets.
+Three hits means it's game over.
+
+Killing enemies will sometimes drop a powerup.
+Every powerup comes with a blessing and a curse. Be careful when picking up powerups!
+
+Survive five waves of enemies to win, or try for a high score.
+
+Credits:
+
+BeegYoshi - Primary Dev, Art
+Patches - Support Dev, 3D modeling, Art, Music
+SnoopyHolmes - Art, Shaders, Sound Effects
